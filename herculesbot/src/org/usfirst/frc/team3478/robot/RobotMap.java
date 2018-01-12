@@ -79,10 +79,12 @@ public class RobotMap {
 		frontRight = new TalonSRX(1);
 		backLeft = new TalonSRX(2);
 		backRight = new TalonSRX(3);
+		frontLeft.setInverted(true);
+		backLeft.setInverted(true);
 		frontLeft.setNeutralMode(NeutralMode.Brake);
-		frontLeft.setNeutralMode(NeutralMode.Brake);
-		frontLeft.setNeutralMode(NeutralMode.Brake);
-		frontLeft.setNeutralMode(NeutralMode.Brake);
+		frontRight.setNeutralMode(NeutralMode.Brake);
+		backLeft.setNeutralMode(NeutralMode.Brake);
+		backRight.setNeutralMode(NeutralMode.Brake);
 		frontLeft.set(ControlMode.PercentOutput,0);
 		frontRight.set(ControlMode.PercentOutput,0);
 		backLeft.set(ControlMode.PercentOutput,0);

@@ -19,65 +19,53 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot_Drive extends Subsystem {
 
-	private static final double TOLERANCE=0.15;
-	private static final double ROTATION_POWER=0.5;
+	private static final double TOLERANCE=0.15;  //tolerancia del joystick
+	private TalonSRX[] talons;  //arreglo para guadar los talon del chasis
 	
-	private TalonSRX[] talons;
-	
+	//////////constructor de la clase/////////////////////
 	public Robot_Drive(){
 		talons=new TalonSRX[]{RobotMap.frontLeft,RobotMap.frontRight,
 				RobotMap.backLeft,RobotMap.backRight};
-		
 	}
-	
-	public void initDefaultCommand() {
-		//nada
-	}
+	//////////////////////////////////////////////////////
 	
 	////para poner todo en la posicion inicial/////
 	public void InitDefaultState() {
-		
+		Stop_drive();
 	}
 	//////////////////////////////////////////////
 	
 	
 	////////funcion principal del drive/////////////
 	public void Main_drive() {
+		//lee el control 1
 		Joystick joystick=Robot.oi.Stick1;
-		// Read gamepad inputs
+		
+		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1), 
-				translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1),
-				rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1);
+			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1),
+			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1);
 		
+		//obtiene la magnbitud del vector del joystick
+		double magnitude=Math.sqrt((translationX*translationX)+(translationY*translationY));
 		
+		// Calcula el angulo del vector
+		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		
-		// ----------------------------Robot Translation-----------------------------
-		
-		// Obtain the total offset from the center
-		// of the left joystick X and Y axes
-		double magnitude=Math.sqrt(translationX*translationX+
-				translationY*translationY);
-		
-		
-		
-		
-		// Calculate the direction of movement
-		double angle=-Math.atan2(translationX, translationY)+Math.PI/4;
-		
-		// Show the translation angle on the 
-		// dashboard
+		// Show the translation angle on the dashboard
 		SmartDashboard.putNumber("Translation Angle", angle*180/Math.PI);
 		
-		talons[0].set(ControlMode.PercentOutput,-magnitude*
-				Math.sin(angle)+rotationAxis);
+		talons[0].set(ControlMode.PercentOutput,magnitude*
+				Math.sin(angle)-rotationAxis);
 		talons[1].set(ControlMode.PercentOutput,magnitude*
 				Math.cos(angle)+rotationAxis);
-		talons[2].set(ControlMode.PercentOutput,-magnitude*
-				Math.cos(angle)+rotationAxis);
+		talons[2].set(ControlMode.PercentOutput,magnitude*
+				Math.cos(angle)-rotationAxis);
 		talons[3].set(ControlMode.PercentOutput,magnitude*
 				Math.sin(angle)+rotationAxis);
 	}
 
+	///para mapear un numero de un rango a otro rango
 	private double map(double x, double in_min, double in_max, double out_min, double out_max)
 	{
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -85,8 +73,9 @@ public class Robot_Drive extends Subsystem {
 	
 	private double mapDoubleT(double x, double in_min, double in_max, double out_min, double out_max)
 	{
-		if(Math.abs(x)<TOLERANCE)
+		if(Math.abs(x)<TOLERANCE) {
 			return 0;
+		}
 		if(x<0){
 			return map(x,-in_min,-in_max,-out_min,-out_max);
 		}
@@ -97,11 +86,16 @@ public class Robot_Drive extends Subsystem {
 	
 	//////funcion para detener el drive///////////
 	public void Stop_drive() {
-		for(TalonSRX talon:talons)
+		for(TalonSRX talon:talons) {
 			talon.set(ControlMode.PercentOutput, 0.0);
-		
+		}
 	}
 	//////////////////////////////////////////////\
 	
+	
+	
+	public void initDefaultCommand() {
+		//nada
+	}
 	
 }
