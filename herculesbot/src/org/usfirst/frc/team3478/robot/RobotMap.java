@@ -21,7 +21,15 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * floating around.
  */
 public class RobotMap {
-	
+	private static final int FRONT_LEFT_DEVICE_NUMBER = 0;
+	private static final int FRONT_RIGHT_DEVICE_NUMBER = 1;
+	private static final int BACK_LEFT_DEVICE_NUMBER = 2;
+	private static final int BACK_RIGHT_DEVICE_NUMBER = 3;
+	private static final int ELEVATOR_DEVICE_NUMBER = 4;
+	private static final int LOWER_INTAKE_LEFT_DEVICE_NUMBER = 5;
+	private static final int LOWER_INTAKE_RIGHT_DEVICE_NUMBER = 6;
+	private static final int UPPER_INTAKE_LEFT_DEVICE_NUMBER = 7;
+	private static final int UPPER_INTAKE_RIGHT_DEVICE_NUMBER = 8;
 	
 	/************* 1 start ************************/
 	
@@ -37,9 +45,12 @@ public class RobotMap {
 	 /************* 1 end ************************/
 		
 		
-	/************* 2 start (david) ************************/
-	
-	
+	/************* 2 start (David) ************************/
+	public static TalonSRX elevator;
+	public static TalonSRX lowerIntakeLeft;
+	public static TalonSRX lowerIntakeRight;
+	public static TalonSRX upperIntakeLeft;
+	public static TalonSRX upperIntakeRight;
 	/************* 2 end ************************/
 	
 	
@@ -75,10 +86,10 @@ public class RobotMap {
 		Compressor = new Compressor(0);	
 		pdp = new PowerDistributionPanel();
 		
-		frontLeft = new TalonSRX(0);
-		frontRight = new TalonSRX(1);
-		backLeft = new TalonSRX(2);
-		backRight = new TalonSRX(3);
+		frontLeft = new TalonSRX(FRONT_LEFT_DEVICE_NUMBER);
+		frontRight = new TalonSRX(FRONT_RIGHT_DEVICE_NUMBER);
+		backLeft = new TalonSRX(BACK_LEFT_DEVICE_NUMBER);
+		backRight = new TalonSRX(BACK_RIGHT_DEVICE_NUMBER);
 		frontLeft.setInverted(true);
 		backLeft.setInverted(true);
 		frontLeft.setNeutralMode(NeutralMode.Brake);
@@ -91,8 +102,18 @@ public class RobotMap {
 		backRight.set(ControlMode.PercentOutput,0);
 		
 		/************* 1 end ************************/
-			
-			
+		elevator = new TalonSRX(ELEVATOR_DEVICE_NUMBER);
+		lowerIntakeLeft = new TalonSRX(LOWER_INTAKE_LEFT_DEVICE_NUMBER);
+		lowerIntakeRight = new TalonSRX(LOWER_INTAKE_RIGHT_DEVICE_NUMBER);
+		upperIntakeLeft = new TalonSRX(UPPER_INTAKE_LEFT_DEVICE_NUMBER);
+		upperIntakeRight = new TalonSRX(UPPER_INTAKE_RIGHT_DEVICE_NUMBER);	
+		
+		elevator.setNeutralMode(NeutralMode.Brake);
+		lowerIntakeLeft.setNeutralMode(NeutralMode.Brake);
+		lowerIntakeRight.setNeutralMode(NeutralMode.Brake);
+		upperIntakeLeft.setNeutralMode(NeutralMode.Brake);
+		upperIntakeRight.setNeutralMode(NeutralMode.Brake);
+		
 		/************* 2 start ************************/
 		
 		

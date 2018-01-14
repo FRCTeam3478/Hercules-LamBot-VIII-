@@ -7,10 +7,28 @@
 
 package org.usfirst.frc.team3478.robot.subsystems;
 
+import org.usfirst.frc.team3478.robot.Robot;
+import org.usfirst.frc.team3478.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Robot_Elevador extends Subsystem {
-
+	public static int RIGHT_STICK = 0;
+	
+	TalonSRX elevator;
+	Joystick joystick;
+	
+	double rightStickValue;
+	
+	public Robot_Elevador() {
+		joystick = Robot.oi.Stick2;
+		elevator = RobotMap.elevator;
+	}
+	
 	public void initDefaultCommand() {
 		//nada
 	}
@@ -20,4 +38,14 @@ public class Robot_Elevador extends Subsystem {
 		
 	}
 	//////////////////////////////////////////////
+	
+	public void lift() {
+		rightStickValue = joystick.getRawAxis(RIGHT_STICK);
+		
+		elevator.set(ControlMode.PercentOutput, rightStickValue * 0.5);
+	}
+	
+	public void stop(){
+		elevator.set(ControlMode.PercentOutput, 0.0);
+	}
 }

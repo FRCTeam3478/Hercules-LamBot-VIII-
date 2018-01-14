@@ -9,7 +9,10 @@ package org.usfirst.frc.team3478.robot;
 
 import org.usfirst.frc.team3478.robot.commands.Robot_Autonomo_Main;
 import org.usfirst.frc.team3478.robot.commands.Robot_Drive_MainDrive;
+import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_Lift;
 import org.usfirst.frc.team3478.robot.commands.Robot_General_InitPositions;
+import org.usfirst.frc.team3478.robot.commands.Robot_Intake_Drop;
+import org.usfirst.frc.team3478.robot.commands.Robot_Intake_PickUp;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Alas;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Autonomo;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Control;
@@ -31,6 +34,9 @@ public class Robot extends TimedRobot {
 	/*********comandos que necesite el robot para empezar********/
 	Command autonomo_command;
 	Command drivestart_command;
+	Command lift_command;
+	Command drop_command;
+	Command pickUp_command;
 	Command resetall_command; //todos los subsistemas deben tener una inicializacion en este comando
 	/***********************************************************/
 	
@@ -73,6 +79,9 @@ public class Robot extends TimedRobot {
 		autonomo_command = new Robot_Autonomo_Main();
 		drivestart_command = new Robot_Drive_MainDrive();
 		resetall_command = new Robot_General_InitPositions();
+		lift_command = new Robot_Elevador_Lift();
+		drop_command = new Robot_Intake_Drop();
+		pickUp_command = new Robot_Intake_PickUp();
 		Robot.Robot_control.turnCompressorOn();  //para activar la secuencia del compresor
 		/***********************************************************************************/
 	}
@@ -121,6 +130,11 @@ public class Robot extends TimedRobot {
 		if (autonomo_command != null) autonomo_command.cancel();  //cancelamos el comando si esta activo
 		if (resetall_command != null) resetall_command.start();  //inicializamos el comando si no existe
 		if (drivestart_command != null) drivestart_command.start();  //inicializamos el comando si no existe
+		if (lift_command != null) lift_command.start();  //cancelamos el comando si esta activo
+		if (drop_command != null) drop_command.start();  //cancelamos el comando si esta activo
+		if (pickUp_command != null) pickUp_command.start();  //cancelamos el comando si esta activo
+		
+	
 	}
 
 	/**
