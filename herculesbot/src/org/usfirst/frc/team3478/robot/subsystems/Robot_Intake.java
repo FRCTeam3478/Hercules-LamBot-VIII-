@@ -18,10 +18,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 public class Robot_Intake extends Subsystem {
-	public static int LEFT_TRIGGER = 0;
-	public static int RIGHT_TRIGGER = 1;
+	public static final int LEFT_TRIGGER = 2;
+	public static final int RIGHT_TRIGGER = 3;
 	
-	Joystick joystick;
 	TalonSRX lowerIntakeLeft;
 	TalonSRX lowerIntakeRight; 
 	TalonSRX upperIntakeLeft;
@@ -29,15 +28,16 @@ public class Robot_Intake extends Subsystem {
 	
 	double leftTriggerValue;
 	double rightTriggerValue;
+	double leftOutputValue;
+	double rightOutputValue;
 	
 	public Robot_Intake() {
-		joystick = Robot.oi.Stick2;
 		lowerIntakeLeft = RobotMap.lowerIntakeLeft;
 		lowerIntakeRight = RobotMap.lowerIntakeRight;
 		upperIntakeLeft = RobotMap.upperIntakeLeft;
-		upperIntakeRight = RobotMap.lowerIntakeRight;
-		
+		upperIntakeRight = RobotMap.upperIntakeRight;
 	}
+	
 	public void initDefaultCommand() {
 		//nada
 	}
@@ -49,19 +49,29 @@ public class Robot_Intake extends Subsystem {
 	//////////////////////////////////////////////
 	
 	public void pickUp() {
+		Joystick joystick = Robot.oi.Stick2;
 		leftTriggerValue = joystick.getRawAxis(LEFT_TRIGGER);
-		
-		lowerIntakeLeft.set(ControlMode.PercentOutput,leftTriggerValue);
-		lowerIntakeRight.set(ControlMode.PercentOutput,-leftTriggerValue);
-		upperIntakeLeft.set(ControlMode.PercentOutput,leftTriggerValue);
-		upperIntakeRight.set(ControlMode.PercentOutput,-leftTriggerValue);
-	}
-	
-	public void drop() {
 		rightTriggerValue = joystick.getRawAxis(RIGHT_TRIGGER);
 		
-		upperIntakeLeft.set(ControlMode.PercentOutput,rightTriggerValue);
-		upperIntakeRight.set(ControlMode.PercentOutput,-rightTriggerValue);
+		
+		
+		if (rightTriggerValue - leftTriggerValue > 0.8) {
+			leftOutputValue = 1.0;
+			rightOutputValue = 1.0;
+		}
+		else if (rightTriggerValue - leftTriggerValue < -0.8) {
+			leftOutputValue = -1.0;
+			rightOutputValue = -1.0;
+		}
+		else {
+			leftOutputValue = 0.0;
+			rightOutputValue = 0.0;
+		}
+		
+		lowerIntakeLeft.set(ControlMode.PercentOutput,-leftOutputValue);
+		lowerIntakeRight.set(ControlMode.PercentOutput,-leftOutputValue);
+		upperIntakeLeft.set(ControlMode.PercentOutput,-rightOutputValue);
+		upperIntakeRight.set(ControlMode.PercentOutput,rightOutputValue);
 	}
 	
 	public void stop() {

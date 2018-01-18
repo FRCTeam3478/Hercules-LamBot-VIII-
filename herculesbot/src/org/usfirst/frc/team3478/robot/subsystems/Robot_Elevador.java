@@ -17,15 +17,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Robot_Elevador extends Subsystem {
-	public static int RIGHT_STICK = 0;
+	public static int RIGHT_STICK = 1;
 	
 	TalonSRX elevator;
-	Joystick joystick;
 	
 	double rightStickValue;
 	
 	public Robot_Elevador() {
-		joystick = Robot.oi.Stick2;
 		elevator = RobotMap.elevator;
 	}
 	
@@ -40,12 +38,14 @@ public class Robot_Elevador extends Subsystem {
 	//////////////////////////////////////////////
 	
 	public void lift() {
+		Joystick joystick = Robot.oi.Stick2;
 		rightStickValue = joystick.getRawAxis(RIGHT_STICK);
 		
 		elevator.set(ControlMode.PercentOutput, rightStickValue * 0.5);
 	}
 	
 	public void stop(){
+		Joystick joystick = Robot.oi.Stick2;
 		elevator.set(ControlMode.PercentOutput, 0.0);
 	}
 }
