@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot_Drive extends Subsystem {
 
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
+	private static int direction = 1;
 	private TalonSRX[] talons;  //arreglo para guadar los talon del chasis
 	
 	//////////constructor de la clase/////////////////////
@@ -42,9 +43,11 @@ public class Robot_Drive extends Subsystem {
 		Joystick joystick=Robot.oi.Stick1;
 		
 		//lee cada eje de los joystick y les quita el error y mapea
-		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1), 
-			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1),
-			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1);
+		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
+			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
+					   Zizq=mapDoubleT(joystick.getRawAxis(2),TOLERANCE,1,0,1)*direction,
+					   Zder=mapDoubleT(joystick.getRawAxis(3),TOLERANCE,1,0,1)*direction,
+					   rotationAxis=Zder - Zizq;
 		
 		//obtiene la magnbitud del vector del joystick
 		double magnitude=Math.sqrt((translationX*translationX)+(translationY*translationY));
@@ -53,7 +56,7 @@ public class Robot_Drive extends Subsystem {
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		
 		// Show the translation angle on the dashboard
-		SmartDashboard.putNumber("Translation Angle", angle*180/Math.PI);
+		//SmartDashboard.putNumber("Translation Angle", angle*180/Math.PI);
 		
 		talons[0].set(ControlMode.PercentOutput,magnitude*
 				Math.sin(angle)-rotationAxis);
@@ -64,6 +67,21 @@ public class Robot_Drive extends Subsystem {
 		talons[3].set(ControlMode.PercentOutput,magnitude*
 				Math.sin(angle)+rotationAxis);
 	}
+	
+	
+	/////////para cambiar la polaridad del chassis/////////////////////////////////
+	public void Change_polarity() {
+		direction = direction*-1;
+	}
+	//////////////////////////////////////////////////////////////////////////////
+	
+	//////funcion para detener el drive///////////
+	public void Stop_drive() {
+		for(TalonSRX talon:talons) {
+			talon.set(ControlMode.PercentOutput, 0.0);
+		}
+	}
+	///////////////////////////////////////////////
 
 	///para mapear un numero de un rango a otro rango
 	private double map(double x, double in_min, double in_max, double out_min, double out_max)
@@ -84,13 +102,6 @@ public class Robot_Drive extends Subsystem {
 	
 	///////////////////////////////////////////////
 	
-	//////funcion para detener el drive///////////
-	public void Stop_drive() {
-		for(TalonSRX talon:talons) {
-			talon.set(ControlMode.PercentOutput, 0.0);
-		}
-	}
-	//////////////////////////////////////////////\
 	
 	
 	

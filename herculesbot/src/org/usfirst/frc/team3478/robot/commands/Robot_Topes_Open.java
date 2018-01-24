@@ -13,14 +13,10 @@ import org.usfirst.frc.team3478.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class Robot_General_InitPositions extends Command {
-	public Robot_General_InitPositions() {
+public class Robot_Topes_Open extends Command {
+	public Robot_Topes_Open() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.Robot_intake);
-		requires(Robot.Robot_elevador);
-		requires(Robot.Robot_escalador);
 		requires(Robot.Robot_topes);
-		requires(Robot.Robot_drive);
 	}
 
 	// Called just before this Command runs the first time
@@ -31,11 +27,7 @@ public class Robot_General_InitPositions extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_intake.InitDefaultState();
-		Robot.Robot_elevador.InitDefaultState();
-		Robot.Robot_escalador.InitDefaultState();
-		Robot.Robot_topes.InitDefaultState();
-		Robot.Robot_drive.InitDefaultState();
+		Robot.Robot_topes.Release_tope();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -47,7 +39,7 @@ public class Robot_General_InitPositions extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		///nada
+		//nada
 	}
 
 	// Called when another command which requires one or more of the same
