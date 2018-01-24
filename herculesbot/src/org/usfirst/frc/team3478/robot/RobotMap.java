@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /**
@@ -21,6 +22,9 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * floating around.
  */
 public class RobotMap {
+	private static final int INTAKE_LEFT_PORT = 4;
+	private static final int INTAKE_RIGHT_PORT = 5;
+	private static final int INTAKE_HINGE_PORT = 6;
 	
 	
 	/************* 1 start ************************/
@@ -35,7 +39,11 @@ public class RobotMap {
 	
 	
 	 /************* 1 end ************************/
-		
+	public static TalonSRX intakeLeft;
+	public static TalonSRX intakeRight;
+	public static TalonSRX intakeHinge;
+	
+	public static Encoder intakeHingeEncoder;
 		
 	/************* 2 start ************************/
 	
@@ -91,8 +99,17 @@ public class RobotMap {
 		backRight.set(ControlMode.PercentOutput,0);
 		
 		/************* 1 end ************************/
-			
-			
+		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
+		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
+		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
+		
+		intakeLeft.setNeutralMode(NeutralMode.Brake);
+		intakeRight.setNeutralMode(NeutralMode.Brake);
+		intakeHinge.setNeutralMode(NeutralMode.Brake);
+		
+		intakeLeft.set(ControlMode.PercentOutput,0.0);
+		intakeRight.set(ControlMode.PercentOutput,0.0);
+		intakeHinge.set(ControlMode.PercentOutput,0.0);
 		/************* 2 start ************************/
 		
 		
