@@ -44,7 +44,7 @@ public class Robot_Intake extends Subsystem {
 	
 	public Robot_Intake() {
 		intakeRight = RobotMap.intakeRight;
-		intakeLeft = RobotMap.intakeRight;
+		intakeLeft = RobotMap.intakeLeft; /// Se tenia intakeRight 
 		stick1 = Robot.oi.Stick1;
 	}
 	

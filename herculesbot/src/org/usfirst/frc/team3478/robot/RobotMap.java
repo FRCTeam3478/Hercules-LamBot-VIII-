@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -59,7 +58,7 @@ public class RobotMap {
 	public static TalonSRX intakeLeft;
 	public static TalonSRX intakeRight;
 	public static TalonSRX intakeHinge;
-	public static Encoder intakeHingeEncoder;
+	//public static Encoder intakeHingeEncoder;
 	/***************************************/
 		
 	/*********topes********************/
