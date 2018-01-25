@@ -8,10 +8,12 @@
 package org.usfirst.frc.team3478.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Servo;
@@ -41,8 +43,13 @@ public class RobotMap {
 	
 	private static final int ESCALADOR_UP = 4;
 	private static final int ESCALADOR_DOWN = 5;
+	private static final int INTAKE_UP = 6;
+	private static final int INTAKE_DOWN = 7;
 	/***********************************************/
 	
+	/**********numeros de las senales analogas********/
+	private static final int BOX_IN = 0;
+	/***********************************************/
 	
 	/*************chasis************************/
 	public static TalonSRX frontLeft;
@@ -58,7 +65,9 @@ public class RobotMap {
 	public static TalonSRX intakeLeft;
 	public static TalonSRX intakeRight;
 	public static TalonSRX intakeHinge;
-	//public static Encoder intakeHingeEncoder;
+	public static DigitalInput intakeUp;
+	public static DigitalInput intakeDown;
+	public static AnalogInput boxIn;
 	/***************************************/
 		
 	/*********topes********************/
@@ -109,15 +118,50 @@ public class RobotMap {
 		/*********************************************/
 		
 		/*********intake***************************/
+        intakeUp = new DigitalInput(INTAKE_UP);  //tienen pull up en el roborio
+        intakeDown = new DigitalInput(INTAKE_DOWN);  //tienen pull up en el roborio
+        boxIn = new AnalogInput(BOX_IN); 
+        
 		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
 		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
 		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
+		
+		/* set Break Mode */
 		intakeLeft.setNeutralMode(NeutralMode.Brake);
 		intakeRight.setNeutralMode(NeutralMode.Brake);
 		intakeHinge.setNeutralMode(NeutralMode.Brake);
+		
+		/* set motors with PercentOutput Mode */ 
 		intakeLeft.set(ControlMode.PercentOutput,0.0);
 		intakeRight.set(ControlMode.PercentOutput,0.0);
-		intakeHinge.set(ControlMode.PercentOutput,0.0);
+		
+		/* set the enable state for limit switches */
+		intakeHinge.overrideLimitSwitchesEnable(false);
+		
+		/* first choose the sensor */
+		intakeHinge.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); // 1024 CPR
+		intakeHinge.setSensorPhase(true);
+		intakeHinge.setInverted(false);
+		
+		/* set the peak and nominal outputs */
+		intakeHinge.configNominalOutputForward(0.0, 0);
+		intakeHinge.configNominalOutputReverse(0.0, 0);
+		intakeHinge.configPeakOutputForward(1.0, 0);
+		intakeHinge.configPeakOutputReverse(-1.0, 0);
+		
+		/* set closed loop gains in slot0*/
+		intakeHinge.selectProfileSlot(0, 0);
+		intakeHinge.configAllowableClosedloopError(0, 0, 0); // slotIdx, allowableError, timeoutMs
+		intakeHinge.config_kF(0, 0, 0);
+		intakeHinge.config_kP(0, 1, 0);
+		intakeHinge.config_kI(0, 0, 0);
+		intakeHinge.config_kD(0, 0, 0);
+		
+		/* zero the sensor */
+		intakeHinge.setSelectedSensorPosition(0, 0, 0);
+		
+		/* Stop Motor */
+		intakeHinge.set(ControlMode.PercentOutput, 0);
 		/*********************************************/
 
 		/*********topes***********************/
