@@ -1,0 +1,99 @@
+
+package org.usfirst.frc.team3478.robot;
+import org.usfirst.frc.team3478.robot.commands.Robot_Escalar;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+
+public class OI {
+	
+	
+	/************* 1 start ************************/
+	
+	/////objetos que vamos a utilizar/////////////////
+	public Joystick Stick1; //declara un joystick
+	public Joystick Stick2; //declara un joystick
+	/////////////////////////////////////////////////
+	
+	/************* 1 end ************************/
+	
+	
+	/************* 2 start ************************/
+	
+	
+	/************* 2 end ************************/
+	
+	
+	/************* 3 start ************************/
+	
+	
+	/************* 3 end ************************/
+	
+	
+	/************* 4 start ************************/
+	
+	
+	/************* 4 end ************************/
+	
+	
+	/************* 5 start ************************/
+	
+	
+	/************* 5 end ************************/
+	
+	
+	/************* 6 start ************************/
+	
+	
+	/************* 6 end ************************/
+	
+	
+	
+	 ///////constructor de la clase
+	 public OI() {
+		 
+		 /************* 1 start ************************/
+		 
+		 Stick1 = new Joystick(0);  //une el josytick al objeto
+		 Stick2 = new Joystick(1);  //une el josytick al objeto
+		
+		 /************* 1 end ************************/
+			
+			
+		/************* 2 start ************************/
+		 Command climbCommand=new Robot_Escalar();
+		 Button climberSafety=new JoystickButton(Stick2,1);
+		 climberSafety.whileHeld(climbCommand);
+		
+		/************* 2 end ************************/
+		
+		
+		/************* 3 start ************************/
+		
+		
+		/************* 3 end ************************/
+		
+		
+		/************* 4 start ************************/
+		
+		
+		/************* 4 end ************************/
+		
+		
+		/************* 5 start ************************/
+		
+		
+		/************* 5 end ************************/
+		
+		
+		/************* 6 start ************************/
+		
+		
+		/************* 6 end ************************/
+		 
+	    }
+	
+	 
+}

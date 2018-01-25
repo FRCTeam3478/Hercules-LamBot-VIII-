@@ -1,0 +1,158 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package org.usfirst.frc.team3478.robot;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
+/**
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
+ */
+public class RobotMap {
+	
+	// IDs de CAN del intake
+	private static final int INTAKE_LEFT_ID = 4;
+	private static final int INTAKE_RIGHT_ID = 5;
+	private static final int INTAKE_HINGE_ID = 6;
+	// IDs de CAN del escalador
+	private static final int CLIMBER1_ID = 7;
+	private static final int CLIMBER2_ID = 8;
+
+	
+	/************* 1 start ************************/
+	
+	public static TalonSRX frontLeft;
+	public static TalonSRX frontRight;
+	public static TalonSRX backLeft;
+	public static TalonSRX backRight;
+	
+	public static Compressor Compressor;
+	public static PowerDistributionPanel pdp;
+	
+	
+	 /************* 1 end ************************/
+	public static TalonSRX intakeLeft;
+	public static TalonSRX intakeRight;
+	public static TalonSRX intakeHinge;
+	
+	public static Encoder intakeHingeEncoder;
+		
+	/************* 2 start ************************/
+	public static TalonSRX climberMotor1;
+	public static TalonSRX climberMotor2;
+	
+	public static TalonSRX climberMotor1;
+	public static DigitalInput lowerLimitSwitch;
+	
+	
+	
+	/************* 2 end ************************/
+	
+	
+	/************* 3 start ************************/
+	
+	
+	/************* 3 end ************************/
+	
+	
+	/************* 4 start ************************/
+	
+	
+	/************* 4 end ************************/
+	
+	
+	/************* 5 start ************************/
+	
+	
+	/************* 5 end ************************/
+	
+	
+	/************* 6 start ************************/
+	
+	
+	/************* 6 end ************************/
+	
+	
+	
+	public static void init() {
+		
+		/************* 1 start ************************/
+		
+		Compressor = new Compressor(0);	
+		pdp = new PowerDistributionPanel();
+		
+		frontLeft = new TalonSRX(0);
+		frontRight = new TalonSRX(1);
+		backLeft = new TalonSRX(2);
+		backRight = new TalonSRX(3);
+		frontLeft.setInverted(true);
+		backLeft.setInverted(true);
+		frontLeft.setNeutralMode(NeutralMode.Brake);
+		frontRight.setNeutralMode(NeutralMode.Brake);
+		backLeft.setNeutralMode(NeutralMode.Brake);
+		backRight.setNeutralMode(NeutralMode.Brake);
+		frontLeft.set(ControlMode.PercentOutput,0);
+		frontRight.set(ControlMode.PercentOutput,0);
+		backLeft.set(ControlMode.PercentOutput,0);
+		backRight.set(ControlMode.PercentOutput,0);
+		
+		/************* 1 end ************************/
+		intakeLeft = new TalonSRX(INTAKE_LEFT_ID);
+		intakeRight = new TalonSRX(INTAKE_RIGHT_ID);
+		intakeHinge = new TalonSRX(INTAKE_HINGE_ID);
+		
+		intakeLeft.setNeutralMode(NeutralMode.Brake);
+		intakeRight.setNeutralMode(NeutralMode.Brake);
+		intakeHinge.setNeutralMode(NeutralMode.Brake);
+		
+		intakeLeft.set(ControlMode.PercentOutput,0.0);
+		intakeRight.set(ControlMode.PercentOutput,0.0);
+		intakeHinge.set(ControlMode.PercentOutput,0.0);
+		/************* 2 start ************************/
+		
+		
+		/************* 2 end ************************/
+		
+		
+		/************* 3 start ************************/
+		
+		
+		/************* 3 end ************************/
+		
+		
+		/************* 4 start ************************/
+		
+		
+		/************* 4 end ************************/
+		
+		
+		/************* 5 start ************************/
+		
+		
+		/************* 5 end ************************/
+		
+		
+		/************* 6 start ************************/
+		
+		
+		/************* 6 end ************************/
+		
+		
+		
+	}
+	
+	
+}

@@ -10,7 +10,6 @@ package org.usfirst.frc.team3478.robot;
 import org.usfirst.frc.team3478.robot.commands.Robot_Autonomo_Main;
 import org.usfirst.frc.team3478.robot.commands.Robot_Drive_MainDrive;
 import org.usfirst.frc.team3478.robot.commands.Robot_General_InitPositions;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Alas;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Autonomo;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Control;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Drive;
@@ -35,7 +34,6 @@ public class Robot extends TimedRobot {
 	/***********************************************************/
 	
 	/********subsistemas del robot*******************************/
-	public static Robot_Alas Robot_alas;
 	public static Robot_Intake Robot_intake;
 	public static Robot_Elevador Robot_elevador;
 	public static Robot_Escalador Robot_escalador;
@@ -51,7 +49,6 @@ public class Robot extends TimedRobot {
 		RobotMap.init(); //inicializa todos los elementos del robot
 		
 		/*******aqui vamos inicializar los subsystemas que se necesite*************************/
-		Robot_alas = new Robot_Alas();
 		Robot_intake = new Robot_Intake();
 		Robot_elevador = new Robot_Elevador();
 		Robot_escalador = new Robot_Escalador();

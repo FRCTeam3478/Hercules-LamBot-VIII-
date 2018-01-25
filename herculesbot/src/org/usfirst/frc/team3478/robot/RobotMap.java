@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
@@ -22,10 +23,17 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * floating around.
  */
 public class RobotMap {
-	private static final int INTAKE_LEFT_PORT = 4;
-	private static final int INTAKE_RIGHT_PORT = 5;
-	private static final int INTAKE_HINGE_PORT = 6;
 	
+	// IDs de CAN del intake
+	private static final int INTAKE_LEFT_ID = 4;
+	private static final int INTAKE_RIGHT_ID = 5;
+	private static final int INTAKE_HINGE_ID = 6;
+	// IDs de CAN del escalador
+	private static final int CLIMBER1_ID = 7;
+	private static final int CLIMBER2_ID = 8;
+	// Puertos de los limit switches
+	private static final int CLIMBER_LIMIT_SWITCH_TOP_PORT = 0;
+	private static final int CLIMBER_LIMIT_SWITCH_BOT_PORT = 1;
 	
 	/************* 1 start ************************/
 	
@@ -46,7 +54,11 @@ public class RobotMap {
 	public static Encoder intakeHingeEncoder;
 		
 	/************* 2 start ************************/
+	public static TalonSRX climberMotor1;
+	public static TalonSRX climberMotor2;
 	
+	public static DigitalInput climberTopLimitSwitch;
+	public static DigitalInput climberBottomLimitSwitch;
 	
 	/************* 2 end ************************/
 	
@@ -99,9 +111,9 @@ public class RobotMap {
 		backRight.set(ControlMode.PercentOutput,0);
 		
 		/************* 1 end ************************/
-		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
-		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
-		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
+		intakeLeft = new TalonSRX(INTAKE_LEFT_ID);
+		intakeRight = new TalonSRX(INTAKE_RIGHT_ID);
+		intakeHinge = new TalonSRX(INTAKE_HINGE_ID);
 		
 		intakeLeft.setNeutralMode(NeutralMode.Brake);
 		intakeRight.setNeutralMode(NeutralMode.Brake);
@@ -111,6 +123,17 @@ public class RobotMap {
 		intakeRight.set(ControlMode.PercentOutput,0.0);
 		intakeHinge.set(ControlMode.PercentOutput,0.0);
 		/************* 2 start ************************/
+		/*	public static TalonSRX climberMotor1;
+			public static TalonSRX climberMotor2;
+			
+			public static DigitalInput climberTopLimitSwitch;
+			public static DigitalInput climberBottomLimitSwitch;
+		 */
+		climberMotor1= new TalonSRX(CLIMBER1_ID);
+		climberMotor2= new TalonSRX(CLIMBER2_ID);
+		
+		climberTopLimitSwitch=new DigitalInput(CLIMBER_LIMIT_SWITCH_TOP_PORT);
+		climberTopLimitSwitch=new DigitalInput(CLIMBER_LIMIT_SWITCH_TOP_PORT);
 		
 		
 		/************* 2 end ************************/

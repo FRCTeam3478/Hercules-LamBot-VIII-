@@ -36,6 +36,8 @@ public class Robot_Drive extends Subsystem {
 	//////////////////////////////////////////////
 	
 	
+	
+	
 	////////funcion principal del drive/////////////
 	public void Main_drive() {
 		//lee el control 1
@@ -52,9 +54,10 @@ public class Robot_Drive extends Subsystem {
 		// Calcula el angulo del vector
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		
-		// Show the translation angle on the dashboard
+		// Mostrar el angulo del vector
 		SmartDashboard.putNumber("Translation Angle", angle*180/Math.PI);
 		
+		// Movimiento vectorial
 		talons[0].set(ControlMode.PercentOutput,magnitude*
 				Math.sin(angle)-rotationAxis);
 		talons[1].set(ControlMode.PercentOutput,magnitude*

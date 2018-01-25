@@ -1,6 +1,11 @@
 
 package org.usfirst.frc.team3478.robot;
+import org.usfirst.frc.team3478.robot.commands.Robot_Escalar;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class OI {
 	
@@ -58,7 +63,11 @@ public class OI {
 			
 			
 		/************* 2 start ************************/
-		
+		 // Asignar un boton de seguridad al comando
+		 // escalar
+		 Command climbCommand=new Robot_Escalar();
+		 Button climberSafety=new JoystickButton(Stick2,5);
+		 climberSafety.whileHeld(climbCommand);// vincular el boton con el comando
 		
 		/************* 2 end ************************/
 		
