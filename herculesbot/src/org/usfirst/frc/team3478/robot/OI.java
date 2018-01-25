@@ -2,6 +2,9 @@
 package org.usfirst.frc.team3478.robot;
 
 import org.usfirst.frc.team3478.robot.commands.Robot_Drive_ChangePolarity;
+import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoDown;
+import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoUp;
+import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoUpper;
 import org.usfirst.frc.team3478.robot.commands.Robot_Topes_Open;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -15,6 +18,10 @@ public class OI {
 	public Joystick Stick2; //declara un joystick
 	public JoystickButton XboxY1; //declara un boton de joystick
 	public JoystickButton XboxA1; //declara un boton de joystick
+	
+	public JoystickButton XboxA2; //declara un boton de joystick
+	public JoystickButton XboxB2; //declara un boton de joystick
+	public JoystickButton XboxY2; //declara un boton de joystick
 	/////////////////////////////////////////////////
 	
 
@@ -31,7 +38,12 @@ public class OI {
 		 ///////////////////////////////////////////
 		 
 		 /////////////elevador///////////////////////(driver2)
-		 
+		 XboxA2 = new JoystickButton(Stick2, 1);
+		 XboxA2.whenReleased(new Robot_Elevador_AutoDown());  //mientras este presionado hace el comando
+		 XboxB2 = new JoystickButton(Stick2, 2);
+		 XboxB2.whenReleased(new Robot_Elevador_AutoUp());  //mientras este presionado hace el comando
+		 XboxY2 = new JoystickButton(Stick2, 4);
+		 XboxY2.whenReleased(new Robot_Elevador_AutoUpper());  //mientras este presionado hace el comando
 		 ///////////////////////////////////////////
 		 
 		 ////////////chasis/////////////////////////(driver1)
