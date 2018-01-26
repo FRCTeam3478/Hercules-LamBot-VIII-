@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Robot_Intake extends Subsystem {
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static final double POWERFACTOR = 0.1; //limitador del maximo
+	private static final double POWERFACTOR = 0.07; //limitador del maximo
 	private static final int Encoder_CPR = 1024; //pulsos por vuelta del encoder
 	private final int Y_AXIS = 1; 
 	private final int RIGHT_TRIGGER = 2;
@@ -29,7 +29,7 @@ public class Robot_Intake extends Subsystem {
 			
 	//max change no debe permitir movimientos de mas de 1 grado al mecanismo
 	private static final int MAX_CHANGE = (int)((Encoder_CPR)*4/360); //el maximo cambio es de 1 grado (para que no se pase los switches con una instruccion)
-	private static int direction = 1;
+	private static int direction = -1;
 	private static int position_abs = 0;
 	private static int position_abs_last = 0;
 	
@@ -78,6 +78,16 @@ public class Robot_Intake extends Subsystem {
 		
 		position_abs = powerfake+position_abs; //sumamos lo que se va mover a la variable global de posicion que fija donde esta el motor
 		
+		/////////aqui va el pov para los automaticos//////////////////
+		if(stick2.getPOV()==0){			
+			position_abs= 0;
+		}else if(stick2.getPOV()==180){
+			position_abs= Encoder_CPR;
+		}else if(stick2.getPOV()==270){
+			position_abs= (int) Encoder_CPR/2;
+		}
+		/////////////////////////////////////////////////////////////		
+		
 		if((position_abs-position_abs_last) < 0 && !intakeDown.get()) { //chemaos el switch para que no se pase del limite
 			position_abs=position_abs_last;
 		}else if((position_abs-position_abs_last) > 0 && !intakeUp.get()) { //chemaos el switch para que no se pase del limite
@@ -101,11 +111,11 @@ public class Robot_Intake extends Subsystem {
 	
 	//// Funcion para comer o escupir cajas //////////////////////////////
 	public void manipulate(double rightTriggerValue, double leftTriggerValue) {
-		double rightOutputValue;
-		double leftOutputValue;
+		double rightOutputValue = 0.0;
+		double leftOutputValue = 0.0;
 		// Mapear el valor de los triggers para la potencia
-		rightTriggerValue = mapDoubleT(rightTriggerValue,TOLERANCE,1,0,1)*direction;
-		leftTriggerValue = mapDoubleT(leftTriggerValue,TOLERANCE,1,0,1)*direction;
+		rightTriggerValue = mapDoubleT(rightTriggerValue,TOLERANCE,1,0,1);
+		leftTriggerValue = mapDoubleT(leftTriggerValue,TOLERANCE,1,0,1);
 		
 		// left trigger value is subtracted from right trigger value to get difference
 		double triggerDifferenceValue = rightTriggerValue - leftTriggerValue;
@@ -127,12 +137,6 @@ public class Robot_Intake extends Subsystem {
 			// set -1.0 as output value
 			rightOutputValue = 1.0;
 			leftOutputValue = 1.0;
-		}
-		// else, if it is equal to 0.0
-		else {
-			// set 0.0 as output value
-			rightOutputValue = 0.0;
-			leftOutputValue = 0.0;
 		}
 		
 		// set right and left intake motors their respective output value

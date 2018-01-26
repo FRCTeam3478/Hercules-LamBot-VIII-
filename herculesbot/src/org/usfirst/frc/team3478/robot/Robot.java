@@ -9,8 +9,10 @@ package org.usfirst.frc.team3478.robot;
 
 import org.usfirst.frc.team3478.robot.commands.Robot_Autonomo_Main;
 import org.usfirst.frc.team3478.robot.commands.Robot_Drive_MainDrive;
+import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_MainMove;
 import org.usfirst.frc.team3478.robot.commands.Robot_Escalador_MainMove;
 import org.usfirst.frc.team3478.robot.commands.Robot_General_InitPositions;
+import org.usfirst.frc.team3478.robot.commands.Robot_Intake_MainMove;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Autonomo;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Control;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Drive;
@@ -32,6 +34,8 @@ public class Robot extends TimedRobot {
 	Command autonomo_command;
 	Command drivestart_command;
 	Command escaladorstart_command;
+	Command elevadorstart_command;
+	Command intakestart_command;
 	Command resetall_command; //todos los subsistemas deben tener una inicializacion en este comando
 	/***********************************************************/
 	
@@ -72,6 +76,8 @@ public class Robot extends TimedRobot {
 		autonomo_command = new Robot_Autonomo_Main();
 		drivestart_command = new Robot_Drive_MainDrive();
 		escaladorstart_command = new Robot_Escalador_MainMove();
+		intakestart_command = new Robot_Intake_MainMove();
+		elevadorstart_command = new Robot_Elevador_MainMove();
 		resetall_command = new Robot_General_InitPositions();
 		/***********************************************************************************/
 	}
@@ -121,6 +127,8 @@ public class Robot extends TimedRobot {
 		if (resetall_command != null) resetall_command.start();  //inicializamos el comando si no existe
 		if (drivestart_command != null) drivestart_command.start();  //inicializamos el comando si no existe
 		if (escaladorstart_command != null) escaladorstart_command.start();  //inicializamos el comando si no existe
+		if (elevadorstart_command != null) elevadorstart_command.start();  //inicializamos el comando si no existe
+		if (intakestart_command != null) intakestart_command.start();  //inicializamos el comando si no existe
 	}
 
 	/**

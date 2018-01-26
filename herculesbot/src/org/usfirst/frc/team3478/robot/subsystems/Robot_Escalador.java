@@ -20,13 +20,50 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Robot_Escalador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static int direction = 1;
-	private TalonSRX[] talons;  //arreglo para guadar los talon del chasis
-	private DigitalInput[] signals; 
-
-	public void initDefaultCommand() {
-		//nada
+	private static int direction = -1;
+	
+	private TalonSRX[] climberMotors; //arreglo de talons del escalador
+	private DigitalInput topLimitSwitch; //limit switch superior del escalador
+	private DigitalInput bottomLimitSwitch; //limit switch inferior del escalador
+	
+	////////////constructor de la clase///////////////////////////////
+	public Robot_Escalador(){
+		climberMotors=new TalonSRX[]{RobotMap.EscaladorMotLeft,RobotMap.EscaladorMotRight};
+		topLimitSwitch=RobotMap.SwitchArriba;
+		bottomLimitSwitch=RobotMap.SwitchAbajo;
 	}
+	/////////////////////////////////////////////////////////////////
+	
+	////////////metodo para subir y bajar el escalador//////////////
+	public void Main_Escalador(){
+		Joystick joystick=Robot.oi.Stick1;
+		//Mapear el valor del joystick para la potencia
+		double power=mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1)*direction;
+		//Interrumpir la funcion cuando el escalador
+		//llegue al limite superior
+		if(power>0 && !topLimitSwitch.get()){
+			power=0;
+		}
+		//Interrumpir la funcion cuando el escalador
+		//llegue al limite inferior
+		if(power<0 && !bottomLimitSwitch.get()){
+			power=0;
+		}
+		//Ajustar la potencia de los motores
+		for(TalonSRX motor:climberMotors) {
+			motor.set(ControlMode.PercentOutput, power);
+		}
+	}
+	//////////////////////////////////////////////////////////////////////
+	
+	//////////////para parar el motor del escalador/////////////
+	public void Stop_Escalador() {
+		for(TalonSRX motor:climberMotors) {
+			motor.set(ControlMode.PercentOutput, 0.0);
+		}
+	}
+	////////////////////////////////////////////////////////
+	
 	
 	////para poner todo en la posicion inicial/////
 	public void InitDefaultState() {
@@ -34,47 +71,12 @@ public class Robot_Escalador extends Subsystem {
 	}
 	//////////////////////////////////////////////
 	
-	//////////constructor de la clase/////////////////////
-	public Robot_Escalador(){
-		talons=new TalonSRX[]{RobotMap.EscaladorMotLeft,RobotMap.EscaladorMotRight};
-		signals=new DigitalInput[] {RobotMap.SwitchAbajo,RobotMap.SwitchArriba};
-	}
-	//////////////////////////////////////////////////////
-	
-	//////////main ciclo del escalador//////////////////
-	public void Main_Escalador() {
-		
-		Joystick joystick=Robot.oi.Stick1;
-		
-		//lee cada eje de los joystick y les quita el error y mapea
-		double translationY= mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1);  //arriba -1 abajo 1
-		if(translationY<0 && signals[1].get()==false) {
-			translationY=0;
-		}else if(translationY>0 && signals[0].get()==false) {
-			translationY=0;
-		}
-		for(TalonSRX talon:talons) {
-			talon.set(ControlMode.PercentOutput, (translationY*direction));
-		}
-		
-	}
-	///////////////////////////////////////////////////
-	
-	//////////////para parar el motor del escalador/////////////
-	public void Stop_Escalador() {
-		for(TalonSRX talon:talons) {
-			talon.set(ControlMode.PercentOutput, 0.0);
-		}
-	}
-	////////////////////////////////////////////////////////
-	
 	
 	///para mapear un numero de un rango a otro rango
 	private double map(double x, double in_min, double in_max, double out_min, double out_max)
 	{
 		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
-	
 	private double mapDoubleT(double x, double in_min, double in_max, double out_min, double out_max)
 	{
 		if(Math.abs(x)<TOLERANCE) {
@@ -85,7 +87,10 @@ public class Robot_Escalador extends Subsystem {
 		}
 		return map(x,in_min,in_max,out_min,out_max);
 	}
+	//////////////////////////////////////////////
 	
-	///////////////////////////////////////////////
+	public void initDefaultCommand() {
+		//nada
+	}
 	
 }

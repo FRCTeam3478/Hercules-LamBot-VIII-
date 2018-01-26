@@ -18,11 +18,6 @@ public class Robot_Control extends Subsystem {
 		//nada
 	}
 	
-	////para poner todo en la posicion inicial/////
-	public void InitDefaultState() {
-		
-	}
-	//////////////////////////////////////////////
-    
+
 	
 }

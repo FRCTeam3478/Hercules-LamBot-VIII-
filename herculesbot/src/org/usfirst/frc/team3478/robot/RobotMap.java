@@ -33,6 +33,8 @@ public class RobotMap {
 	
 	private static final int ESCALADOR_LEFT_PORT = 7;
 	private static final int ESCALADOR_RIGHT_PORT = 8;
+	
+	private static final int ELEVADOR_PORT = 9;
 	/******************************************/
 	
 	/**********numeros de las senales digitales********/
@@ -43,8 +45,13 @@ public class RobotMap {
 	
 	private static final int ESCALADOR_UP = 4;
 	private static final int ESCALADOR_DOWN = 5;
-	private static final int INTAKE_UP = 6;
-	private static final int INTAKE_DOWN = 7;
+	
+	private static final int ELEVADOR_UP = 6;
+	private static final int ELEVADOR_DOWN = 7;
+
+	private static final int INTAKE_UP = 8;
+	private static final int INTAKE_DOWN = 9;
+
 	/***********************************************/
 	
 	/**********numeros de las senales analogas********/
@@ -81,7 +88,11 @@ public class RobotMap {
 	public static DigitalInput SwitchArriba;
 	/***********************************/
 	
-	
+	/***********elevador****************/
+	public static TalonSRX ElevadorMot;
+	public static DigitalInput EleSwitchAbajo;
+	public static DigitalInput EleSwitchArriba;
+	/**********************************/
 	
 	public static void init() {
 		
@@ -125,6 +136,9 @@ public class RobotMap {
 		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
 		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
 		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
+		
+		intakeLeft.setInverted(true);
+		intakeRight.setInverted(false);
 		
 		/* set Break Mode */
 		intakeLeft.setNeutralMode(NeutralMode.Brake);
@@ -177,11 +191,40 @@ public class RobotMap {
 		EscaladorMotRight.setNeutralMode(NeutralMode.Brake);
 		EscaladorMotLeft.set(ControlMode.PercentOutput,0);
 		EscaladorMotRight.set(ControlMode.PercentOutput,0);
+		
 		SwitchAbajo = new DigitalInput(ESCALADOR_DOWN);  //tienen pull up en el roborio
 		SwitchArriba = new DigitalInput(ESCALADOR_UP);   //tienen pull up en el roborio
 		/**************************************/
 		
-		
+		/***********elevador****************/
+		ElevadorMot = new TalonSRX(ELEVADOR_PORT);
+		ElevadorMot.setNeutralMode(NeutralMode.Brake);
+		/* set the enable state for limit switches */
+		ElevadorMot.overrideLimitSwitchesEnable(false);
+		/* first choose the sensor */
+		ElevadorMot.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		ElevadorMot.setSensorPhase(true); //invierte al sensor
+		ElevadorMot.setInverted(false);  //invierte al motor
+		ElevadorMot.configAllowableClosedloopError(0, 0, 0);
+		/* set the peak and nominal outputs */
+		ElevadorMot.configNominalOutputForward(0, 0);
+		ElevadorMot.configNominalOutputReverse(0, 0);
+		ElevadorMot.configPeakOutputForward(1.0, 0);
+		ElevadorMot.configPeakOutputReverse(-1.0, 0);
+		/* set closed loop gains in slot0*/
+		ElevadorMot.selectProfileSlot(0, 0);
+		ElevadorMot.config_kF(0, 0, 0);
+		ElevadorMot.config_kP(0, 1, 0);
+		ElevadorMot.config_kI(0, 0, 0);
+		ElevadorMot.config_kD(0, 0, 0);
+		/* zero the sensor */
+		ElevadorMot.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
+		/* Set to position 0 */
+		//ElevadorMot.set(ControlMode.Position, 0);  //encoder ticks (versa) 1024cpr
+		ElevadorMot.set(ControlMode.PercentOutput,0);
+		EleSwitchAbajo = new DigitalInput(ELEVADOR_DOWN);  //tienen pull up en el roborio
+		EleSwitchArriba = new DigitalInput(ELEVADOR_UP);   //tienen pull up en el roborio
+		/**********************************/
 		
 	}
 	
