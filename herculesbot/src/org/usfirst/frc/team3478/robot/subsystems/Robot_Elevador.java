@@ -25,7 +25,7 @@ public class Robot_Elevador extends Subsystem {
 	//max change no debe permitir movimientos de mas de 10 mm al mecanismo
 	// la polea 36 dientes 5 mm de pitch
 	private static final int MAX_CHANGE = (int)(10*((Encoder_CPR*4)/(36*5))); //el maximo cambio es de media vuelta(para que no se pase los switches con una isntruccion)
-	private static int direction = 1;
+	private static int direction = -1;
 	private static int Position_abs = 0;
 	private static int Position_abs_last = 0;
 		
@@ -85,13 +85,13 @@ public class Robot_Elevador extends Subsystem {
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Elevador_Up() {
-		Position_abs=(int)(3*Encoder_CPR);
+		Position_abs=(int)(3*Encoder_CPR*4);
 	}
 	///////////////////////////////////////////////////////////////
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Elevador_Upper() {
-		Position_abs=(int)(5*Encoder_CPR);
+		Position_abs=(int)(5*Encoder_CPR*4);
 	}
 	///////////////////////////////////////////////////////////////
 	

@@ -34,7 +34,7 @@ public class RobotMap {
 	private static final int ESCALADOR_LEFT_PORT = 7;
 	private static final int ESCALADOR_RIGHT_PORT = 8;
 	
-	private static final int ELEVADOR_PORT = 8;
+	private static final int ELEVADOR_PORT = 9;
 	/******************************************/
 	
 	/**********numeros de las senales digitales********/
@@ -45,14 +45,13 @@ public class RobotMap {
 	
 	private static final int ESCALADOR_UP = 4;
 	private static final int ESCALADOR_DOWN = 5;
-<<<<<<< HEAD
 	
 	private static final int ELEVADOR_UP = 6;
 	private static final int ELEVADOR_DOWN = 7;
-=======
-	private static final int INTAKE_UP = 6;
-	private static final int INTAKE_DOWN = 7;
->>>>>>> origin/alpha_master
+
+	private static final int INTAKE_UP = 8;
+	private static final int INTAKE_DOWN = 9;
+
 	/***********************************************/
 	
 	/**********numeros de las senales analogas********/
@@ -137,6 +136,9 @@ public class RobotMap {
 		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
 		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
 		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
+		
+		intakeLeft.setInverted(true);
+		intakeRight.setInverted(false);
 		
 		/* set Break Mode */
 		intakeLeft.setNeutralMode(NeutralMode.Brake);
