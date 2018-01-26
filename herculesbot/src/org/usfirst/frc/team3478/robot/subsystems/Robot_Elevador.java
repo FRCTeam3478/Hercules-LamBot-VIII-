@@ -22,9 +22,7 @@ public class Robot_Elevador extends Subsystem {
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
 	private static final double POWERFACTOR = 1; //limitador del maximo
 	private static final int Encoder_CPR = 1024; //pulsos por vuelta del encoder
-	//max change no debe permitir movimientos de mas de 10 mm al mecanismo
-	// la polea 36 dientes 5 mm de pitch
-	private static final int MAX_CHANGE = (int)(10*((Encoder_CPR*4)/(36*5))); //el maximo cambio es de media vuelta(para que no se pase los switches con una isntruccion)
+	
 	private static int direction = -1;
 	private static int Position_abs = 0;
 	private static int Position_abs_last = 0;
@@ -69,13 +67,6 @@ public class Robot_Elevador extends Subsystem {
 			Position_abs=Position_abs_last;
 		}else if((Position_abs-Position_abs_last) > 0 && !ElevadorTopSwitch.get()) { //chemaos el switch para que no se pase del limite
 			Position_abs=Position_abs_last;
-		}
-		if(Math.abs(Position_abs-Position_abs_last)>MAX_CHANGE) {  //para limitar el cambio maximo
-			if((Position_abs-Position_abs_last)<0) {
-				Position_abs = Position_abs_last - MAX_CHANGE;
-			}else {
-				Position_abs = Position_abs_last + MAX_CHANGE;
-			}
 		}
 		elevadormotor.set(ControlMode.Position, Position_abs);  //mueve el motor a donde le digamos (ticks del encoder)
 		Position_abs_last = Position_abs; //guardamos el ultimo estado

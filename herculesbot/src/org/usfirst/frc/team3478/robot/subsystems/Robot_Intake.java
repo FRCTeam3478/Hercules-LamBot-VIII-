@@ -28,7 +28,6 @@ public class Robot_Intake extends Subsystem {
 	private final int LEFT_TRIGGER = 3;
 			
 	//max change no debe permitir movimientos de mas de 1 grado al mecanismo
-	private static final int MAX_CHANGE = (int)((Encoder_CPR)*4/360); //el maximo cambio es de 1 grado (para que no se pase los switches con una instruccion)
 	private static int direction = -1;
 	private static int position_abs = 0;
 	private static int position_abs_last = 0;
@@ -79,21 +78,19 @@ public class Robot_Intake extends Subsystem {
 		position_abs = powerfake+position_abs; //sumamos lo que se va mover a la variable global de posicion que fija donde esta el motor
 		
 		/////////aqui va el pov para los automaticos//////////////////
-		
+		if(stick2.getPOV()==0){			
+			position_abs= 0;
+		}else if(stick2.getPOV()==180){
+			position_abs= Encoder_CPR;
+		}else if(stick2.getPOV()==270){
+			position_abs= (int) Encoder_CPR/2;
+		}
 		/////////////////////////////////////////////////////////////		
 		
 		if((position_abs-position_abs_last) < 0 && !intakeDown.get()) { //chemaos el switch para que no se pase del limite
 			position_abs=position_abs_last;
 		}else if((position_abs-position_abs_last) > 0 && !intakeUp.get()) { //chemaos el switch para que no se pase del limite
 			position_abs=position_abs_last;
-		}
-		
-		if(Math.abs(position_abs-position_abs_last) > MAX_CHANGE) {  //para limitar el cambio maximo
-			if((position_abs-position_abs_last)<0) {
-				position_abs = position_abs_last - MAX_CHANGE;
-			}else {
-				position_abs = position_abs_last + MAX_CHANGE;
-			}
 		}
 		
 		intakeHinge.set(ControlMode.Position, position_abs);  //mueve el motor a donde le digamos (ticks del encoder)
