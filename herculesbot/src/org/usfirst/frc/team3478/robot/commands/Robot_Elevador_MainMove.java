@@ -13,14 +13,10 @@ import org.usfirst.frc.team3478.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class Robot_General_InitPositions extends Command {
-	public Robot_General_InitPositions() {
+public class Robot_Elevador_MainMove extends Command {
+	public Robot_Elevador_MainMove() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.Robot_intake);
 		requires(Robot.Robot_elevador);
-		requires(Robot.Robot_escalador);
-		requires(Robot.Robot_topes);
-		requires(Robot.Robot_drive);
 	}
 
 	// Called just before this Command runs the first time
@@ -31,23 +27,19 @@ public class Robot_General_InitPositions extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_intake.InitDefaultState();
-		Robot.Robot_elevador.InitDefaultState();
-		Robot.Robot_escalador.InitDefaultState();
-		Robot.Robot_topes.InitDefaultState();
-		Robot.Robot_drive.InitDefaultState();
+		Robot.Robot_elevador.Main_Move_Elevador();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;  //cambiar a true si queremos que solo se haga una vez, false es que lo repite(el while held cambia el false a true o cuando se interrumpe)
+		return false;  //cambiar a true si queremos que solo se haga una vez, false es que lo repite(el while held cambia el false a true o cuando se interrumpe)
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		///nada
+		Robot.Robot_elevador.Stop_Elevador();
 	}
 
 	// Called when another command which requires one or more of the same
