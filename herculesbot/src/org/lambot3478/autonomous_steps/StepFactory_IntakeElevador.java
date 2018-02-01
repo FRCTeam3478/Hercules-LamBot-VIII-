@@ -1,0 +1,48 @@
+package org.lambot3478.autonomous_steps;
+
+import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
+
+import edu.wpi.first.wpilibj.Timer;
+
+public class StepFactory_IntakeElevador {
+	public static AutonomousStep_IntakeElevador getNewLowerElevator(){
+		return new LowerElevator();
+	}
+	public static AutonomousStep_IntakeElevador getNewRaiseElevatorTime(double power,double time){
+		return new RaiseElevatorTime(power,time);
+	}
+	public static AutonomousStep_IntakeElevador getNewGrabBox(){
+		return new GrabBox();
+	}
+	public static AutonomousStep_IntakeElevador getNewThrowBox(){
+		return new ThrowBox();
+	}
+	public static AutonomousStep_IntakeElevador getNewWait(double time){
+		AutonomousStep_IntakeElevador wait=new AutonomousStep_IntakeElevador(){
+			double delay=time;
+			Timer timer;
+			@Override
+			public void start() {
+				timer=new Timer();
+				timer.start();
+			}
+
+			@Override
+			public void run() {
+				
+			}
+			@Override
+			public boolean isFinished() {
+				if(timer==null){
+					timer=new Timer();
+					timer.start();
+				}
+				if(timer.get()<delay)
+					return false;
+				return true;
+			}
+			
+		};
+		return wait;
+	}
+}

@@ -1,0 +1,30 @@
+package org.lambot3478.autonomous_step;
+
+import org.usfirst.frc.team3478.robot.Robot;
+import org.usfirst.frc.team3478.robot.RobotMap;
+import org.usfirst.frc.team3478.robot.subsystems.Robot_Heading;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+public abstract class AutonomousStep_IntakeElevador extends AutonomousStep{
+	protected TalonSRX[] elevatorTalons;
+	protected TalonSRX[] intakeTalons;
+	
+	public AutonomousStep_IntakeElevador(){
+		
+	}
+	public void setup(){
+		elevatorTalons=new TalonSRX[]{RobotMap.ElevadorMot,
+				RobotMap.EscaladorMotLeft};
+		intakeTalons=new TalonSRX[]{RobotMap.intakeLeft,
+				RobotMap.intakeRight};
+	}
+	@Override
+	public abstract void start();
+
+	@Override
+	public abstract void run();
+	
+	@Override
+	public abstract boolean isFinished();
+}

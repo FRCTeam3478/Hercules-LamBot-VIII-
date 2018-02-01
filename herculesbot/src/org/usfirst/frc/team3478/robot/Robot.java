@@ -18,12 +18,15 @@ import org.usfirst.frc.team3478.robot.subsystems.Robot_Control;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Drive;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Elevador;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Escalador;
+import org.usfirst.frc.team3478.robot.subsystems.Robot_Heading;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Intake;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Topes;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Robot extends TimedRobot {
@@ -47,9 +50,12 @@ public class Robot extends TimedRobot {
 	public static Robot_Drive Robot_drive;
 	public static Robot_Autonomo Robot_autonomo;
 	public static Robot_Control Robot_control;
+	public static Robot_Heading Robot_heading;
 	/*****************************************************************************************/
-	
 
+	/*******seleccion de autonomo************************************/
+	public static SendableChooser autonomousChooser;
+	/****************************************************************/
 	@Override
 	public void robotInit() {
 		RobotMap.init(); //inicializa todos los elementos del robot
@@ -62,6 +68,7 @@ public class Robot extends TimedRobot {
 		Robot_drive = new Robot_Drive();
 		Robot_autonomo = new Robot_Autonomo();
 		Robot_control = new Robot_Control();
+		Robot_heading = new Robot_Heading();
 		/*************************************************************************************/
 		
 		oi = new OI();  ///lo del joystick
@@ -80,6 +87,15 @@ public class Robot extends TimedRobot {
 		elevadorstart_command = new Robot_Elevador_MainMove();
 		resetall_command = new Robot_General_InitPositions();
 		/***********************************************************************************/
+		/****************para seleccionar entre autonomos***********************************//////
+		autonomousChooser = new SendableChooser();
+		autonomousChooser.addDefault("Nada", 1);
+		autonomousChooser.addObject("Cruzar", 2);
+		autonomousChooser.addObject("Izquierda", 3);
+		autonomousChooser.addObject("Centro", 4);
+		autonomousChooser.addObject("Derecha", 5);
+	    SmartDashboard.putData("Autonomous Selector", autonomousChooser);
+		/************************************************************************************/
 	}
 
 	/**

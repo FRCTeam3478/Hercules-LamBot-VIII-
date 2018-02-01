@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Timer"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Encoder"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.Subsystem"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3478.robot.subsystems.Robot_Heading"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.interfaces.Gyro"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3478.robot.RobotMap"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DigitalInput"/>
+<fullyQualifiedTypeName name="com.ctre.phoenix.motorcontrol.can.TalonSRX"/>
+<fullyQualifiedTypeName name="com.ctre.phoenix.motorcontrol.ControlMode"/>
+<fullyQualifiedTypeName name="org.lambot3478.autonomous_steps.LowerElevator"/>
+<fullyQualifiedTypeName name="org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador"/>
+<fullyQualifiedTypeName name="org.lambot3478.autonomous_steps.StepFactory_IntakeElevador"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SendableChooser"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SmartDashboard"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3478.robot.Robot"/>
+<fullyQualifiedTypeName name="org.lambot3478.autonomous_step.AutonomousStep"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DriverStation"/>
+<fullyQualifiedTypeName name="org.lambot3478.autonomous_step.AutonomousStep_Drive"/>
+</qualifiedTypeNameHistroy>

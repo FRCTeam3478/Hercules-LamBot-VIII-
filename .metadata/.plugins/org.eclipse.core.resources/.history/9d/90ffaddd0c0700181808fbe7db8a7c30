@@ -1,0 +1,7 @@
+package org.lambot3478.autonomous_steps;
+
+public class StepFactory_IntakeElevador {
+	public static LowerElevator getNewLowerElevator(){
+		return new LowerElevator();
+	}
+}

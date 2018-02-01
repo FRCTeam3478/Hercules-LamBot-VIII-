@@ -1,0 +1,12 @@
+package org.lambot3478.autonomous_step;
+
+public abstract class AutonomousStep {
+	// Parámetro límite
+	private double limit;
+	// Tipo de límite (Tiempo,distancia,grados,...)
+	private int limitType;
+	// Método para inicializar el paso
+	public abstract void start();
+	// Función iterativa del paso
+	public abstract void run();
+}

@@ -1,0 +1,14 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class Robot_Heading extends Subsystem{
+	public Robot_Heading(){
+		
+	}
+	@Override
+	protected void initDefaultCommand() {
+		
+	}
+	
+}

@@ -1,0 +1,27 @@
+package org.lambot3478.autonomous_steps;
+
+import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+public class ThrowBox extends AutonomousStep_IntakeElevador{
+	private final double POWER=1.0;
+	public ThrowBox(){
+		
+	}
+	@Override
+	public void start() {
+	
+	}
+	@Override
+	public void run() {
+		setIntakeTalons(POWER);
+	}
+
+	@Override
+	public boolean isFinished() {
+		
+		return true;
+	}
+}

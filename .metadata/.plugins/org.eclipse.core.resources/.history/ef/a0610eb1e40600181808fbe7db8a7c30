@@ -1,0 +1,13 @@
+package org.lambot3478.autonomous_steps;
+
+public class StepFactory_Drive {
+	public static VectorMoveTime getNewVectorMoveTime(double translationAngle,double power,double time){
+		return new VectorMoveTime(translationAngle,power,time);
+	}
+	public static RotateTime getNewRotateTime(double rotationPower,double time){
+		return new RotateTime(rotationPower,time);
+	}
+	public static RotateDegrees getNewRotateTime(double rotation){
+		return new RotateDegrees(rotation);
+	}
+}

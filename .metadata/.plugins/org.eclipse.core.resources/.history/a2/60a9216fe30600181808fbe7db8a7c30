@@ -1,0 +1,25 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class Robot_Heading extends Subsystem{
+	public Robot_Heading(){
+		
+	}
+	/* 
+	 * public void reset(){
+	 * }
+	 */
+	public double getAngularVel(){
+		return 0.0;
+	}
+	public double getRotation(){
+		return 0.0;
+	}
+	@Override
+	protected void initDefaultCommand() {
+		
+	}
+	
+	
+}

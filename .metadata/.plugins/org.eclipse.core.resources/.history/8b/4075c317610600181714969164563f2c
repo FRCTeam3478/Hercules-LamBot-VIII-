@@ -1,0 +1,28 @@
+package org.lambot3478.autonomous_step;
+
+public abstract class AutonomousStep_Drive extends AutonomousStep{
+	public static int DRIVE_LIMIT_TIME=0;
+	public static int DRIVE_LIMIT_DISTANCE=1;
+	public static int DRIVE_LIMIT_ROTATION=2;
+	@Override
+	public abstract void start();
+
+	@Override
+	public abstract void run();
+	
+	private boolean limitIsReached(){
+		if(limitType==DRIVE_LIMIT_TIME){
+			
+		}
+		else if(limitType==DRIVE_LIMIT_TIME){
+			
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean isFinished() {
+		return limitIsReached();
+	}
+
+}

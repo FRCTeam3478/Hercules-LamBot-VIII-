@@ -1,0 +1,36 @@
+package org.lambot3478.autonomous_steps;
+
+import org.lambot3478.autonomous_step.AutonomousStep_Drive;
+
+public class StepFactory_Drive {
+	public static VectorMoveTime getNewVectorMoveTime(double translationAngle,double power,double time){
+		return new VectorMoveTime(translationAngle,power,time);
+	}
+	public static RotateTime getNewRotateTime(double rotationPower,double time){
+		return new RotateTime(rotationPower,time);
+	}
+	public static RotateDegrees getNewRotateDegrees(double rotation){
+		return new RotateDegrees(rotation);
+	}
+	public static AutonomousStep_Drive getNewWait(double time){
+		AutonomousStep_Drive wait=new AutonomousStep_Drive(){
+			double delay;
+			@Override
+			public void start() {
+				this.delay=time;
+			}
+
+			@Override
+			public void run() {
+				
+			}
+
+			@Override
+			public boolean isFinished() {
+				return false;
+			}
+			
+		};
+		return (AutonomousStep_Drive)wait;
+	}
+}

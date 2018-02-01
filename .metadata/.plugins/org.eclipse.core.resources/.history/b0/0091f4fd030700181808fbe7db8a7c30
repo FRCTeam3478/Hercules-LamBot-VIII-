@@ -1,0 +1,27 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import org.usfirst.frc.team3478.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+
+public class Robot_Heading extends Subsystem{
+	private Gyro gyro;
+	public Robot_Heading(){
+		gyro=RobotMap.gyro;
+		gyro.calibrate();
+		gyro.reset();
+	}
+	public double getAngularVel(){
+		return gyro.getRate();
+	}
+	public double getRotation(){
+		return gyro.getAngle();
+	}
+	@Override
+	protected void initDefaultCommand() {
+		
+	}
+	
+	
+}

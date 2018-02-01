@@ -1,0 +1,56 @@
+package org.lambot3478.autonomous_step;
+
+import org.usfirst.frc.team3478.robot.RobotMap;
+import org.usfirst.frc.team3478.robot.subsystems.Robot_Heading;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Timer;
+
+public abstract class AutonomousStep_Drive extends AutonomousStep{
+	public static int DRIVE_LIMIT_TIME=0;
+	public static int DRIVE_LIMIT_DISTANCE=1;
+	public static int DRIVE_LIMIT_ROTATION=2;
+	private Timer timer;
+	private Encoder[] encoders;
+	private Robot_Heading heading;
+	@Override
+	public abstract void start();
+
+	@Override
+	public abstract void run();
+	
+	private boolean limitIsReached(){
+		if(limitType==DRIVE_LIMIT_TIME){
+			if(timer==null){
+				timer=new Timer();
+				timer.start();
+			}
+			if(timer.get()<limit)
+				return false;
+		}
+		else if(limitType==DRIVE_LIMIT_DISTANCE){
+			if(encoders==null){
+				encoders=new Encoder[]{RobotMap.DriveEL,RobotMap.DriveER};
+				for(Encoder encoder:encoders){
+					encoder.reset();
+				}
+			}
+			if(encoders[0].getDistance()<limit&&encoders[1].getDistance()<limit)
+				return false;
+		}
+		else if(limitType==DRIVE_LIMIT_ROTATION){
+			if(heading==null){
+				heading=Robot.Robot_heading;
+			}
+			if()
+				return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean isFinished() {
+		return limitIsReached();
+	}
+
+}

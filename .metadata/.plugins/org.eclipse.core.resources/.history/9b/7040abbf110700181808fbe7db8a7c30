@@ -1,0 +1,39 @@
+package org.lambot3478.autonomous_steps;
+
+import org.lambot3478.autonomous_step.AutonomousStep_Drive;
+
+import edu.wpi.first.wpilibj.Timer;
+
+public class ForwardDistance extends AutonomousStep_Drive{
+	private double front;
+	private double power;
+	private double distance;
+	
+	public ForwardDistance(double power,double distance){
+		// Inicializar los parametros
+		this.power=power;
+		this.distance=distance;
+	}
+	@Override
+	public void start() {
+		front=heading.getRotation();
+	}
+
+	@Override
+	public void run() {
+		// Potencia de alineacion proporcional
+		double rotationGain=(front-heading.getRotation())/22.5;
+		vectorMove(0, power, rotationGain);
+	}
+	@Override
+	public boolean isFinished() {
+		if(timer==null){
+			timer=new Timer();
+			timer.start();
+		}
+		if(timer.get()<time)
+			return false;
+		return true;
+	}
+
+}
