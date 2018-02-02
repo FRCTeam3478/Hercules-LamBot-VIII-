@@ -15,8 +15,6 @@ package org.usfirst.frc.team3478.robot.subsystems;
 
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
-import org.lambot3478.autonomous_steps.StepFactory_Drive;
-import org.lambot3478.autonomous_steps.StepFactory_IntakeElevador;
 import org.usfirst.frc.team3478.robot.Robot;
 import org.usfirst.frc.team3478.robot.RobotMap;
 
@@ -30,7 +28,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Robot_Autonomo extends Subsystem {
 	private final int AUTONOMOUS_NOTHING=1;
-	private final int AUTONOMOUS_CROSS_LINE=2;
+	private final int AUTONOMOUS_CENTER_2BOX =2;
 	private final int AUTONOMOUS_CENTER=3;
 	private final int AUTONOMOUS_LEFT=4;
 	private final int AUTONOMOUS_RIGHT=5;
@@ -41,7 +39,7 @@ public class Robot_Autonomo extends Subsystem {
 	// Arreglo de pasos del tren motriz 
 	private AutonomousStep_Drive[] driveSteps={};
 		/* // Ejemplo de secuencia de tren motriz
-		 * {
+		 * new AutonomousStep_Drive[]{
 		 * StepFactory_Drive.getNewVectorMoveTime(90,1.0,0.8),
 		 * StepFactory_Drive.getNewVectorMoveTime(-90,1.0,0.8),
 		 * StepFactory_Drive.getNewRotateDegrees(-180)};*/
@@ -51,7 +49,8 @@ public class Robot_Autonomo extends Subsystem {
 	//Arreglo de pasos del intake y elevador
 	private AutonomousStep_IntakeElevador[] intakeSteps={};
 		/*// Ejemplo de secuencia de elevador
-		 * {StepFactory_IntakeElevador.getNewLowerElevator(),
+		 * new AutonomousStep_IntakeElevador[]{
+		 * StepFactory_IntakeElevador.getNewLowerElevator(),
 		 * StepFactory_IntakeElevador.getNewWait(1),
 		 * StepFactory_IntakeElevador.getNewRaiseElevatorTime(0.7,2),
 		 * StepFactory_IntakeElevador.getNewThrowBox(),
@@ -62,13 +61,12 @@ public class Robot_Autonomo extends Subsystem {
 		 */
 	
 	
-	
 	//arreglo para guadar los talons del chasis
 	private TalonSRX[] talonsDrive;
 	//arreglo para guadar los talons del elevador
 	private TalonSRX[] talonsIntakeElevador;
 	
-	
+	/////////constructor de la clase///////////////////////////////
 	public Robot_Autonomo(){
 		talonsDrive=new TalonSRX[]{RobotMap.frontLeft,RobotMap.frontRight,
 				RobotMap.backLeft,RobotMap.backRight};
@@ -76,31 +74,39 @@ public class Robot_Autonomo extends Subsystem {
 				RobotMap.intakeLeft,RobotMap.intakeRight,
 				RobotMap.ElevadorMot};
 	}
-	public void initDefaultCommand() {
-		//nada
-	}
+	//////////////////////////////////////////////////////////////
+	
+	/////////////funcion para detener el chasis/////////////////////
 	private void driveStop(){
 		for(TalonSRX talon:talonsDrive) {
 			talon.set(ControlMode.PercentOutput, 0.0);
 		}
 	}
+	//////////////////////////////////////////////////////////////
+	
+	/////////////funcion para detener todo lo del intake////////////
 	private void intakeElevadorStop(){
 		for(TalonSRX talon:talonsIntakeElevador) {
 			talon.set(ControlMode.PercentOutput, 0.0);
 		}
 	}
+	//////////////////////////////////////////////////////////////
 	
 	////funcion principal del autonomo////////////
 	public void RunAuto() {
 		/*******************Seleccion de autonomo********************************/
 		// Obtener el autonomo seleccionado en la dashboard
 		int selected=(int) Robot.autonomousChooser.getSelected();
-		// Obtener los datos de juego
+		// Obtener los datos de juego (3 caracteres)
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		if(selected==AUTONOMOUS_CROSS_LINE){
-			driveSteps=new AutonomousStep_Drive[]{
-					StepFactory_Drive.getNewFwdDistance(1,14)};
+		if(selected==AUTONOMOUS_CENTER_2BOX){
+			if(gameData.charAt(0)=='L'){
+				// TODO
+			}
+			else{
+				// TODO
+			}
 		}
 		else if(selected==AUTONOMOUS_LEFT){
 			if(gameData.charAt(0)=='L'){
@@ -111,17 +117,29 @@ public class Robot_Autonomo extends Subsystem {
 			}
 		}
 		else if(selected==AUTONOMOUS_CENTER){
-			// TODO
+			if(gameData.charAt(0)=='L'){
+				// TODO
+			}
+			else{
+				// TODO
+			}
 		}
 		else if(selected==AUTONOMOUS_RIGHT){
-			// TODO
+			if(gameData.charAt(0)=='L'){
+				// TODO
+			}
+			else{
+				// TODO
+			}
 		}
 		/************************************************************************/
 		
 		/*******************Ejecucion de pasos***********************************/
-		// Timer de seguridad
+		//Crea el Timer de seguridad
 		Timer safetyTimer=new Timer();
 		safetyTimer.start();
+		
+		//////Crea un tread para correr las secuencias del intake en paralelo al chassis
 		Thread intakeElevadorThread=new Thread(new Runnable(){
 			@Override
 			public void run(){
@@ -142,12 +160,11 @@ public class Robot_Autonomo extends Subsystem {
 						break;
 					}
 				}
-				// Detener los motores de los mecanismos
-				// manipuladores de cajas
-				intakeElevadorStop();
 			}
 		});
-		intakeElevadorThread.start();
+		intakeElevadorThread.start(); //inicia el tread del intake
+		
+		////corre las secuencias del chasis//////////////////
 		for(AutonomousStep_Drive step:driveSteps){
 			// Inicializar los actuadores tren motriz
 			// y sensores usados por el
@@ -167,12 +184,11 @@ public class Robot_Autonomo extends Subsystem {
 				break;
 			}
 		}
-		safetyTimer.stop();
-		// Esperar a que los pasos del intake y elevador 
-		// terminen de ejecutarse
-		while(intakeElevadorThread.isAlive()){}
+		//Espera a que termine las secuencias del intake en el tread
+		while(intakeElevadorThread.isAlive() && safetyTimer.get()<SAFETY_TIMER){}
 		// Detener los motores del tren motriz
-		driveStop();
+		safetyTimer.stop();
+		EndAuto();
 		/************************************************************************/
 	}
 	
@@ -180,7 +196,14 @@ public class Robot_Autonomo extends Subsystem {
 	
 	/////////funcion que hace al final del autonomo////////
 	public void EndAuto() {
+		driveStop();
+		intakeElevadorStop();
 	}
 	///////////////////////////////////////////////////
+	
+	
+	public void initDefaultCommand() {
+		//nada
+	}
 	
 }

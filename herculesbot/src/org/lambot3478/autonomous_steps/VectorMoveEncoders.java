@@ -2,15 +2,12 @@ package org.lambot3478.autonomous_steps;
 
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 
-import edu.wpi.first.wpilibj.Timer;
+////para mover el chasis en las direcciones 0,45,90,135,180,255,270,315 una distancia medida con los encoders//////////////////
 
-////para mover el chasis en las direcciones 0,45,90,135,180,255,270,315 cierto tiempo//////////////////
-
-public class VectorMoveTime extends AutonomousStep_Drive{
-	private Timer timer;
+public class VectorMoveEncoders extends AutonomousStep_Drive{
 	private double front;
 	private double power;
-	private double time;
+	private double distance;
 	private double translationAngle;
 	/////para el pid/////////////
 	private double integral_val=0;
@@ -21,31 +18,27 @@ public class VectorMoveTime extends AutonomousStep_Drive{
 	private final double MIN_PID_VAL = -0.5;
 	/////////////////////////////
 	
-	public VectorMoveTime(double translationAngle,double power,double time){
+	public VectorMoveEncoders(double translationAngle,double power,double distance){
 		// Inicializar los parametros
-		this.translationAngle=translationAngle;
+		this.translationAngle = translationAngle;
 		this.power=power;
-		this.time=time;
+		this.distance=distance;
 	}
+	
 	@Override
 	public void start() {
-		front=heading.getRotation();
-		timer=new Timer();
-		timer.start();
+		front=heading.getRotation();  //guarda la posicion inicial
+		resetEncoders();  //resetea los encoders
 	}
 
 	@Override
 	public void run() {
-		// Potencia de alineacion proporcional
+		//ajusta al robot para que se mueva recto (controlador p con ganacia de 0.025)
 		vectorMove(translationAngle, power, PID_fun(front,heading.getRotation(),0.025,0,0));
 	}
 	@Override
 	public boolean isFinished() {
-		if(timer==null){
-			timer=new Timer();
-			timer.start();
-		}
-		if(timer.get()<time)
+		if(Math.abs(encoders[0].getDistance())<distance || Math.abs(encoders[1].getDistance())<distance)
 			return false;
 		return true;
 	}

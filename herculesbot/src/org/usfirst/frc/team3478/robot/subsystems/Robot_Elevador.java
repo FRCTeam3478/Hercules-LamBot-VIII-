@@ -20,15 +20,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Robot_Elevador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static final double POWERFACTOR = 1; //limitador del maximo
 	private static final int Encoder_CPR = 1024; //pulsos por vuelta del encoder
 	
 	private static int direction = -1;
+	private final int Step_limit = (int)((Encoder_CPR*4)/36); //que avance maximo 5mm por ciclo, polea 36 dientes 5mm por diente
+	private final int LIMITMULTIPLIER = 5;
 	private static int Position_abs = 0;
-	private static int Position_abs_last = 0;
+	private static int Position_Now = 0;
+	private static int Position_Last = 0;
 		
 	
 	private TalonSRX elevadormotor; //arreglo de talons del escalador
+	private TalonSRX intakeHinge;
 	private DigitalInput ElevadorTopSwitch; //limit switch superior del escalador
 	private DigitalInput ElevadorBottomSwitch; //limit switch inferior del escalador
 
@@ -39,6 +42,9 @@ public class Robot_Elevador extends Subsystem {
 	////para poner todo en la posicion inicial/////
 	public void InitDefaultState() {
 		Stop_Elevador();
+		Position_abs=elevadormotor.getSelectedSensorPosition(0);  //inicia la posicion donde se quedo en el autonomo
+		Position_Now = Position_abs;
+		Position_Last = Position_abs;
 	}
 	////////////////////////////////////////////////
 	
@@ -47,29 +53,57 @@ public class Robot_Elevador extends Subsystem {
 		elevadormotor=RobotMap.ElevadorMot;
 		ElevadorTopSwitch=RobotMap.EleSwitchArriba;
 		ElevadorBottomSwitch=RobotMap.EleSwitchAbajo;
+		intakeHinge = RobotMap.intakeHinge;
 	}
 	/////////////////////////////////////////////////////////////////
 	
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Main_Move_Elevador() {
+		
+		if(!ElevadorBottomSwitch.get()) { //si toca el switch de avbajo resetea el encoder para quitar error
+			elevadormotor.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
+		}
+		
 		Joystick joystick=Robot.oi.Stick2; //crea el objeto del joystick
 		double power=mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1)*direction; //mapea el valor del eje y da direccion
-		int powerfake = (int)((power*100)*POWERFACTOR); //fijamos cuanto se va a mover por ciclo de roborio con el eje
+		int powerfake = (int)(power*Step_limit*LIMITMULTIPLIER); //fijamos cuanto se va a mover por ciclo de roborio con el eje
 		if(powerfake>0 && !ElevadorTopSwitch.get()){ //checamos el switch de arriba para no pasarnos
 			powerfake=0;
 		}
 		if(powerfake<0 && !ElevadorBottomSwitch.get()){//checamos el switch de abajo para no pasarnos
 			powerfake=0;
 		}
-		Position_abs = powerfake+Position_abs; //sumamos lo que se va mover a la variable global de posicion que fija donde esta el motor
-		if((Position_abs-Position_abs_last) < 0 && !ElevadorBottomSwitch.get()) { //chemaos el switch para que no se pase del limite
-			Position_abs=Position_abs_last;
-		}else if((Position_abs-Position_abs_last) > 0 && !ElevadorTopSwitch.get()) { //chemaos el switch para que no se pase del limite
-			Position_abs=Position_abs_last;
+		
+		Position_abs = ((int)((powerfake+Position_abs)/Step_limit))*Step_limit; //sacamos el nuevo setpoint y lo hacemos divisible a steplimit
+		
+		///////////sumamos a la rampa de pasos o restamos/////////////////
+		if(Position_Now < Position_abs) {
+			Position_Now = Position_Now + Step_limit;
+		}else if(Position_Now > Position_abs) {
+			Position_Now = Position_Now + Step_limit;
 		}
-		elevadormotor.set(ControlMode.Position, Position_abs);  //mueve el motor a donde le digamos (ticks del encoder)
-		Position_abs_last = Position_abs; //guardamos el ultimo estado
+		////////////////////////////////////////////////////////////////
+		
+		/////////para que no se mueva mas de lo que debe///////////////
+		if((Position_Now-Position_Last)>0 && !ElevadorTopSwitch.get() ) {
+			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
+			Position_Now = Position_abs;
+		}else if((Position_Now-Position_Last)<0 && !ElevadorBottomSwitch.get()) {
+			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
+			Position_Now = Position_abs;
+		}
+		//////////////////////////////////////////////////////////////
+		
+		////////no puede mover si el intake esta arriba  asi que agregamos eso/////////////////////
+		if(intakeHinge.getSelectedSensorPosition(0) < 40 ) {
+			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
+			Position_Now = Position_abs;
+		}
+		//////////////////////////////////////////////////////////////////////////////////////////
+		
+		elevadormotor.set(ControlMode.Position, Position_Now);  //mueve el motor a donde le digamos (ticks del encoder)
+		Position_Last = Position_Now;
 	}
 	///////////////////////////////////////////////////////////////
 	

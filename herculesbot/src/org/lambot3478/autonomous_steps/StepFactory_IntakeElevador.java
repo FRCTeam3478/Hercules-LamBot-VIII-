@@ -4,12 +4,20 @@ import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
 
 import edu.wpi.first.wpilibj.Timer;
 
+///////////Esta clase esta disenada para regresar todos los ojbetos de las clases que extiende a la clase de los pasos por systema//////////////////
+
 public class StepFactory_IntakeElevador {
-	public static AutonomousStep_IntakeElevador getNewLowerElevator(){
-		return new LowerElevator();
+	public static AutonomousStep_IntakeElevador getMoveElevatorEncoder( double position){
+		return new MoveElevatorEncoder( position );
 	}
-	public static AutonomousStep_IntakeElevador getNewRaiseElevatorTime(double power,double time){
-		return new RaiseElevatorTime(power,time);
+	public static AutonomousStep_IntakeElevador getMoveElevatorTime(double power,double time){
+		return new MoveElevatorTime(power,time);
+	}
+	public static AutonomousStep_IntakeElevador getMoveIntakeEncoder( double degrees){
+		return new MoveElevatorEncoder( degrees );
+	}
+	public static AutonomousStep_IntakeElevador getMoveIntakeTime(double power,double time){
+		return new MoveElevatorTime(power,time);
 	}
 	public static AutonomousStep_IntakeElevador getNewGrabBox(){
 		return new GrabBox();

@@ -134,6 +134,7 @@ public class RobotMap {
 		/*********************************************/
 		
 		/*********intake***************************/
+        //***encoder 0 cuando esta cerrado*********/
         intakeUp = new DigitalInput(INTAKE_UP);  //tienen pull up en el roborio
         intakeDown = new DigitalInput(INTAKE_DOWN);  //tienen pull up en el roborio
         boxIn = new AnalogInput(BOX_IN); 
@@ -202,6 +203,7 @@ public class RobotMap {
 		/**************************************/
 		
 		/***********elevador****************/
+		 //***encoder 0 abajo*********/
 		ElevadorMot = new TalonSRX(ELEVADOR_PORT);
 		ElevadorMot.setNeutralMode(NeutralMode.Brake);
 		/* set the enable state for limit switches */

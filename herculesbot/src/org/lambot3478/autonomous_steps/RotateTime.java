@@ -3,6 +3,8 @@ package org.lambot3478.autonomous_steps;
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 import edu.wpi.first.wpilibj.Timer;
 
+//////clase para girar a la izquierda o a la derecha cierto tiempo/////////////////
+
 public class RotateTime extends AutonomousStep_Drive{
 	private Timer timer;
 	private double power;
