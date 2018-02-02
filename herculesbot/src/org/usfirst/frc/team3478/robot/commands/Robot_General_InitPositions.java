@@ -16,7 +16,6 @@ import org.usfirst.frc.team3478.robot.Robot;
 public class Robot_General_InitPositions extends Command {
 	public Robot_General_InitPositions() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.Robot_alas);
 		requires(Robot.Robot_intake);
 		requires(Robot.Robot_elevador);
 		requires(Robot.Robot_escalador);
@@ -32,7 +31,6 @@ public class Robot_General_InitPositions extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_alas.InitDefaultState();
 		Robot.Robot_intake.InitDefaultState();
 		Robot.Robot_elevador.InitDefaultState();
 		Robot.Robot_escalador.InitDefaultState();

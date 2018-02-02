@@ -27,7 +27,7 @@ public class Robot_Autonomo_Main extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_autonomo.StartAuto();
+		Robot.Robot_autonomo.RunAuto();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
