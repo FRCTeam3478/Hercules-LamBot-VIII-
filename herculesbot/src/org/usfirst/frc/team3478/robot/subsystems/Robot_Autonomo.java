@@ -15,6 +15,8 @@ package org.usfirst.frc.team3478.robot.subsystems;
 
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
+import org.lambot3478.autonomous_steps.StepFactory_Drive;
+import org.lambot3478.autonomous_steps.StepFactory_IntakeElevador;
 import org.usfirst.frc.team3478.robot.Robot;
 import org.usfirst.frc.team3478.robot.RobotMap;
 
@@ -101,12 +103,64 @@ public class Robot_Autonomo extends Subsystem {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		if(selected==AUTONOMOUS_CENTER_2BOX){
+			/***
+			 * 1- La distancia de la pared a la mitad del switch son 168 in
+			 * 2-Las distancias en la funcion deben ser en pulgadas.
+			 * 3-Tus distancias no me dan sentido porque segun tus comentarios son pies (12 in) y los giros tampoco checalas
+			 * 4-Usa movimientos a 45 en lugar de girar para ser mas rapidos(la funcion te lo permite)
+			 * 5-El intake empieza arriba por lo que hay que bajarlo antes de mover el elevador(ya estan las funciones para mover el intake)
+			 * 6-Usa mejor el encoder del elevador no tiempo(ya esta la funcion)
+			 */
+			int direction=0;
 			if(gameData.charAt(0)=='L'){
-				// TODO
+				direction = -1;
 			}
 			else{
-				// TODO
+				direction = 1;
 			}
+			driveSteps = new AutonomousStep_Drive[]{
+					// go forward 6.75 ft to the midpoint between switch and starting line
+					StepFactory_Drive.getNewVectorMoveEncoders(0.0,0.8,6.75),	
+					// turn sideways, depending on the switch assignment
+					StepFactory_Drive.getNewRotateDegrees(45 * direction),
+					// go forward 8 ft to be in front of the switch
+					StepFactory_Drive.getNewVectorMoveEncoders(0.0,0.8,8),
+					// turn sideways
+					StepFactory_Drive.getNewRotateDegrees(-45 * direction),
+					// go forward 4 ft to get closer to the switch
+					StepFactory_Drive.getNewVectorMoveEncoders(0.0,0.8,4),
+					//  
+					//turn sideways to look towards the pyramid of power cubes
+					StepFactory_Drive.getNewRotateDegrees(-45 * direction),
+					// go forward 2 ft to get closer to the pyramid
+					StepFactory_Drive.getNewVectorMoveEncoders(0.0,0.8,8),
+					// turn around
+					StepFactory_Drive.getNewRotateDegrees(180),
+					// go forward 2 ft to be in front of the switch
+					StepFactory_Drive.getNewVectorMoveEncoders(0.0,0.8,2),
+					// turn sideways to look towards the switch
+					StepFactory_Drive.getNewRotateDegrees(-45 * direction),				
+					};
+			intakeSteps=new AutonomousStep_IntakeElevador[]{
+					// raise elevator while moving towards the switch
+					StepFactory_IntakeElevador.getMoveElevatorTime(0.7,0.5),
+					// wait any remaining time to get to the switch
+					StepFactory_IntakeElevador.getNewWait(4.0),
+					// throw box
+					StepFactory_IntakeElevador.getNewThrowBox(),
+					// lower elevator while moving towards the pyramid of power cubes
+					StepFactory_IntakeElevador.getMoveElevatorEncoder(0.0),
+					// wait any remaining time to get to the pyramid
+					StepFactory_IntakeElevador.getNewWait(1.0),
+					// grab box from pyramid
+					StepFactory_IntakeElevador.getNewGrabBox(),
+					// raise elevator while moving towards the switch again
+					StepFactory_IntakeElevador.getMoveElevatorTime(0.7,0.5),
+					// wait any remaining time to get to the switch again
+					StepFactory_IntakeElevador.getNewWait(4.0),
+					// throw box
+					StepFactory_IntakeElevador.getNewThrowBox(),
+			};
 		}
 		else if(selected==AUTONOMOUS_LEFT){
 			if(gameData.charAt(0)=='L'){

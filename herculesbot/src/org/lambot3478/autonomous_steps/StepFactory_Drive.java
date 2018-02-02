@@ -16,7 +16,7 @@ public class StepFactory_Drive {
 	public static AutonomousStep_Drive getNewRotateDegrees(double rotation){
 		return new RotateDegrees(rotation);
 	}
-	public static AutonomousStep_Drive getNewFwdDistance(double translationAngle,double power,double distance){
+	public static AutonomousStep_Drive getNewVectorMoveEncoders(double translationAngle,double power,double distance){
 		return new VectorMoveEncoders(translationAngle,power,distance);
 	}
 	public static AutonomousStep_Drive getNewWait(double time){

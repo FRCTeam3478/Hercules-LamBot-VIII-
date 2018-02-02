@@ -45,6 +45,7 @@ public class VectorMoveEncoders extends AutonomousStep_Drive{
 	
 	
 	////////////////funcion de pid basica/////////////////////////////////////////////
+	/////pid se trabaj de 0 a 180 y -180 a 0 ///////////////////////////////////////
 	public double PID_fun(double setpoint,double actual_point,double kp,double ki,double kd){
     	double output_val = 0;  //la salida
         double dt = 0.1;  //tiempo que tarda entre medidas

@@ -38,7 +38,7 @@ public class Robot_Heading extends Subsystem{
 		 * return gyro.getAngle(); 
 		 */
 		/****Regresar la entrada del NavX****/
-		
+		////necesita regresar de 0 a 180 y -180 a 0
 		/************************************/
 		return 0.0;
 	}
