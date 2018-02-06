@@ -17,7 +17,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Servo;
-
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class RobotMap {
 	
@@ -94,6 +95,10 @@ public class RobotMap {
 	public static DigitalInput EleSwitchArriba;
 	/**********************************/
 	
+	/***********orientacion*************/
+	public static Gyro gyro;
+	/***********************************/
+	
 	public static void init() {
 		
 		/*************chasis************************/
@@ -129,6 +134,7 @@ public class RobotMap {
 		/*********************************************/
 		
 		/*********intake***************************/
+        //***encoder 0 cuando esta cerrado*********/
         intakeUp = new DigitalInput(INTAKE_UP);  //tienen pull up en el roborio
         intakeDown = new DigitalInput(INTAKE_DOWN);  //tienen pull up en el roborio
         boxIn = new AnalogInput(BOX_IN); 
@@ -197,6 +203,7 @@ public class RobotMap {
 		/**************************************/
 		
 		/***********elevador****************/
+		 //***encoder 0 abajo*********/
 		ElevadorMot = new TalonSRX(ELEVADOR_PORT);
 		ElevadorMot.setNeutralMode(NeutralMode.Brake);
 		/* set the enable state for limit switches */
@@ -226,7 +233,11 @@ public class RobotMap {
 		EleSwitchArriba = new DigitalInput(ELEVADOR_UP);   //tienen pull up en el roborio
 		/**********************************/
 		
+		/***********Orientacion************/
+		/* // Para pruebas
+		 * gyro=new ADXRS450_Gyro();
+		 */
+		/**********************************/
+		
 	}
-	
-	
 }
