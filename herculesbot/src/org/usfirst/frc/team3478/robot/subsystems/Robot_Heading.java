@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Robot_Heading extends Subsystem{
 
 	private static AHRS ahrs;
+	private static double frontsave;
 	
 	//////////////cosntructor de la clase inicializamos el imu/////////////////
 	public Robot_Heading(){
@@ -24,6 +25,7 @@ public class Robot_Heading extends Subsystem{
 		try{
 			ahrs=new AHRS(SPI.Port.kMXP);
 			ahrs.reset();
+			frontsave=0;
 		}
 		catch(Exception e){
 			
@@ -32,11 +34,13 @@ public class Robot_Heading extends Subsystem{
 	}
 	////////////////////////////////////////////////////////////////////////
 	
-	///////////para resetear el imu si necesario//////////////////////
+
+	//////////para actualizar la posicion relativa del robot////////////////
 	public void resetRotation(){
-		ahrs.reset();
+		frontsave=ahrs.getAngle();
 	}
-	///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+	
 	
 	/////////////para leer el rate del imu//////////////////////////////
 	public double getRate(){
@@ -62,7 +66,7 @@ public class Robot_Heading extends Subsystem{
 	public double getRotation(){
 	/****Regresar la entrada del NavX****/
 	////mapear rotacion de -180 a 180
-	return mapRound(ahrs.getAngle(),-180,180);
+	return mapRound(ahrs.getAngle());
 	/************************************/
 	}
 	/////////////////////////////////////////////////////////////////////////
@@ -72,28 +76,15 @@ public class Robot_Heading extends Subsystem{
 		// nada
 	}
 	
-	//////////////para convertir el angulo de -180 a 180/////////////////////////
-	private int mapRound(double value){
-		int mapx = ((int)(value))%360;
-		if(mapx>180) {
-			mapx=mapx-360;
-		}
-		return(mapx);
-	}
-	////////////////////////////////////////////////////////////////////////////////
-	
 	//////////para convertir de 180 a -180 con dobles////////////////////////////
-	private double mapRound(double value,double min,double max){
-		double res=value-min;
-		int rs=(int)(res/(max-min));
-		
-		if(res<0){
-			res+=(rs+1)*(max-min);
+	private double mapRound(double value){
+		value = value - frontsave;
+		int rs=(int)(value/360);
+		double valx = value-(rs*360);
+		if(valx>180){
+			valx = valx-360;
 		}
-		if(res>(max-min)){
-			res-=(max-min)*(rs);
-		}
-		return min+res;
+		return valx;
 	}
 	/////////////////////////////////////////////////////////////////////////////
 	

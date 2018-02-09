@@ -20,11 +20,12 @@ public class RotateDegrees extends AutonomousStep_Drive{
 	public RotateDegrees(double rotation){
 		super();
 		this.rotation=rotation;
+		heading.resetRotation();
 	}
 	
 	@Override
 	public void start() {
-		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0);
+		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class RotateDegrees extends AutonomousStep_Drive{
 	}
 	@Override
 	public boolean isFinished() {
-		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0);
+		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
 		if(adjustangle != 0){
 			return false;
 		}
