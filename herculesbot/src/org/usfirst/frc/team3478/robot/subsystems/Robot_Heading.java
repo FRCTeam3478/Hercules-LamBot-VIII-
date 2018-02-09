@@ -60,10 +60,10 @@ public class Robot_Heading extends Subsystem{
 	
 	///////////////para leer el angulo ya convertido de -180 a 180 ////////////
 	public double getRotation(){
-		/****Regresar la entrada del NavX****/
-		////mapear rotacion de -180 a 180
-		return mapRound(ahrs.getAngle());
-		/************************************/
+	/****Regresar la entrada del NavX****/
+	////mapear rotacion de -180 a 180
+	return mapRound(ahrs.getAngle(),-180,180);
+	/************************************/
 	}
 	/////////////////////////////////////////////////////////////////////////
 	
@@ -73,7 +73,7 @@ public class Robot_Heading extends Subsystem{
 	}
 	
 	//////////////para convertir el angulo de -180 a 180/////////////////////////
-	private double mapRound(double value){
+	private int mapRound(double value){
 		int mapx = ((int)(value))%360;
 		if(mapx>180) {
 			mapx=mapx-360;
@@ -81,5 +81,20 @@ public class Robot_Heading extends Subsystem{
 		return(mapx);
 	}
 	////////////////////////////////////////////////////////////////////////////////
+	
+	//////////para convertir de 180 a -180 con dobles////////////////////////////
+	private double mapRound(double value,double min,double max){
+		double res=value-min;
+		int rs=(int)(res/(max-min));
+		
+		if(res<0){
+			res+=(rs+1)*(max-min);
+		}
+		if(res>(max-min)){
+			res-=(max-min)*(rs);
+		}
+		return min+res;
+	}
+	/////////////////////////////////////////////////////////////////////////////
 	
 }

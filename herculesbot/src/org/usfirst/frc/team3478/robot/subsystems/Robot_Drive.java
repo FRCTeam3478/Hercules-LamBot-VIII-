@@ -33,8 +33,8 @@ public class Robot_Drive extends Subsystem {
 	private static final double MAX_PID_VAL = 0.5;
 	private static final double MIN_PID_VAL = -0.5;
 	private static double rotationFront;
-	private static double rotatingrobot = 0;
-	private static double rotatingrobotramp = 0;
+	private static int rotatingrobot = 0;
+	private static int rotatingrobotramp = 0;
 	/////////////////////////////
 	
 	//////////constructor de la clase/////////////////////
@@ -64,8 +64,8 @@ public class Robot_Drive extends Subsystem {
 		
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
-			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
-			   rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
+			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction;
+		int rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
 		
 		/////////rampa para dar los giros///////////////////
 		if(rotatingrobotramp<rotationAxis) {
@@ -116,8 +116,9 @@ public class Robot_Drive extends Subsystem {
 		
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*-1, 
-			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*-1,
-			   rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
+			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*-1;
+		
+	    int rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
 		
 		/////////rampa para dar los giros///////////////////
 		if(rotatingrobotramp<rotationAxis) {
