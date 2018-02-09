@@ -1,8 +1,0 @@
-package org.lambot3478.autonomous_step;
-
-public abstract class AutonomousStep {
-	private double limit;
-	private int limitType;
-	public abstract void start();
-	public abstract void run();
-}

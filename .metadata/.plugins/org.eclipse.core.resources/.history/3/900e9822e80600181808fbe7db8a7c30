@@ -1,7 +1,0 @@
-package org.lambot3478.autonomous_steps;
-
-import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
-
-public class LowerElevatorTime extends AutonomousStep_IntakeElevador{
-
-}
