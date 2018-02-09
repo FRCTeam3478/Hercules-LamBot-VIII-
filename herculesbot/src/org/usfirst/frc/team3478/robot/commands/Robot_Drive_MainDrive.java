@@ -27,7 +27,7 @@ public class Robot_Drive_MainDrive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_drive.Main_drive();
+		Robot.Robot_drive.Front_drive();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

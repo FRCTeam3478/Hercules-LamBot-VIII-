@@ -20,19 +20,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot_Drive extends Subsystem {
 
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static int direction = 1;
-	private TalonSRX[] talons;  //arreglo para guadar los talon del chasis
-	private Robot_Heading robotHeading;
+	private static int direction = -1;
+	private static TalonSRX[] talons;  //arreglo para guadar los talon del chasis
+	private static Robot_Heading robotHeading;
 	
 	
 	/////para el pid/////////////
-	private double integral_val=0;
-	private double pre_input = 0;
-	private final double MAX_INTEGRAL_VAL = 0.3;
-	private final double MIN_INTEGRAL_VAL = -0.3;
-	private final double MAX_PID_VAL = 0.5;
-	private final double MIN_PID_VAL = -0.5;
-	private double rotationFront;
+	private static double integral_val=0;
+	private static double pre_input = 0;
+	private static final double MAX_INTEGRAL_VAL = 0.3;
+	private static final double MIN_INTEGRAL_VAL = -0.3;
+	private static final double MAX_PID_VAL = 0.5;
+	private static final double MIN_PID_VAL = -0.5;
+	private static double rotationFront;
+	private static double rotatingrobot = 0;
+	private static double rotatingrobotramp = 0;
 	/////////////////////////////
 	
 	//////////constructor de la clase/////////////////////
@@ -45,23 +47,33 @@ public class Robot_Drive extends Subsystem {
 	
 	////para poner todo en la posicion inicial/////
 	public void InitDefaultState() {
-		rotationFront=robotHeading.getRawRotation();
+		rotatingrobot = 0;
+		rotatingrobotramp = 0;
+		rotationFront=robotHeading.getRotation();
 		Stop_drive();
 	}
 	//////////////////////////////////////////////
 	
 	
-	////////funcion principal del drive/////////////
+	////////funcion principal del drive estilo tanque//////////////////////////////////////
 	public void Main_drive() {
 		//lee el control 1
 		Joystick joystick=Robot.oi.Stick1;
 		
+		double stempx=0.060;  //paso de la rampa
+		
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
-					   Zizq=mapDoubleT(joystick.getRawAxis(2),TOLERANCE,1,0,1)*direction,
-					   Zder=mapDoubleT(joystick.getRawAxis(3),TOLERANCE,1,0,1)*direction,
-					   rotationAxis=Zder - Zizq;
+			   rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
+		
+		/////////rampa para dar los giros///////////////////
+		if(rotatingrobotramp<rotationAxis) {
+			rotatingrobotramp=rotatingrobotramp+1;
+		}else if(rotatingrobotramp>rotationAxis) {
+			rotatingrobotramp=rotatingrobotramp-1;
+		}
+		////////////////////////////////////////////////////
 		
 		//obtiene la magnbitud del vector del joystick
 		double magnitude=Math.sqrt((translationX*translationX)+(translationY*translationY));
@@ -70,99 +82,135 @@ public class Robot_Drive extends Subsystem {
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		
 		
+		///////////para evitar que el robot se gire cuando no debe///////////////////////////////
+		double rotationGain=PID_fun(rotationFront,robotHeading.getRotation(),0.025,0,0)*-1;
+		if(Math.abs((rotatingrobotramp*stempx))>0.0){
+			rotatingrobot=1;
+			rotationGain=0;
+		}
+		if(rotatingrobot==1 && (rotatingrobotramp*stempx)==0.0) {
+			rotatingrobot=0;
+			rotationFront=robotHeading.getRotation();
+			rotationGain=0;
+		}
+		////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 		talons[0].set(ControlMode.PercentOutput,magnitude*
-				Math.sin(angle)-rotationAxis);
+				Math.sin(angle)-(rotatingrobotramp*stempx)-rotationGain);
 		talons[1].set(ControlMode.PercentOutput,magnitude*
-				Math.cos(angle)+rotationAxis);
+				Math.cos(angle)+(rotatingrobotramp*stempx)+rotationGain);
 		talons[2].set(ControlMode.PercentOutput,magnitude*
-				Math.cos(angle)-rotationAxis);
+				Math.cos(angle)-(rotatingrobotramp*stempx)-rotationGain);
 		talons[3].set(ControlMode.PercentOutput,magnitude*
-				Math.sin(angle)+rotationAxis);
+				Math.sin(angle)+(rotatingrobotramp*stempx)+rotationGain);
 	}
+	//////////////////////////////////////////////////////////////////
+	
+	///////////////funcion del drive con field oriented///////////////////////////////
 	public void Front_drive() {
 		//lee el control 1
 		Joystick joystick=Robot.oi.Stick1;
 		
-		//lee cada eje de los joystick y les quita el error y mapea
-		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1), 
-			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1),
-			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1);
+		double stempx=0.060;  //paso de la rampa
 		
+		//lee cada eje de los joystick y les quita el error y mapea
+		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*-1, 
+			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*-1,
+			   rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
+		
+		/////////rampa para dar los giros///////////////////
+		if(rotatingrobotramp<rotationAxis) {
+			rotatingrobotramp=rotatingrobotramp+1;
+		}else if(rotatingrobotramp>rotationAxis) {
+			rotatingrobotramp=rotatingrobotramp-1;
+		}
+		////////////////////////////////////////////////////
+
 		//obtiene la magnbitud del vector del joystick
 		double magnitude=Math.sqrt((translationX*translationX)+(translationY*translationY));
 		
 		
-		
-		
-		// Calcular el angulo del vector relativo al frente 
+		// Calcular el angulo del vector relativo al frente(para hacer el filed oriented drive)////
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		angle-=(robotHeading.getRawRotation())*Math.PI/180.0;
+		//////////////////////////////////////////////////////////////////////////////////////////
 		
-		double rotationGain=PID_fun(rotationFront,robotHeading.getRawRotation(),0.028,0,0);
-		if(Math.abs(rotationAxis)>0.0){
+		///////////para evitar que el robot se gire cuando no debe///////////////////////////////
+		double rotationGain=PID_fun(rotationFront,robotHeading.getRotation(),0.025,0,0)*-1;
+		if(Math.abs((rotatingrobotramp*stempx))>0.0){
+			rotatingrobot=1;
 			rotationGain=0;
 		}
+		if(rotatingrobot==1 && (rotatingrobotramp*stempx)==0.0) {
+			rotatingrobot=0;
+			rotationFront=robotHeading.getRotation();
+			rotationGain=0;
+		}
+		////////////////////////////////////////////////////////////////////////////////////////////
+		
 		talons[0].set(ControlMode.PercentOutput,magnitude*
-				Math.sin(angle)-rotationAxis-rotationGain);
+				Math.sin(angle)-(rotatingrobotramp*stempx)-rotationGain);
 		talons[1].set(ControlMode.PercentOutput,magnitude*
-				Math.cos(angle)+rotationAxis+rotationGain);
+				Math.cos(angle)+(rotatingrobotramp*stempx)+rotationGain);
 		talons[2].set(ControlMode.PercentOutput,magnitude*
-				Math.cos(angle)-rotationAxis-rotationGain);
+				Math.cos(angle)-(rotatingrobotramp*stempx)-rotationGain);
 		talons[3].set(ControlMode.PercentOutput,magnitude*
-				Math.sin(angle)+rotationAxis+rotationGain);
+				Math.sin(angle)+(rotatingrobotramp*stempx)+rotationGain);
 	}
+	////////////////////////////////////////////////////////////////////////////////////////
 	
 	////////////////funcion de pid basica/////////////////////////////////////////////
 	/////pid se trabaj de 0 a 180 y -180 a 0 ///////////////////////////////////////
 	public double PID_fun(double setpoint,double actual_point,double kp,double ki,double kd){
-		double output_val = 0;  //la salida
-		double dt = 0.1;  //tiempo que tarda entre medidas
-		double epsilon = 2;  //tolerancia
-		
-		//para tener un pid variable a cierto rango
-		double kp2 = kp*3;
-		double kd2 = kd*3;
-		double range_tol = 10;
-		
-		//obtiene el error
-		double error = setpoint - actual_point;
-		if(Math.abs(error) <= epsilon){
-		error = 0;
-		integral_val=0;  //resetea
-		pre_input=0; //resetea
-		return(0);
-		}else{
-		///calcula la integral
-		//considerando rectangulos pequenos donde dt es lo ancho y el error lo largo
-		integral_val=integral_val + (error*dt);  //el area al graficar la variable contra tiempo(y se suma con lo que ya hay)
-		////para limitar la integral
-		if(integral_val> (MAX_INTEGRAL_VAL)){
-			integral_val = (MAX_INTEGRAL_VAL);}
-		if(integral_val< (MIN_INTEGRAL_VAL)){
-			integral_val = (MIN_INTEGRAL_VAL);}
-		}
-		     
-		//calcula la derivada
-		double derivative_val = (actual_point - pre_input)/dt;  //la funcion dx/dt donde dx es la diferencia entre el ultimo error y el nuevo
-		
-		if( Math.abs(error)>range_tol){   //si esta muy lejos
-		//calculates the output
-		output_val = (kp2*error) + (ki*integral_val) - (kd2*derivative_val);
-		}else{  //si esta muy cerca
-		//calculates the output
-		output_val = (kp*error) + (ki*integral_val) - (kd*derivative_val);
-		}
-		
-		//Saturation filter, para asegurar que no pase los valores maximos ni minimos
-		//sirve como una rampa tambien para evitar cambios bruscos
-		if(output_val > MAX_PID_VAL){output_val=MAX_PID_VAL;}
-		if(output_val < MIN_PID_VAL){output_val=MIN_PID_VAL;}
-		
-		//update error, guardando el nuevo error que sera el viejo
-		pre_input =actual_point;
-		
-		return(output_val); ///regresa el rewsultado del pid
-	}
+    	double output_val = 0;  //la salida
+        double dt = 0.1;  //tiempo que tarda entre medidas
+        double epsilon = 2;  //tolerancia
+        
+      //para tener un pid variable a cierto rango
+    	double kp2 = kp*3;
+    	double kd2 = kd*3;
+        double range_tol = 10;
+        
+        //obtiene el error
+        double error = setpoint - actual_point;
+        if(Math.abs(error) <= epsilon){
+        	error = 0;
+        	integral_val=0;  //resetea
+        	pre_input=0; //resetea
+        	return(0);
+        }else{
+        	///calcula la integral
+        	//considerando rectangulos pequenos donde dt es lo ancho y el error lo largo
+        	integral_val=integral_val + (error*dt);  //el area al graficar la variable contra tiempo(y se suma con lo que ya hay)
+        	////para limitar la integral
+        	if(integral_val> (MAX_INTEGRAL_VAL)){
+        		integral_val = (MAX_INTEGRAL_VAL);}
+        	if(integral_val< (MIN_INTEGRAL_VAL)){
+        		integral_val = (MIN_INTEGRAL_VAL);}
+        }
+                 
+        //calcula la derivada
+        double derivative_val = (actual_point - pre_input)/dt;  //la funcion dx/dt donde dx es la diferencia entre el ultimo error y el nuevo
+
+        if( Math.abs(error)>range_tol){   //si esta muy lejos
+        	//calculates the output
+        	output_val = (kp2*error) + (ki*integral_val) - (kd2*derivative_val);
+        }else{  //si esta muy cerca
+        	//calculates the output
+        	output_val = (kp*error) + (ki*integral_val) - (kd*derivative_val);
+        }
+       
+        //Saturation filter, para asegurar que no pase los valores maximos ni minimos
+        //sirve como una rampa tambien para evitar cambios bruscos
+        if(output_val > MAX_PID_VAL){output_val=MAX_PID_VAL;}
+        if(output_val < MIN_PID_VAL){output_val=MIN_PID_VAL;}
+
+        //update error, guardando el nuevo error que sera el viejo
+        pre_input =actual_point;
+
+        return(output_val); ///regresa el rewsultado del pid
+    }
 	
 	/////////para cambiar la polaridad del chassis/////////////////////////////////
 	public void Change_polarity() {

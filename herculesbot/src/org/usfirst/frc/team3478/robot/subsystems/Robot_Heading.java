@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3478.robot.subsystems;
 
-import org.usfirst.frc.team3478.robot.RobotMap;
-
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
@@ -12,12 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 
 public class Robot_Heading extends Subsystem{
-	/* // Para pruebas
-	 * private static Gyro gyro;
-	 */
+
+	private static AHRS ahrs;
 	
-	private AHRS ahrs;
-	private double front;
+	//////////////cosntructor de la clase inicializamos el imu/////////////////
 	public Robot_Heading(){
 		/* // Para pruebas
 		 * gyro=RobotMap.gyro;
@@ -34,9 +30,15 @@ public class Robot_Heading extends Subsystem{
 		}
 		/************************************/
 	}
+	////////////////////////////////////////////////////////////////////////
+	
+	///////////para resetear el imu si necesario//////////////////////
 	public void resetRotation(){
-		front=ahrs.getAngle();
+		ahrs.reset();
 	}
+	///////////////////////////////////////////////////////////////////
+	
+	/////////////para leer el rate del imu//////////////////////////////
 	public double getRate(){
 		/* // Para pruebas
 		 * return gyro.getRate();
@@ -46,33 +48,37 @@ public class Robot_Heading extends Subsystem{
 		return ahrs.getRate();
 		/************************************/		
 	}
+	///////////////////////////////////////////////////////////////////
+	
+	//////////////////para leer el angulo 0 a 360 //////////////////////
 	public double getRawRotation(){
 		/****Regresar la entrada del NavX****/
 		return ahrs.getAngle();
 		/************************************/
 	}
+	//////////////////////////////////////////////////////////////////
 	
+	///////////////para leer el angulo ya convertido de -180 a 180 ////////////
 	public double getRotation(){
 		/****Regresar la entrada del NavX****/
 		////mapear rotacion de -180 a 180
-		return mapRound(ahrs.getAngle(),-180,180);
+		return mapRound(ahrs.getAngle());
 		/************************************/
 	}
+	/////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	protected void initDefaultCommand() {
 		// nada
 	}
 	
-	private double mapRound(double value,double min,double max){
-		double res=value-min;
-		int rs=(int)(res/(max-min));
-		
-		if(res<0){
-			res+=(rs+1)*(max-min);
+	//////////////para convertir el angulo de -180 a 180/////////////////////////
+	private double mapRound(double value){
+		if(value>180) {
+			value=value-360;
 		}
-		if(res>(max-min)){
-			res-=(max-min)*(rs);
-		}
-		return min+res;
+		return((int)(value));
 	}
+	////////////////////////////////////////////////////////////////////////////////
+	
 }

@@ -59,13 +59,13 @@ public class Robot extends TimedRobot {
 		RobotMap.init(); //inicializa todos los elementos del robot
 		
 		/*******aqui vamos inicializar los subsystemas que se necesite*************************/
+		Robot_heading = new Robot_Heading();
 		Robot_intake = new Robot_Intake();
 		Robot_elevador = new Robot_Elevador();
 		Robot_escalador = new Robot_Escalador();
 		Robot_topes = new Robot_Topes();
 		Robot_drive = new Robot_Drive();
 		Robot_autonomo = new Robot_Autonomo();
-		Robot_heading = new Robot_Heading();
 		/*************************************************************************************/
 		
 		oi = new OI();  ///lo del joystick

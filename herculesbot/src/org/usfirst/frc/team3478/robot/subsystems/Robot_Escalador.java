@@ -38,7 +38,9 @@ public class Robot_Escalador extends Subsystem {
 	public void Main_Escalador(){
 		Joystick joystick=Robot.oi.Stick1;
 		//Mapear el valor del joystick para la potencia
-		double power=mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1)*direction;
+		double Zizq=mapDoubleT(joystick.getRawAxis(2),TOLERANCE,1,0,1)*direction,
+			   Zder=mapDoubleT(joystick.getRawAxis(3),TOLERANCE,1,0,1)*direction,
+			   power=Zder - Zizq;
 		//Interrumpir la funcion cuando el escalador
 		//llegue al limite superior
 		if(power>0 && !topLimitSwitch.get()){

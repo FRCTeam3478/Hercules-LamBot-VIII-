@@ -14,9 +14,13 @@ import org.usfirst.frc.team3478.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 public class Robot_Drive_ChangePolarity extends Command {
+	
+	Command main_drive;
+	
 	public Robot_Drive_ChangePolarity() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.Robot_drive);
+		 main_drive = new Robot_Drive_MainDrive();
 	}
 
 	// Called just before this Command runs the first time
@@ -39,7 +43,7 @@ public class Robot_Drive_ChangePolarity extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.Robot_drive.Main_drive();
+		main_drive.start();
 	}
 
 	// Called when another command which requires one or more of the same
