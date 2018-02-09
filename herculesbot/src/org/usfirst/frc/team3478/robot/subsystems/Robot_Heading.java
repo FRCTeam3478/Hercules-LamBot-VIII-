@@ -74,10 +74,11 @@ public class Robot_Heading extends Subsystem{
 	
 	//////////////para convertir el angulo de -180 a 180/////////////////////////
 	private double mapRound(double value){
-		if(value>180) {
-			value=value-360;
+		double mapx = value%360;
+		if(mapx>180) {
+			mapx=mapx-360;
 		}
-		return((int)(value));
+		return((int)(mapx));
 	}
 	////////////////////////////////////////////////////////////////////////////////
 	
