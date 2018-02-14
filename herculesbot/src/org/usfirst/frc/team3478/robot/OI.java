@@ -5,7 +5,9 @@ import org.usfirst.frc.team3478.robot.commands.Robot_Drive_ChangePolarity;
 import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoDown;
 import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoUp;
 import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoUpper;
-import org.usfirst.frc.team3478.robot.commands.Robot_Topes_Open;
+import org.usfirst.frc.team3478.robot.commands.Robot_Escalador_MainMove;
+import org.usfirst.frc.team3478.robot.commands.Robot_Intake_RotateLeft;
+import org.usfirst.frc.team3478.robot.commands.Robot_Intake_RotateRight;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -16,12 +18,16 @@ public class OI {
 	/////objetos que vamos a utilizar/////////////////
 	public Joystick Stick1; //declara un joystick
 	public Joystick Stick2; //declara un joystick
+	public Joystick Stick3; //declara un joystick
 	public JoystickButton XboxY1; //declara un boton de joystick
 	public JoystickButton XboxA1; //declara un boton de joystick
+	public JoystickButton XboxRB1; //declara un boton de joystick
+	public JoystickButton XboxLB1; //declara un boton de joystick
 	
 	public JoystickButton XboxA2; //declara un boton de joystick
 	public JoystickButton XboxB2; //declara un boton de joystick
 	public JoystickButton XboxY2; //declara un boton de joystick
+	public JoystickButton XboxX2;
 	/////////////////////////////////////////////////
 	
 
@@ -31,14 +37,20 @@ public class OI {
 		 ////////////los dos jostick a utilizar(controles de xbox)////////////////
 		 Stick1 = new Joystick(0);  //une el josytick al objeto
 		 Stick2 = new Joystick(1);  //une el josytick al objeto
+		 Stick3 = new Joystick(2);  //une el josytick al objeto
 		 ////////////////////////////////////////////////////////////////////////
 		
-		 /////////////intake/////////////////////////(driver2)
-		 /// Utiliza stick izquierdo o POV para subir y bajar
-		 /// Utiliza Triggers para comer/escupir caja
+		 /////////////intake/////////////////////////(driver 1 y 2)
+		 /// Utiliza stick izquierdo para subir y bajar (driver 2)
+		 /// Utiliza triggers para comer y escupir y botones para girar (driver 1) 
+		 XboxLB1 = new JoystickButton(Stick1, 5);
+		 XboxLB1.whileHeld(new Robot_Intake_RotateLeft());  //mientras este presionado hace el comando
+		 XboxRB1 = new JoystickButton(Stick1, 6);
+		 XboxRB1.whileHeld(new Robot_Intake_RotateRight());  //mientras este presionado hace el comando
 		 ///////////////////////////////////////////
 		 
 		 /////////////elevador///////////////////////(driver2)
+		 ////triggers para subir y bajar
 		 XboxA2 = new JoystickButton(Stick2, 1);
 		 XboxA2.whenReleased(new Robot_Elevador_AutoDown());  //mientras este presionado hace el comando
 		 XboxB2 = new JoystickButton(Stick2, 2);
@@ -56,15 +68,11 @@ public class OI {
 		 XboxA1.whenReleased(new Robot_Drive_ChangePolarity());  //mientras este presionado hace el comando
 		 ///////////////////////////////////////////
 		 
-		 ////////////escalador///////////////////////(driver1)
-		 ///usa el stick derecho para subir y bajar
+		 ////////////escalador///////////////////////(driver 2)
+		 ///usa los triggers para subir y bajar y solo jala si esta presionado x
+		 XboxX2 = new JoystickButton(Stick2, 3);
+		 XboxX2.whileHeld(new Robot_Escalador_MainMove());  //mientras este presionado hace el comando
 		 ///////////////////////////////////////////
-		 
-		 ///////////////topes////////////////////////(driver1)
-		 XboxY1 = new JoystickButton(Stick1, 4);  //Le decimos que boton del joystick es
-		 XboxY1.whenReleased(new Robot_Topes_Open());  //mientras este presionado hace el comando
-		 ////////////////////////////////////////////
-
 		 
 	    }
 	

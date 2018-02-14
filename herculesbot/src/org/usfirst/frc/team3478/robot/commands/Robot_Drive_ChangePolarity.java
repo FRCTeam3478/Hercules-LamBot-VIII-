@@ -20,7 +20,7 @@ public class Robot_Drive_ChangePolarity extends Command {
 	public Robot_Drive_ChangePolarity() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.Robot_drive);
-		 main_drive = new Robot_Drive_MainDrive();
+		main_drive = new Robot_Drive_MainDrive();
 	}
 
 	// Called just before this Command runs the first time

@@ -22,19 +22,15 @@ public class Robot_Elevador extends Subsystem {
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
 	private static final int Encoder_CPR = 1024; //pulsos por vuelta del encoder
 	
-	private static int direction = -1;
+	private static int direction = 1;
 	private final int Step_limit = (int)((Encoder_CPR*4)/36); //que avance maximo 5mm por ciclo, polea 36 dientes 5mm por diente
-	private final int LIMITMULTIPLIER = 5;
 	private static int Position_abs = 0;
 	private static int Position_Now = 0;
 	private static int Position_Last = 0;
 		
-	
 	private TalonSRX elevadormotor; //arreglo de talons del escalador
-	private TalonSRX intakeHinge;
-	private DigitalInput ElevadorTopSwitch; //limit switch superior del escalador
-	private DigitalInput ElevadorBottomSwitch; //limit switch inferior del escalador
-
+	private DigitalInput intakeDown; //limit switch superior del escalador
+	
 	public void initDefaultCommand() {
 		//nada
 	}
@@ -51,9 +47,7 @@ public class Robot_Elevador extends Subsystem {
 	////////////constructor de la clase///////////////////////////////
 	public Robot_Elevador(){
 		elevadormotor=RobotMap.ElevadorMot;
-		ElevadorTopSwitch=RobotMap.EleSwitchArriba;
-		ElevadorBottomSwitch=RobotMap.EleSwitchAbajo;
-		intakeHinge = RobotMap.intakeHinge;
+		intakeDown = RobotMap.intakeDown;
 	}
 	/////////////////////////////////////////////////////////////////
 	
@@ -61,44 +55,42 @@ public class Robot_Elevador extends Subsystem {
 	//////////movimiento principal del elevador/////////////////////
 	public void Main_Move_Elevador() {
 		
-		if(!ElevadorBottomSwitch.get()) { //si toca el switch de avbajo resetea el encoder para quitar error
+		if(elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) { //si toca el switch de abajo resetea el encoder para quitar error
 			elevadormotor.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
 		}
 		
 		Joystick joystick=Robot.oi.Stick2; //crea el objeto del joystick
 		double power=mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1)*direction; //mapea el valor del eje y da direccion
-		int powerfake = (int)(power*Step_limit*LIMITMULTIPLIER); //fijamos cuanto se va a mover por ciclo de roborio con el eje
-		if(powerfake>0 && !ElevadorTopSwitch.get()){ //checamos el switch de arriba para no pasarnos
-			powerfake=0;
-		}
-		if(powerfake<0 && !ElevadorBottomSwitch.get()){//checamos el switch de abajo para no pasarnos
-			powerfake=0;
-		}
-		
+		int powerfake = (int)(power*Step_limit); //fijamos cuanto se va a mover por ciclo de roborio con el eje
+
+		//////calcula la posicion (setpoint) //////////////
 		Position_abs = ((int)((powerfake+Position_abs)/Step_limit))*Step_limit; //sacamos el nuevo setpoint y lo hacemos divisible a steplimit
 		
 		///////////sumamos a la rampa de pasos o restamos/////////////////
 		if(Position_Now < Position_abs) {
 			Position_Now = Position_Now + Step_limit;
 		}else if(Position_Now > Position_abs) {
-			Position_Now = Position_Now + Step_limit;
+			Position_Now = Position_Now - Step_limit;
 		}
 		////////////////////////////////////////////////////////////////
 		
-		/////////para que no se mueva mas de lo que debe///////////////
-		if((Position_Now-Position_Last)>0 && !ElevadorTopSwitch.get() ) {
+		/////////para que no se mueva y no se pase la possicion mas de lo que debe///////////////
+		if((Position_Now-Position_Last)>0 && elevadormotor.getSensorCollection().isFwdLimitSwitchClosed() ) {
 			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
 			Position_Now = Position_abs;
-		}else if((Position_Now-Position_Last)<0 && !ElevadorBottomSwitch.get()) {
+		}else if((Position_Now-Position_Last)<0 && elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) {
 			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
 			Position_Now = Position_abs;
 		}
 		//////////////////////////////////////////////////////////////
 		
+		///****los switches del talon estan activados por proteccion y paran solo el motor****////
+		
 		////////no puede mover si el intake esta arriba  asi que agregamos eso/////////////////////
-		if(intakeHinge.getSelectedSensorPosition(0) < 40 ) {
+		if(intakeDown.get()){
 			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
 			Position_Now = Position_abs;
+			Position_Last = Position_abs;
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////
 		

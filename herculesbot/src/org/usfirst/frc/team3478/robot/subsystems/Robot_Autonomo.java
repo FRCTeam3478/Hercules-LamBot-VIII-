@@ -24,6 +24,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -37,6 +38,8 @@ public class Robot_Autonomo extends Subsystem {
 	
 	// Tiempo para interrupcion de seguridad
 	private final double SAFETY_TIMER=15;
+	
+	private Robot_Heading heading;
 	
 	// Arreglo de pasos del tren motriz 
 	private AutonomousStep_Drive[] driveSteps={};
@@ -98,9 +101,28 @@ public class Robot_Autonomo extends Subsystem {
 	public void RunAuto() {
 		/*******************Seleccion de autonomo********************************/
 		// Obtener el autonomo seleccionado en la dashboard
-		int selected=(int) Robot.autonomousChooser.getSelected();
+		//int selected=(int) Robot.autonomousChooser.getSelected();
+		Joystick joystick=Robot.oi.Stick3; //crea el objeto del joystick
+		int selected=AUTONOMOUS_NOTHING;
+		if(joystick.getRawButton(1)) {
+			selected=AUTONOMOUS_NOTHING;
+		}else if(joystick.getRawButton(2)) {
+			selected=AUTONOMOUS_CENTER_2BOX;
+		}else if(joystick.getRawButton(3)) {
+			selected=AUTONOMOUS_CENTER;
+		}else if(joystick.getRawButton(4)) {
+			selected=AUTONOMOUS_LEFT;
+		}else if(joystick.getRawButton(5)) {
+			selected=AUTONOMOUS_RIGHT;
+		}
+				
 		// Obtener los datos de juego (3 caracteres)
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		////////resetea el giroscopio antes de cualquier cosa/////////////
+		heading=Robot.Robot_heading;
+		heading.Resetdevice();
+		/////////////////////////////////////////////////////////////////
 		
 		if(selected==AUTONOMOUS_CENTER_2BOX){
 			/***

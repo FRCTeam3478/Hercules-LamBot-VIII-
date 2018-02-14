@@ -14,9 +14,13 @@ import org.usfirst.frc.team3478.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 public class Robot_Elevador_AutoUpper extends Command {
+	
+	Command main_elevador;
+	
 	public Robot_Elevador_AutoUpper() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.Robot_elevador);
+		main_elevador = new Robot_Elevador_MainMove();
 	}
 
 	// Called just before this Command runs the first time
@@ -39,7 +43,7 @@ public class Robot_Elevador_AutoUpper extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.Robot_elevador.Main_Move_Elevador();
+		main_elevador.start();
 	}
 
 	// Called when another command which requires one or more of the same

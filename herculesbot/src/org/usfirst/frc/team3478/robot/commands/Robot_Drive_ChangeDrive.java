@@ -13,14 +13,14 @@ import org.usfirst.frc.team3478.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class Robot_Elevador_AutoUp extends Command {
+public class Robot_Drive_ChangeDrive extends Command {
 	
-	Command main_elevador;
+	Command main_drive;
 	
-	public Robot_Elevador_AutoUp() {
+	public Robot_Drive_ChangeDrive() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.Robot_elevador);
-		main_elevador = new Robot_Elevador_MainMove();
+		requires(Robot.Robot_drive);
+		main_drive = new Robot_Drive_MainDrive();
 	}
 
 	// Called just before this Command runs the first time
@@ -31,7 +31,7 @@ public class Robot_Elevador_AutoUp extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_elevador.Elevador_Up();
+		Robot.Robot_drive.Change_drive();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -43,7 +43,7 @@ public class Robot_Elevador_AutoUp extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		main_elevador.start();
+		main_drive.start();
 	}
 
 	// Called when another command which requires one or more of the same

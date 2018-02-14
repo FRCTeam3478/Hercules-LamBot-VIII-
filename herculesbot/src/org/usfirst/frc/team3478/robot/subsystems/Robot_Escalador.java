@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Robot_Escalador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static int direction = -1;
+	private static int direction = 1;
 	
 	private TalonSRX[] climberMotors; //arreglo de talons del escalador
 	private DigitalInput topLimitSwitch; //limit switch superior del escalador
@@ -36,7 +36,7 @@ public class Robot_Escalador extends Subsystem {
 	
 	////////////metodo para subir y bajar el escalador//////////////
 	public void Main_Escalador(){
-		Joystick joystick=Robot.oi.Stick1;
+		Joystick joystick=Robot.oi.Stick2;
 		//Mapear el valor del joystick para la potencia
 		double Zizq=mapDoubleT(joystick.getRawAxis(2),TOLERANCE,1,0,1)*direction,
 			   Zder=mapDoubleT(joystick.getRawAxis(3),TOLERANCE,1,0,1)*direction,

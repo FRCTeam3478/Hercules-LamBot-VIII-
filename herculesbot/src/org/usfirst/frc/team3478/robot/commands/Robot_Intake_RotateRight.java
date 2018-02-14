@@ -13,10 +13,14 @@ import org.usfirst.frc.team3478.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class Robot_Topes_Open extends Command {
-	public Robot_Topes_Open() {
+public class Robot_Intake_RotateRight extends Command {
+	
+	Command main_intake;
+	
+	public Robot_Intake_RotateRight() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.Robot_topes);
+		requires(Robot.Robot_intake);
+		main_intake = new Robot_Intake_MainMove();
 	}
 
 	// Called just before this Command runs the first time
@@ -27,19 +31,19 @@ public class Robot_Topes_Open extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_topes.Release_tope();
+		Robot.Robot_intake.RotateRight_Intake();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;  //cambiar a true si queremos que solo se haga una vez, false es que lo repite(el while held cambia el false a true o cuando se interrumpe)
+		return false;  //cambiar a true si queremos que solo se haga una vez, false es que lo repite(el while held cambia el false a true o cuando se interrumpe)
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		//nada
+		main_intake.start();
 	}
 
 	// Called when another command which requires one or more of the same

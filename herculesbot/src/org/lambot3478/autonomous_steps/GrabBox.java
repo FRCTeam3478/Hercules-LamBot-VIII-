@@ -20,7 +20,7 @@ public class GrabBox extends AutonomousStep_IntakeElevador{
 
 	@Override
 	public boolean isFinished() {
-		if (boxin.getVoltage() > 3) {
+		if (!boxin.get()) {
 			return false;
 		}
 		return true;

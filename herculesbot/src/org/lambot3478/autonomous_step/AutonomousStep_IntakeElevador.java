@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 ///////////clase base de los pasos del intake, cada metodo especifico del intake va sobrescribir las funciones de esta clase/////////////
 
 public abstract class AutonomousStep_IntakeElevador extends AutonomousStep{
-	protected DigitalInput eleUpSwitch,eleDownSwitch,intakeUpSwitch,intakeDownSwitch;
-	protected AnalogInput boxin;
+	protected DigitalInput eleUpSwitch,eleDownSwitch,intakeUpSwitch,intakeDownSwitch,boxin;
 	protected TalonSRX elevatorTalon;
 	protected TalonSRX intakeHinge;
 	protected TalonSRX[] intakeTalons;
@@ -28,8 +27,6 @@ public abstract class AutonomousStep_IntakeElevador extends AutonomousStep{
 		elevatorTalon=RobotMap.ElevadorMot;
 		intakeHinge = RobotMap.intakeHinge;
 		intakeTalons=new TalonSRX[]{RobotMap.intakeLeft,RobotMap.intakeRight};
-		eleUpSwitch=RobotMap.EleSwitchArriba;
-		eleDownSwitch=RobotMap.EleSwitchAbajo;
 		intakeUpSwitch=RobotMap.intakeUp;
 		intakeDownSwitch=RobotMap.intakeDown;
 		boxin=RobotMap.boxIn;

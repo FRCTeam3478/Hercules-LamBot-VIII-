@@ -15,7 +15,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot_Drive extends Subsystem {
 
@@ -23,6 +22,7 @@ public class Robot_Drive extends Subsystem {
 	private static int direction = -1;
 	private static TalonSRX[] talons;  //arreglo para guadar los talon del chasis
 	private static Robot_Heading robotHeading;
+	private static double Select_drive=1;
 	
 	
 	/////para el pid/////////////
@@ -39,13 +39,14 @@ public class Robot_Drive extends Subsystem {
 	//////////constructor de la clase/////////////////////
 	public Robot_Drive(){
 		talons=new TalonSRX[]{RobotMap.frontLeft,RobotMap.frontRight,
-				RobotMap.backLeft,RobotMap.backRight};
+			   RobotMap.backLeft,RobotMap.backRight};
 		robotHeading=Robot.Robot_heading;
 	}
 	//////////////////////////////////////////////////////
 	
 	////para poner todo en la posicion inicial/////
 	public void InitDefaultState() {
+		Select_drive = 1;
 		rotatingrobot = 0;
 		rotatingrobotramp = 0;
 		robotHeading.resetRotation();
@@ -54,11 +55,22 @@ public class Robot_Drive extends Subsystem {
 	//////////////////////////////////////////////
 	
 	
-	////////funcion principal del drive estilo tanque//////////////////////////////////////
+	////////funcion principal del drive//////////////////////////////////////
 	public void Main_drive() {
+		if(Select_drive ==1) {
+			Front_drive();
+		}else {
+			Tank_drive();
+		}
+	}
+	//////////////////////////////////////////////////////////////////
+	
+	
+	////////funcion del drive estilo tanque//////////////////////////////////////
+	public void Tank_drive() {
 		//lee el control 1
 		Joystick joystick=Robot.oi.Stick1;
-
+	
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
@@ -193,6 +205,12 @@ public class Robot_Drive extends Subsystem {
 	}
 	//////////////////////////////////////////////////////////////////////////////
 	
+	/////////para cambiar la polaridad del chassis/////////////////////////////////
+	public void Change_drive() {
+		Select_drive = Select_drive*-1;
+	}
+	//////////////////////////////////////////////////////////////////////////////
+	
 	//////funcion para detener el drive///////////
 	public void Stop_drive() {
 		for(TalonSRX talon:talons) {
@@ -220,9 +238,7 @@ public class Robot_Drive extends Subsystem {
 	
 	///////////////////////////////////////////////
 	
-	
-	
-	
+
 	public void initDefaultCommand() {
 		//nada
 	}

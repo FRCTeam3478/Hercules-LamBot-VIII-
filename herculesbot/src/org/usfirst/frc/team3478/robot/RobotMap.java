@@ -13,12 +13,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class RobotMap {
 	
@@ -28,14 +24,14 @@ public class RobotMap {
 	private static final int BACK_LEFT_CHASSIS_PORT = 2;
 	private static final int BACK_RIGHT_CHASSIS_PORT = 3;
 	
-	private static final int INTAKE_LEFT_PORT = 4;
-	private static final int INTAKE_RIGHT_PORT = 5;
-	private static final int INTAKE_HINGE_PORT = 6;
+	private static final int INTAKE_LEFT_PORT = 7;
+	private static final int INTAKE_RIGHT_PORT = 8;
+	private static final int INTAKE_HINGE_PORT = 9;
 	
-	private static final int ESCALADOR_LEFT_PORT = 7;
-	private static final int ESCALADOR_RIGHT_PORT = 8;
+	private static final int ESCALADOR_LEFT_PORT = 5;
+	private static final int ESCALADOR_RIGHT_PORT = 6;
 	
-	private static final int ELEVADOR_PORT = 9;
+	private static final int ELEVADOR_PORT = 4;
 	/******************************************/
 	
 	/**********numeros de las senales digitales********/
@@ -47,16 +43,10 @@ public class RobotMap {
 	private static final int ESCALADOR_UP = 4;
 	private static final int ESCALADOR_DOWN = 5;
 	
-	private static final int ELEVADOR_UP = 6;
-	private static final int ELEVADOR_DOWN = 7;
+	private static final int INTAKE_UP = 6;
+	private static final int INTAKE_DOWN = 7;
+	private static final int BOX_IN = 8;
 
-	private static final int INTAKE_UP = 8;
-	private static final int INTAKE_DOWN = 9;
-
-	/***********************************************/
-	
-	/**********numeros de las senales analogas********/
-	private static final int BOX_IN = 0;
 	/***********************************************/
 	
 	/*************chasis************************/
@@ -75,13 +65,9 @@ public class RobotMap {
 	public static TalonSRX intakeHinge;
 	public static DigitalInput intakeUp;
 	public static DigitalInput intakeDown;
-	public static AnalogInput boxIn;
+	public static DigitalInput boxIn;
 	/***************************************/
 		
-	/*********topes********************/
-	public static Servo Servo1;
-	/**********************************/
-	
 	/********escalador******************/
 	public static TalonSRX EscaladorMotLeft;
 	public static TalonSRX EscaladorMotRight; 
@@ -91,13 +77,7 @@ public class RobotMap {
 	
 	/***********elevador****************/
 	public static TalonSRX ElevadorMot;
-	public static DigitalInput EleSwitchAbajo;
-	public static DigitalInput EleSwitchArriba;
 	/**********************************/
-	
-	/***********orientacion*************/
-	public static Gyro gyro;
-	/***********************************/
 	
 	public static void init() {
 		
@@ -135,58 +115,25 @@ public class RobotMap {
 		
 		/*********intake***************************/
         //***encoder 0 cuando esta cerrado*********/
-        intakeUp = new DigitalInput(INTAKE_UP);  //tienen pull up en el roborio
-        intakeDown = new DigitalInput(INTAKE_DOWN);  //tienen pull up en el roborio
-        boxIn = new AnalogInput(BOX_IN); 
-        
 		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
 		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
 		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
-		
 		intakeLeft.setInverted(true);
 		intakeRight.setInverted(false);
-		
-		/* set Break Mode */
+		intakeHinge.setInverted(false);
 		intakeLeft.setNeutralMode(NeutralMode.Brake);
 		intakeRight.setNeutralMode(NeutralMode.Brake);
 		intakeHinge.setNeutralMode(NeutralMode.Brake);
-		
-		/* set motors with PercentOutput Mode */ 
 		intakeLeft.set(ControlMode.PercentOutput,0.0);
 		intakeRight.set(ControlMode.PercentOutput,0.0);
+		intakeHinge.set(ControlMode.PercentOutput,0.0);
+		/*configura la rampa*/
+		intakeHinge.configOpenloopRamp(0.2, 0);
 		
-		/* set the enable state for limit switches */
-		intakeHinge.overrideLimitSwitchesEnable(false);
-		
-		/* first choose the sensor */
-		intakeHinge.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); // 1024 CPR
-		intakeHinge.setSensorPhase(true);
-		intakeHinge.setInverted(false);
-		
-		/* set the peak and nominal outputs */
-		intakeHinge.configNominalOutputForward(0.0, 0);
-		intakeHinge.configNominalOutputReverse(0.0, 0);
-		intakeHinge.configPeakOutputForward(1.0, 0);
-		intakeHinge.configPeakOutputReverse(-1.0, 0);
-		
-		/* set closed loop gains in slot0*/
-		intakeHinge.selectProfileSlot(0, 0);
-		intakeHinge.configAllowableClosedloopError(0, 0, 0); // slotIdx, allowableError, timeoutMs
-		intakeHinge.config_kF(0, 0, 0);
-		intakeHinge.config_kP(0, 1, 0);
-		intakeHinge.config_kI(0, 0, 0);
-		intakeHinge.config_kD(0, 0, 0);
-		
-		/* zero the sensor */
-		intakeHinge.setSelectedSensorPosition(0, 0, 0);
-		
-		/* Stop Motor */
-		intakeHinge.set(ControlMode.PercentOutput, 0);
+		intakeUp = new DigitalInput(INTAKE_UP);  //tienen pull up en el roborio
+        intakeDown = new DigitalInput(INTAKE_DOWN);  //tienen pull up en el roborio
+        boxIn = new DigitalInput(BOX_IN); 
 		/*********************************************/
-
-		/*********topes***********************/
-		Servo1 = new Servo(1);
-		/*************************************/
 		
 		/*********escalador********************/
 		EscaladorMotLeft = new TalonSRX(ESCALADOR_LEFT_PORT);
@@ -197,6 +144,8 @@ public class RobotMap {
 		EscaladorMotRight.setNeutralMode(NeutralMode.Brake);
 		EscaladorMotLeft.set(ControlMode.PercentOutput,0);
 		EscaladorMotRight.set(ControlMode.PercentOutput,0);
+		EscaladorMotLeft.configOpenloopRamp(0.2, 0);
+		EscaladorMotRight.configOpenloopRamp(0.2, 0);
 		
 		SwitchAbajo = new DigitalInput(ESCALADOR_DOWN);  //tienen pull up en el roborio
 		SwitchArriba = new DigitalInput(ESCALADOR_UP);   //tienen pull up en el roborio
@@ -207,10 +156,10 @@ public class RobotMap {
 		ElevadorMot = new TalonSRX(ELEVADOR_PORT);
 		ElevadorMot.setNeutralMode(NeutralMode.Brake);
 		/* set the enable state for limit switches */
-		ElevadorMot.overrideLimitSwitchesEnable(false);
+		ElevadorMot.overrideLimitSwitchesEnable(true);
 		/* first choose the sensor */
 		ElevadorMot.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		ElevadorMot.setSensorPhase(true); //invierte al sensor
+		ElevadorMot.setSensorPhase(true); //invierte al sensor(encoder)
 		ElevadorMot.setInverted(false);  //invierte al motor
 		ElevadorMot.configAllowableClosedloopError(0, 0, 0);
 		/* set the peak and nominal outputs */
@@ -224,19 +173,14 @@ public class RobotMap {
 		ElevadorMot.config_kP(0, 1, 0);
 		ElevadorMot.config_kI(0, 0, 0);
 		ElevadorMot.config_kD(0, 0, 0);
+		/*configura la rampa*/
+		ElevadorMot.configClosedloopRamp(0.2, 0);
+		ElevadorMot.configOpenloopRamp(0.2, 0);
 		/* zero the sensor */
 		ElevadorMot.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
 		/* Set to position 0 */
 		//ElevadorMot.set(ControlMode.Position, 0);  //encoder ticks (versa) 1024cpr
 		ElevadorMot.set(ControlMode.PercentOutput,0);
-		EleSwitchAbajo = new DigitalInput(ELEVADOR_DOWN);  //tienen pull up en el roborio
-		EleSwitchArriba = new DigitalInput(ELEVADOR_UP);   //tienen pull up en el roborio
-		/**********************************/
-		
-		/***********Orientacion************/
-		/* // Para pruebas
-		 * gyro=new ADXRS450_Gyro();
-		 */
 		/**********************************/
 		
 	}
