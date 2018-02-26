@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3478.robot;
 
+import org.usfirst.frc.team3478.robot.commands.Robot_Drive_ChangeDrive;
 import org.usfirst.frc.team3478.robot.commands.Robot_Drive_ChangePolarity;
 import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoDown;
 import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_AutoUp;
@@ -23,6 +24,7 @@ public class OI {
 	public JoystickButton XboxA1; //declara un boton de joystick
 	public JoystickButton XboxRB1; //declara un boton de joystick
 	public JoystickButton XboxLB1; //declara un boton de joystick
+	public JoystickButton XboxStart; //declara un boton de joystick
 	
 	public JoystickButton XboxA2; //declara un boton de joystick
 	public JoystickButton XboxB2; //declara un boton de joystick
@@ -43,10 +45,10 @@ public class OI {
 		 /////////////intake/////////////////////////(driver 1 y 2)
 		 /// Utiliza stick izquierdo para subir y bajar (driver 2)
 		 /// Utiliza triggers para comer y escupir y botones para girar (driver 1) 
-		 XboxLB1 = new JoystickButton(Stick1, 5);
-		 XboxLB1.whileHeld(new Robot_Intake_RotateLeft());  //mientras este presionado hace el comando
-		 XboxRB1 = new JoystickButton(Stick1, 6);
-		 XboxRB1.whileHeld(new Robot_Intake_RotateRight());  //mientras este presionado hace el comando
+		 //XboxLB1 = new JoystickButton(Stick1, 5);
+		 //XboxLB1.whileHeld(new Robot_Intake_RotateLeft());  //mientras este presionado hace el comando
+		 //XboxRB1 = new JoystickButton(Stick1, 6);
+		 //XboxRB1.whileHeld(new Robot_Intake_RotateRight());  //mientras este presionado hace el comando
 		 ///////////////////////////////////////////
 		 
 		 /////////////elevador///////////////////////(driver2)
@@ -66,6 +68,8 @@ public class OI {
 		 //XboxA1.whenReleased(new Shifter_change_down()); //solo hace el comando cuando soltemos
 		 //XboxA1.whenPressed(command);  //solo hace el comando cuando presionamos
 		 XboxA1.whenReleased(new Robot_Drive_ChangePolarity());  //mientras este presionado hace el comando
+		 XboxStart = new JoystickButton(Stick1, 8);
+		 XboxStart.whenReleased(new Robot_Drive_ChangeDrive());  //mientras este presionado hace el comando
 		 ///////////////////////////////////////////
 		 
 		 ////////////escalador///////////////////////(driver 2)

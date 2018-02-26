@@ -99,6 +99,11 @@ public class Robot_Autonomo extends Subsystem {
 	
 	////funcion principal del autonomo////////////
 	public void RunAuto() {
+		
+		//Crea el Timer de seguridad
+		Timer safetyTimer=new Timer();
+		safetyTimer.start();
+		
 		/*******************Seleccion de autonomo********************************/
 		// Obtener el autonomo seleccionado en la dashboard
 		//int selected=(int) Robot.autonomousChooser.getSelected();
@@ -123,6 +128,12 @@ public class Robot_Autonomo extends Subsystem {
 		heading=Robot.Robot_heading;
 		heading.Resetdevice();
 		/////////////////////////////////////////////////////////////////
+		
+		while(gameData.length() < 2 && safetyTimer.get()<SAFETY_TIMER) {
+			//espere a que llegue la data
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+			Timer.delay(0.01);
+		}
 		
 		if(selected==AUTONOMOUS_CENTER_2BOX){
 			/***
@@ -211,9 +222,6 @@ public class Robot_Autonomo extends Subsystem {
 		/************************************************************************/
 		
 		/*******************Ejecucion de pasos***********************************/
-		//Crea el Timer de seguridad
-		Timer safetyTimer=new Timer();
-		safetyTimer.start();
 		
 		//////Crea un tread para correr las secuencias del intake en paralelo al chassis
 		Thread intakeElevadorThread=new Thread(new Runnable(){

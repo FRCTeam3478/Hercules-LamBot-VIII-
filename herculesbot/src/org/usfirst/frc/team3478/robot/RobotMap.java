@@ -24,9 +24,9 @@ public class RobotMap {
 	private static final int BACK_LEFT_CHASSIS_PORT = 2;
 	private static final int BACK_RIGHT_CHASSIS_PORT = 3;
 	
-	private static final int INTAKE_LEFT_PORT = 7;
-	private static final int INTAKE_RIGHT_PORT = 8;
-	private static final int INTAKE_HINGE_PORT = 9;
+	private static final int INTAKE_LEFT_PORT = 9;
+	private static final int INTAKE_RIGHT_PORT = 7;
+	private static final int INTAKE_HINGE_PORT = 8;
 	
 	private static final int ESCALADOR_LEFT_PORT = 5;
 	private static final int ESCALADOR_RIGHT_PORT = 6;
@@ -43,8 +43,8 @@ public class RobotMap {
 	private static final int ESCALADOR_UP = 4;
 	private static final int ESCALADOR_DOWN = 5;
 	
-	private static final int INTAKE_UP = 6;
-	private static final int INTAKE_DOWN = 7;
+	private static final int INTAKE_UP = 7;
+	private static final int INTAKE_DOWN = 6;
 	private static final int BOX_IN = 8;
 
 	/***********************************************/
@@ -166,13 +166,13 @@ public class RobotMap {
 		ElevadorMot.configNominalOutputForward(0, 0);
 		ElevadorMot.configNominalOutputReverse(0, 0);
 		ElevadorMot.configPeakOutputForward(1.0, 0);
-		ElevadorMot.configPeakOutputReverse(-1.0, 0);
+		ElevadorMot.configPeakOutputReverse(-0.8, 0);
 		/* set closed loop gains in slot0*/
 		ElevadorMot.selectProfileSlot(0, 0);
-		ElevadorMot.config_kF(0, 0, 0);
-		ElevadorMot.config_kP(0, 1, 0);
+		ElevadorMot.config_kF(0, 0.3, 0);
+		ElevadorMot.config_kP(0, 2, 0);
 		ElevadorMot.config_kI(0, 0, 0);
-		ElevadorMot.config_kD(0, 0, 0);
+		ElevadorMot.config_kD(0, 200, 0);
 		/*configura la rampa*/
 		ElevadorMot.configClosedloopRamp(0.2, 0);
 		ElevadorMot.configOpenloopRamp(0.2, 0);

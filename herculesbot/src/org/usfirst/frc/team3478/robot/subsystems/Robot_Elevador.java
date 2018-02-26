@@ -15,18 +15,18 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot_Elevador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static final int Encoder_CPR = 1024; //pulsos por vuelta del encoder
+	private static final int TOP_LIMIT = 69000; //pulsos por vuelta del encoder
 	
-	private static int direction = 1;
-	private final int Step_limit = (int)((Encoder_CPR*4)/36); //que avance maximo 5mm por ciclo, polea 36 dientes 5mm por diente
-	private static int Position_abs = 0;
-	private static int Position_Now = 0;
-	private static int Position_Last = 0;
+	private static int direction = -1;
+	private static int Position_abs = -1;
+	private static Timer timerx;
 		
 	private TalonSRX elevadormotor; //arreglo de talons del escalador
 	private DigitalInput intakeDown; //limit switch superior del escalador
@@ -39,8 +39,7 @@ public class Robot_Elevador extends Subsystem {
 	public void InitDefaultState() {
 		Stop_Elevador();
 		Position_abs=elevadormotor.getSelectedSensorPosition(0);  //inicia la posicion donde se quedo en el autonomo
-		Position_Now = Position_abs;
-		Position_Last = Position_abs;
+		timerx.reset();
 	}
 	////////////////////////////////////////////////
 	
@@ -48,73 +47,111 @@ public class Robot_Elevador extends Subsystem {
 	public Robot_Elevador(){
 		elevadormotor=RobotMap.ElevadorMot;
 		intakeDown = RobotMap.intakeDown;
+		timerx=new Timer();
+		Position_abs = -1;
 	}
 	/////////////////////////////////////////////////////////////////
 	
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Main_Move_Elevador() {
-		
-		if(elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) { //si toca el switch de abajo resetea el encoder para quitar error
+		if(elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) { //si toca el switch de abajo resetea el encoder y limita abajo
 			elevadormotor.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
 		}
-		
 		Joystick joystick=Robot.oi.Stick2; //crea el objeto del joystick
 		double power=mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1)*direction; //mapea el valor del eje y da direccion
-		int powerfake = (int)(power*Step_limit); //fijamos cuanto se va a mover por ciclo de roborio con el eje
-
-		//////calcula la posicion (setpoint) //////////////
-		Position_abs = ((int)((powerfake+Position_abs)/Step_limit))*Step_limit; //sacamos el nuevo setpoint y lo hacemos divisible a steplimit
 		
-		///////////sumamos a la rampa de pasos o restamos/////////////////
-		if(Position_Now < Position_abs) {
-			Position_Now = Position_Now + Step_limit;
-		}else if(Position_Now > Position_abs) {
-			Position_Now = Position_Now - Step_limit;
+		elevadormotor.set(ControlMode.PercentOutput, power);
+		
+		if( power < 0 && elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) {
+			power=0;
+		}else if(power > 0 && elevadormotor.getSensorCollection().isFwdLimitSwitchClosed()) {
+			power=0;
 		}
-		////////////////////////////////////////////////////////////////
-		
-		/////////para que no se mueva y no se pase la possicion mas de lo que debe///////////////
-		if((Position_Now-Position_Last)>0 && elevadormotor.getSensorCollection().isFwdLimitSwitchClosed() ) {
-			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
-			Position_Now = Position_abs;
-		}else if((Position_Now-Position_Last)<0 && elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) {
-			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
-			Position_Now = Position_abs;
-		}
-		//////////////////////////////////////////////////////////////
-		
-		///****los switches del talon estan activados por proteccion y paran solo el motor****////
 		
 		////////no puede mover si el intake esta arriba  asi que agregamos eso/////////////////////
+		/*
 		if(intakeDown.get()){
-			Position_abs=elevadormotor.getSelectedSensorPosition(0);  //no se mueve
-			Position_Now = Position_abs;
-			Position_Last = Position_abs;
+			power=0;
 		}
+		*/
 		//////////////////////////////////////////////////////////////////////////////////////////
+	
+		//////////////////////////////////////////////////////////////////////////////////////////
+		if(power==0 && Position_abs != -1) {
+			if(Position_abs>TOP_LIMIT) {
+				Position_abs=TOP_LIMIT;
+			}
+			if(Position_abs<0) { ///automaticos hasta el switch
+				if(Position_abs==-10) {  //para abajo
+					
+					////////timer de seguridad////////////
+					if(elevadormotor.getSelectedSensorPosition(0)<250 && timerx.get()==0) {
+						timerx.start();
+					}
+					/////////////////////////////////////
+					
+					if(!elevadormotor.getSensorCollection().isRevLimitSwitchClosed() && timerx.get()<2) { //si toca el switch de abajo resetea el encoder y limita abajo
+						elevadormotor.set(ControlMode.PercentOutput, -1);
+					}else {
+						timerx.stop();
+						timerx.reset();
+						Position_abs=-1;
+						elevadormotor.set(ControlMode.PercentOutput, 0);
+					}
+				}else if(Position_abs==-20) { //para arriba
+					
+					////////timer de seguridad////////////
+					if(elevadormotor.getSelectedSensorPosition(0)>68000 && timerx.get()==0) {
+						timerx.start();
+					}
+					/////////////////////////////////////
+					
+					if(!elevadormotor.getSensorCollection().isFwdLimitSwitchClosed() && timerx.get()<2 ) { //si toca el switch de abajo resetea el encoder y limita abajo
+						elevadormotor.set(ControlMode.PercentOutput, 1);
+					}else {
+						timerx.stop();
+						timerx.reset();
+						Position_abs=-1;
+						elevadormotor.set(ControlMode.PercentOutput, 0);
+					}
+				}
+			}else {
+				if(Math.abs(elevadormotor.getSelectedSensorPosition(0)-Position_abs)<=250) {
+					Position_abs=-1;
+				}
+				elevadormotor.set(ControlMode.Position, Position_abs); //mantiene el motor
+			}
+		}else {
+			timerx.stop();
+			timerx.reset();
+			Position_abs=-1;
+			elevadormotor.set(ControlMode.PercentOutput, power);  //mueve el motor a donde le digamos (ticks del encoder)
+		}
 		
-		elevadormotor.set(ControlMode.Position, Position_Now);  //mueve el motor a donde le digamos (ticks del encoder)
-		Position_Last = Position_Now;
+		SmartDashboard.putNumber("positionencoder", elevadormotor.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("positionabs", Position_abs);
+		SmartDashboard.putBoolean("toplimit", elevadormotor.getSensorCollection().isFwdLimitSwitchClosed());
+		SmartDashboard.putBoolean("bottomlimit", elevadormotor.getSensorCollection().isRevLimitSwitchClosed());
 	}
 	///////////////////////////////////////////////////////////////
 	
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Elevador_Up() {
-		Position_abs=(int)(3*Encoder_CPR*4);
+		Position_abs=30000;
 	}
 	///////////////////////////////////////////////////////////////
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Elevador_Upper() {
-		Position_abs=(int)(5*Encoder_CPR*4);
+		Position_abs=-20;
 	}
 	///////////////////////////////////////////////////////////////
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Elevador_Down() {
-		Position_abs=0;
+		Position_abs=-10;
 	}
 	///////////////////////////////////////////////////////////////
 	

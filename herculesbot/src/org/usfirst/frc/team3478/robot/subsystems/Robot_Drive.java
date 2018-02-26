@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot_Drive extends Subsystem {
 
@@ -57,6 +58,7 @@ public class Robot_Drive extends Subsystem {
 	
 	////////funcion principal del drive//////////////////////////////////////
 	public void Main_drive() {
+		SmartDashboard.putNumber("drive", Select_drive);
 		if(Select_drive ==1) {
 			Front_drive();
 		}else {
@@ -74,7 +76,7 @@ public class Robot_Drive extends Subsystem {
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
-			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1;
+			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,0.7)*-1;
 		
 		//obtiene la magnbitud del vector del joystick
 		double magnitude=Math.sqrt((translationX*translationX)+(translationY*translationY));
@@ -104,7 +106,7 @@ public class Robot_Drive extends Subsystem {
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*-1, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*-1;
 		
-	    int rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,1)*-1)/stempx);
+	    int rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,0.7)*-1)/stempx);
 		
 		/////////rampa para dar los giros///////////////////
 		if(rotatingrobotramp<rotationAxis) {
@@ -121,6 +123,7 @@ public class Robot_Drive extends Subsystem {
 		// Calcular el angulo del vector relativo al frente(para hacer el filed oriented drive)////
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		angle-=(robotHeading.getRawRotation())*Math.PI/180.0;
+		SmartDashboard.putNumber("angle", robotHeading.getRawRotation());
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		///////////para evitar que el robot se gire cuando no debe///////////////////////////////

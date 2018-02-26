@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Robot_Escalador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static int direction = 1;
+	private static int direction = -1;
 	
 	private TalonSRX[] climberMotors; //arreglo de talons del escalador
 	private DigitalInput topLimitSwitch; //limit switch superior del escalador
@@ -43,12 +43,12 @@ public class Robot_Escalador extends Subsystem {
 			   power=Zder - Zizq;
 		//Interrumpir la funcion cuando el escalador
 		//llegue al limite superior
-		if(power>0 && !topLimitSwitch.get()){
+		if(power<0 && !topLimitSwitch.get()){
 			power=0;
 		}
 		//Interrumpir la funcion cuando el escalador
 		//llegue al limite inferior
-		if(power<0 && !bottomLimitSwitch.get()){
+		if(power>0 && !bottomLimitSwitch.get()){
 			power=0;
 		}
 		//Ajustar la potencia de los motores
