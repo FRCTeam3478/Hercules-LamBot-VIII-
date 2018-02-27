@@ -13,17 +13,14 @@ public class StepFactory_IntakeElevador {
 	public static AutonomousStep_IntakeElevador getMoveElevatorTime(double power,double time){
 		return new MoveElevatorTime(power,time);
 	}
-	public static AutonomousStep_IntakeElevador getMoveIntakeEncoder( double degrees){
-		return new MoveElevatorEncoder( degrees );
-	}
-	public static AutonomousStep_IntakeElevador getMoveIntakeTime(double power,double time){
-		return new MoveElevatorTime(power,time);
-	}
 	public static AutonomousStep_IntakeElevador getNewGrabBox(){
 		return new GrabBox();
 	}
 	public static AutonomousStep_IntakeElevador getNewThrowBox(){
 		return new ThrowBox();
+	}
+	public static AutonomousStep_IntakeElevador move2Switch(double select){
+		return new MoveElevatorToSwitch(select);
 	}
 	public static AutonomousStep_IntakeElevador getNewWait(double time){
 		AutonomousStep_IntakeElevador wait=new AutonomousStep_IntakeElevador(){

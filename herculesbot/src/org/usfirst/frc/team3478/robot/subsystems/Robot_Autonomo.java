@@ -15,8 +15,17 @@ package org.usfirst.frc.team3478.robot.subsystems;
 
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
+import org.lambot3478.autonomous_steps.GrabBox;
+import org.lambot3478.autonomous_steps.MoveElevatorEncoder;
+import org.lambot3478.autonomous_steps.MoveElevatorTime;
+import org.lambot3478.autonomous_steps.MoveElevatorToSwitch;
+import org.lambot3478.autonomous_steps.RotateDegrees;
+import org.lambot3478.autonomous_steps.RotateTime;
 import org.lambot3478.autonomous_steps.StepFactory_Drive;
 import org.lambot3478.autonomous_steps.StepFactory_IntakeElevador;
+import org.lambot3478.autonomous_steps.ThrowBox;
+import org.lambot3478.autonomous_steps.VectorMoveEncoders;
+import org.lambot3478.autonomous_steps.VectorMoveTime;
 import org.usfirst.frc.team3478.robot.Robot;
 import org.usfirst.frc.team3478.robot.RobotMap;
 
@@ -27,6 +36,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Robot_Autonomo extends Subsystem {
@@ -75,8 +85,7 @@ public class Robot_Autonomo extends Subsystem {
 	public Robot_Autonomo(){
 		talonsDrive=new TalonSRX[]{RobotMap.frontLeft,RobotMap.frontRight,
 				RobotMap.backLeft,RobotMap.backRight};
-		talonsIntakeElevador=new TalonSRX[]{RobotMap.intakeHinge,
-				RobotMap.intakeLeft,RobotMap.intakeRight,
+		talonsIntakeElevador=new TalonSRX[]{RobotMap.intakeLeft,RobotMap.intakeRight,
 				RobotMap.ElevadorMot};
 	}
 	//////////////////////////////////////////////////////////////
@@ -106,20 +115,8 @@ public class Robot_Autonomo extends Subsystem {
 		
 		/*******************Seleccion de autonomo********************************/
 		// Obtener el autonomo seleccionado en la dashboard
-		//int selected=(int) Robot.autonomousChooser.getSelected();
-		Joystick joystick=Robot.oi.Stick3; //crea el objeto del joystick
-		int selected=AUTONOMOUS_NOTHING;
-		if(joystick.getRawButton(1)) {
-			selected=AUTONOMOUS_NOTHING;
-		}else if(joystick.getRawButton(2)) {
-			selected=AUTONOMOUS_CENTER_2BOX;
-		}else if(joystick.getRawButton(3)) {
-			selected=AUTONOMOUS_CENTER;
-		}else if(joystick.getRawButton(4)) {
-			selected=AUTONOMOUS_LEFT;
-		}else if(joystick.getRawButton(5)) {
-			selected=AUTONOMOUS_RIGHT;
-		}
+		int selected=(int) Robot.autonomousChooser.getSelected();
+		SmartDashboard.putNumber("selected", selected);
 				
 		// Obtener los datos de juego (3 caracteres)
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -151,6 +148,7 @@ public class Robot_Autonomo extends Subsystem {
 			else{
 				direction = 1;
 			}
+			/*
 			driveSteps = new AutonomousStep_Drive[]{
 					// go forward 6.75 ft to the midpoint between switch and starting line
 					StepFactory_Drive.getNewVectorMoveEncoders(0.0,0.8,6.75),	
@@ -194,6 +192,7 @@ public class Robot_Autonomo extends Subsystem {
 					// throw box
 					StepFactory_IntakeElevador.getNewThrowBox(),
 			};
+			*/
 		}
 		else if(selected==AUTONOMOUS_LEFT){
 			if(gameData.charAt(0)=='L'){
@@ -205,10 +204,41 @@ public class Robot_Autonomo extends Subsystem {
 		}
 		else if(selected==AUTONOMOUS_CENTER){
 			if(gameData.charAt(0)=='L'){
-				// TODO
+				//TODO
 			}
 			else{
-				// TODO
+				intakeSteps=new AutonomousStep_IntakeElevador[]{
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(28000),
+						StepFactory_IntakeElevador.getNewWait(1),
+						StepFactory_IntakeElevador.getNewThrowBox()
+						
+						//StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.0), //sube 2 s
+						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+						//StepFactory_IntakeElevador.getMoveElevatorTime(-1.0,1.0), //baja 2 s
+						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+						//StepFactory_IntakeElevador.getMoveElevatorEncoder(30000), //mueve a posicion
+						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+						//StepFactory_IntakeElevador.move2Switch(1.0),
+						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+						//StepFactory_IntakeElevador.getNewGrabBox(),
+						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+						//StepFactory_IntakeElevador.getNewThrowBox(),
+						//StepFactory_IntakeElevador.getNewWait(4.0)
+				};
+				
+				driveSteps = new AutonomousStep_Drive[]{
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(45,1,95),
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20)
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateTime(0.5,1),
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateDegrees(-90),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,0.5,10),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						};
 			}
 		}
 		else if(selected==AUTONOMOUS_RIGHT){
@@ -218,6 +248,37 @@ public class Robot_Autonomo extends Subsystem {
 			else{
 				// TODO
 			}
+		}else if(selected==AUTONOMOUS_NOTHING){
+			/*
+			intakeSteps=new AutonomousStep_IntakeElevador[]{
+					//StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.0), //sube 2 s
+					//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+					//StepFactory_IntakeElevador.getMoveElevatorTime(-1.0,1.0), //baja 2 s
+					//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+					//StepFactory_IntakeElevador.getMoveElevatorEncoder(30000), //mueve a posicion
+					//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+					//StepFactory_IntakeElevador.move2Switch(1.0),
+					//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+					//StepFactory_IntakeElevador.getNewGrabBox(),
+					//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
+					//StepFactory_IntakeElevador.getNewThrowBox(),
+					//StepFactory_IntakeElevador.getNewWait(4.0)
+			};
+			
+			driveSteps = new AutonomousStep_Drive[]{
+					//StepFactory_Drive.getNewVectorMoveTime(0,0.5,1),
+					//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+					//StepFactory_Drive.getNewRotateTime(0.5,1),
+					//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+					//StepFactory_Drive.getNewRotateDegrees(-90),
+					//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+					//StepFactory_Drive.getNewVectorMoveEncoders(0,0.5,10),
+					//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+					};
+					
+			*/
+			
+			
 		}
 		/************************************************************************/
 		

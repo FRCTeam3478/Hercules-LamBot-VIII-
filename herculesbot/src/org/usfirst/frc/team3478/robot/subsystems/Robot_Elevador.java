@@ -13,7 +13,6 @@ import org.usfirst.frc.team3478.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,14 +21,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot_Elevador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static final int TOP_LIMIT = 69000; //pulsos por vuelta del encoder
+	private static final int TOP_LIMIT = 68000; //pulsos por vuelta del encoder
+	private static final int LOW_LIMIT = 250; //pulsos por vuelta del encoder
+	private static final int TOLERANCE_ENCODER = 250; //pulsos por vuelta del encoder
 	
 	private static int direction = -1;
 	private static int Position_abs = -1;
 	private static Timer timerx;
 		
 	private TalonSRX elevadormotor; //arreglo de talons del escalador
-	private DigitalInput intakeDown; //limit switch superior del escalador
 	
 	public void initDefaultCommand() {
 		//nada
@@ -39,16 +39,16 @@ public class Robot_Elevador extends Subsystem {
 	public void InitDefaultState() {
 		Stop_Elevador();
 		Position_abs=elevadormotor.getSelectedSensorPosition(0);  //inicia la posicion donde se quedo en el autonomo
+		timerx.stop();
 		timerx.reset();
+		Position_abs = -1;
 	}
 	////////////////////////////////////////////////
 	
 	////////////constructor de la clase///////////////////////////////
 	public Robot_Elevador(){
 		elevadormotor=RobotMap.ElevadorMot;
-		intakeDown = RobotMap.intakeDown;
 		timerx=new Timer();
-		Position_abs = -1;
 	}
 	/////////////////////////////////////////////////////////////////
 	
@@ -58,40 +58,27 @@ public class Robot_Elevador extends Subsystem {
 		if(elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) { //si toca el switch de abajo resetea el encoder y limita abajo
 			elevadormotor.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
 		}
+		
 		Joystick joystick=Robot.oi.Stick2; //crea el objeto del joystick
 		double power=mapDoubleT(joystick.getRawAxis(5),TOLERANCE,1,0,1)*direction; //mapea el valor del eje y da direccion
-		
-		elevadormotor.set(ControlMode.PercentOutput, power);
-		
 		if( power < 0 && elevadormotor.getSensorCollection().isRevLimitSwitchClosed()) {
 			power=0;
 		}else if(power > 0 && elevadormotor.getSensorCollection().isFwdLimitSwitchClosed()) {
 			power=0;
 		}
 		
-		////////no puede mover si el intake esta arriba  asi que agregamos eso/////////////////////
-		/*
-		if(intakeDown.get()){
-			power=0;
-		}
-		*/
-		//////////////////////////////////////////////////////////////////////////////////////////
-	
 		//////////////////////////////////////////////////////////////////////////////////////////
 		if(power==0 && Position_abs != -1) {
-			if(Position_abs>TOP_LIMIT) {
-				Position_abs=TOP_LIMIT;
-			}
 			if(Position_abs<0) { ///automaticos hasta el switch
 				if(Position_abs==-10) {  //para abajo
 					
 					////////timer de seguridad////////////
-					if(elevadormotor.getSelectedSensorPosition(0)<250 && timerx.get()==0) {
+					if(elevadormotor.getSelectedSensorPosition(0)<LOW_LIMIT && timerx.get()==0) {
 						timerx.start();
 					}
 					/////////////////////////////////////
 					
-					if(!elevadormotor.getSensorCollection().isRevLimitSwitchClosed() && timerx.get()<2) { //si toca el switch de abajo resetea el encoder y limita abajo
+					if(!elevadormotor.getSensorCollection().isRevLimitSwitchClosed() && timerx.get()<1) { //si toca el switch de abajo resetea el encoder y limita abajo
 						elevadormotor.set(ControlMode.PercentOutput, -1);
 					}else {
 						timerx.stop();
@@ -102,12 +89,12 @@ public class Robot_Elevador extends Subsystem {
 				}else if(Position_abs==-20) { //para arriba
 					
 					////////timer de seguridad////////////
-					if(elevadormotor.getSelectedSensorPosition(0)>68000 && timerx.get()==0) {
+					if(elevadormotor.getSelectedSensorPosition(0)>TOP_LIMIT && timerx.get()==0) {
 						timerx.start();
 					}
 					/////////////////////////////////////
 					
-					if(!elevadormotor.getSensorCollection().isFwdLimitSwitchClosed() && timerx.get()<2 ) { //si toca el switch de abajo resetea el encoder y limita abajo
+					if(!elevadormotor.getSensorCollection().isFwdLimitSwitchClosed() && timerx.get()<1 ) { //si toca el switch de abajo resetea el encoder y limita abajo
 						elevadormotor.set(ControlMode.PercentOutput, 1);
 					}else {
 						timerx.stop();
@@ -116,11 +103,11 @@ public class Robot_Elevador extends Subsystem {
 						elevadormotor.set(ControlMode.PercentOutput, 0);
 					}
 				}
-			}else {
-				if(Math.abs(elevadormotor.getSelectedSensorPosition(0)-Position_abs)<=250) {
+			}else { //AUTOMATICOS INTERMEDIOS CON ENCODER
+				elevadormotor.set(ControlMode.Position, Position_abs); //mantiene el motor
+				if(Math.abs(elevadormotor.getSelectedSensorPosition(0)-Position_abs)<=TOLERANCE_ENCODER) {
 					Position_abs=-1;
 				}
-				elevadormotor.set(ControlMode.Position, Position_abs); //mantiene el motor
 			}
 		}else {
 			timerx.stop();
@@ -129,10 +116,9 @@ public class Robot_Elevador extends Subsystem {
 			elevadormotor.set(ControlMode.PercentOutput, power);  //mueve el motor a donde le digamos (ticks del encoder)
 		}
 		
-		SmartDashboard.putNumber("positionencoder", elevadormotor.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("positionabs", Position_abs);
-		SmartDashboard.putBoolean("toplimit", elevadormotor.getSensorCollection().isFwdLimitSwitchClosed());
-		SmartDashboard.putBoolean("bottomlimit", elevadormotor.getSensorCollection().isRevLimitSwitchClosed());
+		SmartDashboard.putNumber("posicion elevasdor", elevadormotor.getSelectedSensorPosition(0));
+		SmartDashboard.putBoolean("toplimit elevador", elevadormotor.getSensorCollection().isFwdLimitSwitchClosed());
+		SmartDashboard.putBoolean("bottomlimit elevador", elevadormotor.getSensorCollection().isRevLimitSwitchClosed());
 	}
 	///////////////////////////////////////////////////////////////
 	

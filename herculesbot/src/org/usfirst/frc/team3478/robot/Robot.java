@@ -19,9 +19,12 @@ import org.usfirst.frc.team3478.robot.subsystems.Robot_Escalador;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Heading;
 import org.usfirst.frc.team3478.robot.subsystems.Robot_Intake;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -47,7 +50,7 @@ public class Robot extends TimedRobot {
 	/*****************************************************************************************/
 
 	/*******seleccion de autonomo************************************/
-	//public static SendableChooser autonomousChooser;
+	public static SendableChooser autonomousChooser;
 	/****************************************************************/
 	
 	@Override
@@ -66,9 +69,8 @@ public class Robot extends TimedRobot {
 		oi = new OI();  ///lo del joystick
 	
 		/***********aqui vamos a inicializar la camara si se necesita***********************/
-		//activa la camara
-        //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        //camera.setResolution(640,480);
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(640,480);
 		/**********************************************************************************/
 		
 		/****************aqui vamos a inicializar los comandos*******************************/
@@ -80,13 +82,12 @@ public class Robot extends TimedRobot {
 		/***********************************************************************************/
 		
 		/****************para seleccionar entre autonomos***********************************//////
-		//autonomousChooser = new SendableChooser();
-		//autonomousChooser.addDefault("Nada", 1);
-		//autonomousChooser.addObject("Centro 2 cajas", 2);
-		//autonomousChooser.addObject("Izquierda", 3);
-		//autonomousChooser.addObject("Centro", 4);
-		//autonomousChooser.addObject("Derecha", 5);
-	    //SmartDashboard.putData("Autonomous Selector", autonomousChooser);
+		autonomousChooser = new SendableChooser();
+		autonomousChooser.addDefault("Nada", 1);
+		autonomousChooser.addObject("Izquierda", 2);
+		autonomousChooser.addObject("Centro", 3);
+		autonomousChooser.addObject("Derecha", 4);
+	    SmartDashboard.putData("Autonomous Selector", autonomousChooser);
 		/************************************************************************************/
 	}
 

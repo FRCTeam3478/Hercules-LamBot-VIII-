@@ -58,11 +58,12 @@ public class Robot_Drive extends Subsystem {
 	
 	////////funcion principal del drive//////////////////////////////////////
 	public void Main_drive() {
-		SmartDashboard.putNumber("drive", Select_drive);
 		if(Select_drive ==1) {
 			Front_drive();
+			SmartDashboard.putString("drive mode", "field oriented");
 		}else {
 			Tank_drive();
+			SmartDashboard.putString("drive mode", "tanque");
 		}
 	}
 	//////////////////////////////////////////////////////////////////
@@ -72,7 +73,7 @@ public class Robot_Drive extends Subsystem {
 	public void Tank_drive() {
 		//lee el control 1
 		Joystick joystick=Robot.oi.Stick1;
-	
+		SmartDashboard.putBoolean("chassis invertido",(direction==1));
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
@@ -123,7 +124,7 @@ public class Robot_Drive extends Subsystem {
 		// Calcular el angulo del vector relativo al frente(para hacer el filed oriented drive)////
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		angle-=(robotHeading.getRawRotation())*Math.PI/180.0;
-		SmartDashboard.putNumber("angle", robotHeading.getRawRotation());
+		SmartDashboard.putNumber("angulo chasis", robotHeading.getRawRotation());
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		///////////para evitar que el robot se gire cuando no debe///////////////////////////////

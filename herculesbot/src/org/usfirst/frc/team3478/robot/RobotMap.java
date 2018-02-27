@@ -26,7 +26,6 @@ public class RobotMap {
 	
 	private static final int INTAKE_LEFT_PORT = 9;
 	private static final int INTAKE_RIGHT_PORT = 7;
-	private static final int INTAKE_HINGE_PORT = 8;
 	
 	private static final int ESCALADOR_LEFT_PORT = 5;
 	private static final int ESCALADOR_RIGHT_PORT = 6;
@@ -43,10 +42,7 @@ public class RobotMap {
 	private static final int ESCALADOR_UP = 4;
 	private static final int ESCALADOR_DOWN = 5;
 	
-	private static final int INTAKE_UP = 7;
-	private static final int INTAKE_DOWN = 6;
 	private static final int BOX_IN = 8;
-
 	/***********************************************/
 	
 	/*************chasis************************/
@@ -62,9 +58,6 @@ public class RobotMap {
 	/*********intake***************************/
 	public static TalonSRX intakeLeft;
 	public static TalonSRX intakeRight;
-	public static TalonSRX intakeHinge;
-	public static DigitalInput intakeUp;
-	public static DigitalInput intakeDown;
 	public static DigitalInput boxIn;
 	/***************************************/
 		
@@ -102,14 +95,16 @@ public class RobotMap {
 		DriveEL = new Encoder(ENCODER_CHASSIS_LEFT_A,ENCODER_CHASSIS_LEFT_B,true, Encoder.EncodingType.k4X);
         DriveEL.setMaxPeriod(.1);
         DriveEL.setMinRate(10);
-        DriveEL.setDistancePerPulse(((1/1.75)*(6*3.1416))/(128));  //llantas 6 in relacion encoder flecha final de 1.75
-        DriveEL.setSamplesToAverage(7);
+        DriveEL.setDistancePerPulse((((1/1.75)*(6*3.1416))/(128))*1.1);  //llantas 6 in relacion encoder flecha final de 1.75
+        DriveEL.setSamplesToAverage(10);
+        DriveEL.setReverseDirection(false);
         DriveEL.reset();
         DriveER = new Encoder(ENCODER_CHASSIS_RIGHT_A,ENCODER_CHASSIS_RIGHT_B,false, Encoder.EncodingType.k4X);
         DriveER.setMaxPeriod(.1);
         DriveER.setMinRate(10);
-        DriveER.setDistancePerPulse(((1/1.75)*(6*3.1416))/(128));  //llantas 6 in relacion encoder flecha final de 1.75
-        DriveER.setSamplesToAverage(7);
+        DriveER.setDistancePerPulse((((1/1.75)*(6*3.1416))/(128))*1.1);  //llantas 6 in relacion encoder flecha final de 1.75
+        DriveER.setSamplesToAverage(10);
+        DriveER.setReverseDirection(true);
         DriveER.reset();
 		/*********************************************/
 		
@@ -117,21 +112,12 @@ public class RobotMap {
         //***encoder 0 cuando esta cerrado*********/
 		intakeLeft = new TalonSRX(INTAKE_LEFT_PORT);
 		intakeRight = new TalonSRX(INTAKE_RIGHT_PORT);
-		intakeHinge = new TalonSRX(INTAKE_HINGE_PORT);
 		intakeLeft.setInverted(true);
 		intakeRight.setInverted(false);
-		intakeHinge.setInverted(false);
 		intakeLeft.setNeutralMode(NeutralMode.Brake);
 		intakeRight.setNeutralMode(NeutralMode.Brake);
-		intakeHinge.setNeutralMode(NeutralMode.Brake);
 		intakeLeft.set(ControlMode.PercentOutput,0.0);
 		intakeRight.set(ControlMode.PercentOutput,0.0);
-		intakeHinge.set(ControlMode.PercentOutput,0.0);
-		/*configura la rampa*/
-		intakeHinge.configOpenloopRamp(0.2, 0);
-		
-		intakeUp = new DigitalInput(INTAKE_UP);  //tienen pull up en el roborio
-        intakeDown = new DigitalInput(INTAKE_DOWN);  //tienen pull up en el roborio
         boxIn = new DigitalInput(BOX_IN); 
 		/*********************************************/
 		
@@ -166,7 +152,7 @@ public class RobotMap {
 		ElevadorMot.configNominalOutputForward(0, 0);
 		ElevadorMot.configNominalOutputReverse(0, 0);
 		ElevadorMot.configPeakOutputForward(1.0, 0);
-		ElevadorMot.configPeakOutputReverse(-0.8, 0);
+		ElevadorMot.configPeakOutputReverse(-1.0, 0);
 		/* set closed loop gains in slot0*/
 		ElevadorMot.selectProfileSlot(0, 0);
 		ElevadorMot.config_kF(0, 0.3, 0);

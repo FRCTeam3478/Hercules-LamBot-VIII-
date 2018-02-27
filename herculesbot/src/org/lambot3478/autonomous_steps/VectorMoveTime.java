@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class VectorMoveTime extends AutonomousStep_Drive{
 	private Timer timer;
-	private double front;
 	private double power;
 	private double time;
 	private double translationAngle;
@@ -29,7 +28,7 @@ public class VectorMoveTime extends AutonomousStep_Drive{
 	}
 	@Override
 	public void start() {
-		front=heading.getRotation();
+		heading.resetRotation();
 		timer=new Timer();
 		timer.start();
 	}
@@ -37,7 +36,7 @@ public class VectorMoveTime extends AutonomousStep_Drive{
 	@Override
 	public void run() {
 		// Potencia de alineacion proporcional
-		vectorMove(translationAngle, power, PID_fun(front,heading.getRotation(),0.025,0,0));
+		vectorMove(translationAngle, power, PID_fun(0,heading.getRotation(),0.025,0,0)*-1);
 	}
 	@Override
 	public boolean isFinished() {

@@ -3,7 +3,9 @@ package org.usfirst.frc.team3478.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /* // Para pruebas
  * import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -13,7 +15,6 @@ public class Robot_Heading extends Subsystem{
 
 	private static AHRS ahrs;
 	private static double frontsave;
-	
 	//////////////cosntructor de la clase inicializamos el imu/////////////////
 	public Robot_Heading(){
 		/* // Para pruebas
@@ -45,6 +46,7 @@ public class Robot_Heading extends Subsystem{
 	public void Resetdevice() {
 		ahrs.reset();
 		frontsave=0;
+		Timer.delay(0.2);
 	}
 	///////////////////////////////////////////
 	
@@ -89,6 +91,9 @@ public class Robot_Heading extends Subsystem{
 		double valx = value-(rs*360);
 		if(valx>180){
 			valx = valx-360;
+		}
+		if(valx<-180){
+			valx = valx+360;
 		}
 		return valx;
 	}

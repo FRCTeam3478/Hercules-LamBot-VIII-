@@ -52,7 +52,9 @@ public abstract class AutonomousStep_Drive extends AutonomousStep{
 			encoder.reset();
 		}
 	}
+	
 	protected void vectorMove(double translationAngle,double power,double rotationPower){
+		power=power*-1;
 		//considera Y arriba - abajo +  y X derecha + izquierda - en los ejes
 		double translationX = 0;
 		double translationY = 0;

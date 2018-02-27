@@ -23,7 +23,7 @@ public class ThrowBox extends AutonomousStep_IntakeElevador{
 	
 	@Override
 	public void run() {
-		setIntakeTalons(POWER);
+		setIntakeTalons(-POWER);
 	}
 
 	@Override

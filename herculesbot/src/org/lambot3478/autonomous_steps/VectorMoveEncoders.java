@@ -2,10 +2,11 @@ package org.lambot3478.autonomous_steps;
 
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 ////para mover el chasis en las direcciones 0,45,90,135,180,255,270,315 una distancia medida con los encoders//////////////////
 
 public class VectorMoveEncoders extends AutonomousStep_Drive{
-	private double front;
 	private double power;
 	private double distance;
 	private double translationAngle;
@@ -27,19 +28,22 @@ public class VectorMoveEncoders extends AutonomousStep_Drive{
 	
 	@Override
 	public void start() {
-		front=heading.getRotation();  //guarda la posicion inicial
+		heading.resetRotation();
 		resetEncoders();  //resetea los encoders
 	}
 
 	@Override
 	public void run() {
 		//ajusta al robot para que se mueva recto (controlador p con ganacia de 0.025)
-		vectorMove(translationAngle, power, PID_fun(front,heading.getRotation(),0.025,0,0));
+		vectorMove(translationAngle, power, PID_fun(0,heading.getRotation(),0.025,0,0)*-1);
 	}
 	@Override
 	public boolean isFinished() {
+		SmartDashboard.putNumber("encoderL", encoders[0].getDistance());
+		SmartDashboard.putNumber("enocderR", encoders[1].getDistance());
 		if(Math.abs(encoders[0].getDistance())<distance || Math.abs(encoders[1].getDistance())<distance)
 			return false;
+		vectorMove(0,0,0);
 		return true;
 	}
 	

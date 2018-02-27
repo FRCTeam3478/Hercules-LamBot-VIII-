@@ -12,7 +12,6 @@ public class MoveElevatorTime extends AutonomousStep_IntakeElevador{
 	private Timer timer;
 	private double power;
 	private double time;
-	private boolean breakstate = false;
 	
 	public MoveElevatorTime(double power,double time){
 		this.power=power;
@@ -23,11 +22,6 @@ public class MoveElevatorTime extends AutonomousStep_IntakeElevador{
 	public void start() {
 		timer=new Timer();
 		timer.start();
-		////no se puede mover si esta arriba el intake//////////
-		if(intakeHinge.getSelectedSensorPosition(0) < 40 ) {
-			breakstate=true;  //rompe no puede subir asi
-		}
-		///////////////////////////////////////////////////////
 	}
 
 	@Override
@@ -41,7 +35,7 @@ public class MoveElevatorTime extends AutonomousStep_IntakeElevador{
 			timer=new Timer();
 			timer.start();
 		}
-		if(timer.get()<time && (eleUpSwitch.get()) && (eleDownSwitch.get()) && !breakstate )
+		if(timer.get()<time && (!elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed()) && (!elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed()) )
 			return false;
 		return true;
 	}

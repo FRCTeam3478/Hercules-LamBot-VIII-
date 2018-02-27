@@ -4,48 +4,44 @@ import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.Timer;
+
 //////para subir o bajar el elevador con encoder y seguridad de switch/////////////////////
 
 public class MoveElevatorEncoder extends AutonomousStep_IntakeElevador{
-	private final int Encoder_CPR = 1024; //pulsos por vuelta del encoder
-	private int Step_limit = (int)((Encoder_CPR*4)/36); //que avance maximo 5mm por ciclo, polea 36 dientes 5mm por diente
+	private static final int TOP_LIMIT = 69000; //pulsos por vuelta del encoder
+	private static final int LOW_LIMIT = 0; //pulsos por vuelta del encoder
+	private static final int TOLERANCE_ENCODER = 250; //pulsos por vuelta del encoder
 	private int Actualposition = 0;
 	private int Position;
-	private boolean breakstate = false;
+	private Timer timer;
 	
 	
 	public MoveElevatorEncoder(double Position){  //entrada en mm
+		timer=new Timer();
+		timer.start();
 		// Inicializar los parametros
-		if(Position<0) {Position=0;}  //seguridad
-		this.Position = (int) (((Position*Step_limit)/5)/Step_limit);
+		if(Position<LOW_LIMIT) {Position=LOW_LIMIT;}  //seguridad
+		if(Position>TOP_LIMIT) {Position=TOP_LIMIT;}  //seguridad
+		this.Position = (int)Position;
 	}
 	
 	@Override
 	public void start() {
-		//elevatorTalon.setSelectedSensorPosition(0, 0, 0); //resetea el encoder
-		Actualposition = (int)(elevatorTalon.getSelectedSensorPosition(0)/Step_limit);
-		////no se puede mover si esta arriba el intake//////////
-		if(intakeHinge.getSelectedSensorPosition(0) < 40 ) {
-			breakstate=true;  //rompe no puede subir asi
-		}
-		///////////////////////////////////////////////////////
+		//nada
 	}
 
 	@Override
 	public void run() {
-		elevatorTalon.set(ControlMode.Position, (Actualposition*Step_limit));  //mueve el motor a donde le digamos (ticks del encoder)
+		elevatorTalon.set(ControlMode.Position, Position);  //mueve el motor a donde le digamos (ticks del encoder)
 	}
 
 	@Override
 	public boolean isFinished() {
-		if( Actualposition == Position || (!eleUpSwitch.get()) || (!eleDownSwitch.get()) || breakstate ) {
+		Actualposition = (int)(elevatorTalon.getSelectedSensorPosition(0));
+		if(Math.abs(Actualposition-Position)<=TOLERANCE_ENCODER || (elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed()) || (elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed()) || timer.get()>5 ) {
 			return true;
 		}else {
-			if(Actualposition<Position) {
-				Actualposition = Actualposition + 1;
-			}else if(Actualposition>Position) {
-				Actualposition = Actualposition - 1;
-			}
 			return false;
 		}
 	}

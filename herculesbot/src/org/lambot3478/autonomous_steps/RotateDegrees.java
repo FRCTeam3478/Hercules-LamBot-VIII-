@@ -2,44 +2,55 @@ package org.lambot3478.autonomous_steps;
 
 import org.lambot3478.autonomous_step.AutonomousStep_Drive;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 //////clase para girar a la izquierda o a la derecha cierto angulos checado con giroscopio/////////////////
 
 public class RotateDegrees extends AutonomousStep_Drive{
-	private double rotation;
+	private double rotation=0;
 	private double adjustangle = 0;
+	private double arrdata[]= {1,1,1,1,1};
+	private int filternum = 0;
 	/////para el pid/////////////
 	private double integral_val=0;
 	private double pre_input = 0;
 	private final double MAX_INTEGRAL_VAL = 0.3;
 	private final double MIN_INTEGRAL_VAL = -0.3;
-	private final double MAX_PID_VAL = 0.7;
-	private final double MIN_PID_VAL = -0.7;
+	private final double MAX_PID_VAL = 0.5;
+	private final double MIN_PID_VAL = -0.5;
 	/////////////////////////////
 	
 	
 	public RotateDegrees(double rotation){
-		super();
 		this.rotation=rotation;
-		heading.resetRotation();
 	}
 	
 	@Override
 	public void start() {
-		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
+		heading.resetRotation();
+		adjustangle=-10;
 	}
 
 	@Override
 	public void run() {
 		// Potencia de alineacion proporcional
+		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
 		vectorMove(0,0,adjustangle);
+		SmartDashboard.putNumber("anguloauto", heading.getRotation());
+		arrdata[filternum]=adjustangle;
+		filternum=filternum+1;
+		if(filternum>=arrdata.length) {
+			filternum=0;
+		}
+		Timer.delay(0.01);
 	}
 	@Override
 	public boolean isFinished() {
-		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
-		if(adjustangle != 0){
-			return false;
+		if(arrdata[0]==0 && arrdata[1]==0 && arrdata[2]==0 && arrdata[3]==0 && arrdata[4]==0){
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	
@@ -56,7 +67,7 @@ public class RotateDegrees extends AutonomousStep_Drive{
         double range_tol = 10;
         
         //obtiene el error
-        double error = setpoint - actual_point;
+        int error = (int) ( setpoint - actual_point);
         if(Math.abs(error) <= epsilon){
         	error = 0;
         	integral_val=0;  //resetea
@@ -88,6 +99,14 @@ public class RotateDegrees extends AutonomousStep_Drive{
         //sirve como una rampa tambien para evitar cambios bruscos
         if(output_val > MAX_PID_VAL){output_val=MAX_PID_VAL;}
         if(output_val < MIN_PID_VAL){output_val=MIN_PID_VAL;}
+        
+        if(output_val!=0) {
+        	if(output_val<0.2 && output_val>0) {
+        		output_val=0.2;
+        	}else if(output_val>-0.2 && output_val<0) {
+        		output_val=-0.2;
+        	}
+        }
 
         //update error, guardando el nuevo error que sera el viejo
         pre_input =actual_point;
