@@ -31,7 +31,7 @@ public class GrabBox extends AutonomousStep_IntakeElevador{
 			timer=new Timer();
 			timer.start();
 		}
-		if(timer.get()<5 && boxin.get())
+		if(timer.get()<3 && boxin.get())
 			return false;
 		return true;
 		

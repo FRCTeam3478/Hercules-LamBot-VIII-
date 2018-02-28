@@ -160,8 +160,8 @@ public class RobotMap {
 		ElevadorMot.config_kI(0, 0, 0);
 		ElevadorMot.config_kD(0, 200, 0);
 		/*configura la rampa*/
-		ElevadorMot.configClosedloopRamp(0.2, 0);
-		ElevadorMot.configOpenloopRamp(0.2, 0);
+		ElevadorMot.configClosedloopRamp(0.1, 0);
+		ElevadorMot.configOpenloopRamp(0.1, 0);
 		/* zero the sensor */
 		ElevadorMot.setSelectedSensorPosition(0, 0, 0); //resetea el sensor
 		/* Set to position 0 */

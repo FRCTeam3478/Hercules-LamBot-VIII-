@@ -5,12 +5,13 @@ import org.lambot3478.autonomous_step.AutonomousStep_IntakeElevador;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //////para subir o bajar el elevador con encoder y seguridad de switch/////////////////////
 
 public class MoveElevatorEncoder extends AutonomousStep_IntakeElevador{
 	private static final int TOP_LIMIT = 69000; //pulsos por vuelta del encoder
-	private static final int LOW_LIMIT = 0; //pulsos por vuelta del encoder
+	private static final int LOW_LIMIT = -10000; //pulsos por vuelta del encoder
 	private static final int TOLERANCE_ENCODER = 250; //pulsos por vuelta del encoder
 	private int Actualposition = 0;
 	private int Position;
@@ -18,8 +19,6 @@ public class MoveElevatorEncoder extends AutonomousStep_IntakeElevador{
 	
 	
 	public MoveElevatorEncoder(double Position){  //entrada en mm
-		timer=new Timer();
-		timer.start();
 		// Inicializar los parametros
 		if(Position<LOW_LIMIT) {Position=LOW_LIMIT;}  //seguridad
 		if(Position>TOP_LIMIT) {Position=TOP_LIMIT;}  //seguridad
@@ -28,7 +27,9 @@ public class MoveElevatorEncoder extends AutonomousStep_IntakeElevador{
 	
 	@Override
 	public void start() {
-		//nada
+		timer=new Timer();
+		timer.reset();
+		timer.start();
 	}
 
 	@Override
@@ -39,7 +40,9 @@ public class MoveElevatorEncoder extends AutonomousStep_IntakeElevador{
 	@Override
 	public boolean isFinished() {
 		Actualposition = (int)(elevatorTalon.getSelectedSensorPosition(0));
-		if(Math.abs(Actualposition-Position)<=TOLERANCE_ENCODER || (elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed()) || (elevatorTalon.getSensorCollection().isFwdLimitSwitchClosed()) || timer.get()>5 ) {
+		SmartDashboard.putNumber("enocderEleAuto", Actualposition);
+		if(Math.abs(Actualposition-Position)<=TOLERANCE_ENCODER || timer.get()>5 ) {
+			elevatorTalon.set(ControlMode.PercentOutput, 0);
 			return true;
 		}else {
 			return false;

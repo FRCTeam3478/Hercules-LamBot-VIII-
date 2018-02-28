@@ -29,6 +29,7 @@ public class VectorMoveTime extends AutonomousStep_Drive{
 	@Override
 	public void start() {
 		timer=new Timer();
+		timer.reset();
 		timer.start();
 	}
 
