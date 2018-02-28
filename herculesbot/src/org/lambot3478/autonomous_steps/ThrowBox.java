@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 //////para sacar la caja con cierto tiempo/////////////////////////////
 
 public class ThrowBox extends AutonomousStep_IntakeElevador{
-	private final double TIME=3;
+	private final double TIME=2;
 	private final double POWER=1.0;
 	private Timer timer;
 	

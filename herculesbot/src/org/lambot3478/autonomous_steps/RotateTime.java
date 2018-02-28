@@ -32,6 +32,7 @@ public class RotateTime extends AutonomousStep_Drive{
 		}
 		if(timer.get()<time)
 			return false;
+		heading.resetRotation();
 		return true;
 	}
 

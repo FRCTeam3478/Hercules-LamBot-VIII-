@@ -41,10 +41,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot_Autonomo extends Subsystem {
 	private final int AUTONOMOUS_NOTHING=1;
-	private final int AUTONOMOUS_CENTER_2BOX =2;
+	private final int AUTONOMOUS_CENTER_2BOX =5;
 	private final int AUTONOMOUS_CENTER=3;
-	private final int AUTONOMOUS_LEFT=4;
-	private final int AUTONOMOUS_RIGHT=5;
+	private final int AUTONOMOUS_LEFT=2;
+	private final int AUTONOMOUS_RIGHT=4;
 	
 	// Tiempo para interrupcion de seguridad
 	private final double SAFETY_TIMER=15;
@@ -131,7 +131,7 @@ public class Robot_Autonomo extends Subsystem {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
 			Timer.delay(0.01);
 		}
-		
+		SmartDashboard.putNumber("AutonomoSelected", selected);
 		if(selected==AUTONOMOUS_CENTER_2BOX){
 			/***
 			 * 1- La distancia de la pared a la mitad del switch son 168 in
@@ -196,40 +196,115 @@ public class Robot_Autonomo extends Subsystem {
 		}
 		else if(selected==AUTONOMOUS_LEFT){
 			if(gameData.charAt(0)=='L'){
-				// TODO
+				intakeSteps=new AutonomousStep_IntakeElevador[]{
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(2.5),
+						StepFactory_IntakeElevador.getNewThrowBox(),
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getNewGrabBox(),
+						StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(0.5),
+						StepFactory_IntakeElevador.getNewThrowBox()
+				};
+				
+				driveSteps = new AutonomousStep_Drive[]{
+						StepFactory_Drive.getNewWait(1.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,120), //Avanza
+						StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10), //Avanza
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,5), //Retrocede
+						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,110), // Mueve de lado derecha
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,20),
+						StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),  //Avanza
+						StepFactory_Drive.getNewWait(1.8),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,7), //Avanza
+						//StepFactory_Drive.getNewWait(0.5),
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,27)
+						
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20)
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateTime(0.5,1),
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateDegrees(-90),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,0.5,10),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						};
 			}
 			else{
-				// TODO
+				//TODO
 			}
 		}
 		else if(selected==AUTONOMOUS_CENTER){
 			if(gameData.charAt(0)=='L'){
-				//TODO
+				intakeSteps=new AutonomousStep_IntakeElevador[]{
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(2.3),
+						StepFactory_IntakeElevador.getNewThrowBox(),
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getNewGrabBox(),
+						StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(3.0),
+						StepFactory_IntakeElevador.getNewThrowBox()
+				};
+				
+				driveSteps = new AutonomousStep_Drive[]{
+						StepFactory_Drive.getNewWait(1.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,5),
+						StepFactory_Drive.getNewVectorMoveEncoders(270,1,25),
+						StepFactory_Drive.getNewVectorMoveEncoders(315,1,33),
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,50),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,1,45),
+						StepFactory_Drive.getNewWait(0.6),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,30),
+						StepFactory_Drive.getNewWait(1),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,85),
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,27)
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20)
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateTime(0.5,1),
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateDegrees(-90),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,0.5,10),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						};
 			}
 			else{
 				intakeSteps=new AutonomousStep_IntakeElevador[]{
 						StepFactory_IntakeElevador.move2Switch(1),
-						StepFactory_IntakeElevador.getMoveElevatorEncoder(28000),
-						StepFactory_IntakeElevador.getNewWait(1),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(1.5),
+						StepFactory_IntakeElevador.getNewThrowBox(),
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getNewGrabBox(),
+						StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(2.5),
 						StepFactory_IntakeElevador.getNewThrowBox()
-						
-						//StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.0), //sube 2 s
-						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
-						//StepFactory_IntakeElevador.getMoveElevatorTime(-1.0,1.0), //baja 2 s
-						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
-						//StepFactory_IntakeElevador.getMoveElevatorEncoder(30000), //mueve a posicion
-						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
-						//StepFactory_IntakeElevador.move2Switch(1.0),
-						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
-						//StepFactory_IntakeElevador.getNewGrabBox(),
-						//StepFactory_IntakeElevador.getNewWait(4.0), //delay 4 s
-						//StepFactory_IntakeElevador.getNewThrowBox(),
-						//StepFactory_IntakeElevador.getNewWait(4.0)
 				};
 				
 				driveSteps = new AutonomousStep_Drive[]{
+						StepFactory_Drive.getNewWait(1.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(45,1,50),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,1,5),
 						StepFactory_Drive.getNewWait(0.5),
-						StepFactory_Drive.getNewVectorMoveEncoders(45,1,95),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,50),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,50),
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,20),
+						StepFactory_Drive.getNewWait(1),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,1,70),
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,30)
 						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20)
 						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
 						//StepFactory_Drive.getNewRotateTime(0.5,1),
@@ -242,11 +317,48 @@ public class Robot_Autonomo extends Subsystem {
 			}
 		}
 		else if(selected==AUTONOMOUS_RIGHT){
-			if(gameData.charAt(0)=='L'){
-				// TODO
+			if(gameData.charAt(0)=='R'){
+				intakeSteps=new AutonomousStep_IntakeElevador[]{
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(2.5),
+						StepFactory_IntakeElevador.getNewThrowBox(),
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getNewGrabBox(),
+						StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.getNewWait(0.5),
+						StepFactory_IntakeElevador.getNewThrowBox()
+				};
+				
+				driveSteps = new AutonomousStep_Drive[]{
+						StepFactory_Drive.getNewWait(1),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,120), //Avanza
+						StepFactory_Drive.getNewRotateDegrees(-90), // Gira 90
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10), //Avanza
+						StepFactory_Drive.getNewWait(0.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,5), //Retrocede
+						StepFactory_Drive.getNewVectorMoveEncoders(270,-1,110), // Mueve de lado derecha
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),
+						StepFactory_Drive.getNewRotateDegrees(-90), // Gira 90
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),  //Avanza
+						StepFactory_Drive.getNewWait(1.8),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,7), //Avanza
+						//StepFactory_Drive.getNewWait(0.5),
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,27)
+						
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20)
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateTime(0.5,1),
+						//StepFactory_Drive.getNewWait(4.0),	//delay 4 s	
+						//StepFactory_Drive.getNewRotateDegrees(-90),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,0.5,10),
+						//StepFactory_Drive.getNewWait(4.0)	//delay 4 s	
+						};
 			}
 			else{
-				// TODO
+				//TODO
 			}
 		}else if(selected==AUTONOMOUS_NOTHING){
 			/*

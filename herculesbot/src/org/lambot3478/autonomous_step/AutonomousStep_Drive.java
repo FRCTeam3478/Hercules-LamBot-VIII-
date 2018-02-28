@@ -30,6 +30,7 @@ public abstract class AutonomousStep_Drive extends AutonomousStep{
 				RobotMap.backLeft,RobotMap.backRight};
 		encoders=new Encoder[]{
 				RobotMap.DriveEL,RobotMap.DriveER};
+		heading.resetRotation();
 	}
 	/////////////////////////////////////////////////////////////////////////
 	

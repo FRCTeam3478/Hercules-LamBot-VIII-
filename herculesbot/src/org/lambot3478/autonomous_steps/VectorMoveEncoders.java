@@ -28,7 +28,6 @@ public class VectorMoveEncoders extends AutonomousStep_Drive{
 	
 	@Override
 	public void start() {
-		heading.resetRotation();
 		resetEncoders();  //resetea los encoders
 	}
 
