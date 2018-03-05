@@ -40,7 +40,7 @@ public class VectorMoveEncoders extends AutonomousStep_Drive{
 	public boolean isFinished() {
 		SmartDashboard.putNumber("encoderL", encoders[0].getDistance());
 		SmartDashboard.putNumber("enocderR", encoders[1].getDistance());
-		if(Math.abs(encoders[0].getDistance())<distance || Math.abs(encoders[1].getDistance())<distance)
+		if(Math.abs(encoders[0].getDistance())<distance || Math.abs(encoders[1].getDistance())<distance) //deberia tomar solo uno???
 			return false;
 		vectorMove(0,0,0);
 		return true;

@@ -196,37 +196,91 @@ public class Robot_Autonomo extends Subsystem {
 			*/
 		}
 		else if(selected==AUTONOMOUS_LEFT){
-			if(gameData.charAt(0)=='L'){
+			if(gameData.charAt(0)=='L' && gameData.charAt(1)=='L'){
+
 				intakeSteps=new AutonomousStep_IntakeElevador[]{
 						StepFactory_IntakeElevador.move2Switch(1),
 						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
-						StepFactory_IntakeElevador.getNewWait(2.5),
-						StepFactory_IntakeElevador.getNewThrowBox(),
-						StepFactory_IntakeElevador.move2Switch(1),
-						StepFactory_IntakeElevador.getNewGrabBox(),
-						StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
-						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
-						//StepFactory_IntakeElevador.getNewWait(0.5),
-						//StepFactory_IntakeElevador.getNewThrowBox()
+						StepFactory_IntakeElevador.move2Switch(-1),
+						StepFactory_IntakeElevador.getNewWait(5),
+						StepFactory_IntakeElevador.getNewThrowBox()
 				};
 				
 				driveSteps = new AutonomousStep_Drive[]{
 						StepFactory_Drive.getNewWait(1.5),
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,120), //Avanza
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,150), //Avanza
+						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,10), //Avanza
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,30), //Avanza
 						StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10), //Avanza
-						StepFactory_Drive.getNewWait(0.5),
-						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,5), //Retrocede
-						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,110), // Mueve de lado derecha
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,20),
-						StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),  //Avanza
-						StepFactory_Drive.getNewWait(1.8),
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,10), //Avanza
+						//StepFactory_Drive.getNewWait(0.5),
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,-1,5), //Retrocede
+						//StepFactory_Drive.getNewVectorMoveEncoders(90,-1,110), // Mueve de lado derecha
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20),
+						//StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),  //Avanza
+						StepFactory_Drive.getNewWait(3)
 						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,7), //Avanza
 						};
-			}
-			else{
 				
+			} else if(gameData.charAt(0)=='L' && gameData.charAt(1)=='R'){
+				
+					intakeSteps=new AutonomousStep_IntakeElevador[]{
+							StepFactory_IntakeElevador.move2Switch(1),
+							StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+							StepFactory_IntakeElevador.getNewWait(4),
+							StepFactory_IntakeElevador.getNewThrowBox()
+							//StepFactory_IntakeElevador.move2Switch(1),
+							//StepFactory_IntakeElevador.getNewGrabBox(),
+							//StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
+							//StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+							//StepFactory_IntakeElevador.getNewWait(0.5),
+							//StepFactory_IntakeElevador.getNewThrowBox()
+					};
+					
+					driveSteps = new AutonomousStep_Drive[]{
+							StepFactory_Drive.getNewWait(1.5),
+							StepFactory_Drive.getNewVectorMoveEncoders(0,1,120), //Avanza
+							StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+							StepFactory_Drive.getNewVectorMoveEncoders(0,1,10), //Avanza
+							//StepFactory_Drive.getNewWait(0.5),
+							//StepFactory_Drive.getNewVectorMoveEncoders(0,-1,5), //Retrocede
+							//StepFactory_Drive.getNewVectorMoveEncoders(90,-1,110), // Mueve de lado derecha
+							//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20),
+							//StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+							//StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),  //Avanza
+							StepFactory_Drive.getNewWait(3)
+							//StepFactory_Drive.getNewVectorMoveEncoders(0,1,7), //Avanza
+							};
+				
+			}else if(gameData.charAt(0)=='R' && gameData.charAt(1)=='L'){
+				
+				intakeSteps=new AutonomousStep_IntakeElevador[]{
+						StepFactory_IntakeElevador.move2Switch(1),
+						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
+						StepFactory_IntakeElevador.move2Switch(-1),
+						StepFactory_IntakeElevador.getNewWait(5),
+						StepFactory_IntakeElevador.getNewThrowBox()
+				};
+				
+				driveSteps = new AutonomousStep_Drive[]{
+						StepFactory_Drive.getNewWait(1.5),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,150), //Avanza
+						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,10), //Avanza
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,30), //Avanza
+						StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,10), //Avanza
+						//StepFactory_Drive.getNewWait(0.5),
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,-1,5), //Retrocede
+						//StepFactory_Drive.getNewVectorMoveEncoders(90,-1,110), // Mueve de lado derecha
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,20),
+						//StepFactory_Drive.getNewRotateDegrees(90), // Gira 90
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,10),  //Avanza
+						StepFactory_Drive.getNewWait(3)
+						//StepFactory_Drive.getNewVectorMoveEncoders(0,1,7), //Avanza
+						};
+				
+			}else{
 				intakeSteps=new AutonomousStep_IntakeElevador[]{
 						StepFactory_IntakeElevador.move2Switch(1),
 						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
@@ -250,8 +304,8 @@ public class Robot_Autonomo extends Subsystem {
 						StepFactory_IntakeElevador.getNewGrabBox(),
 						StepFactory_IntakeElevador.getMoveElevatorTime(1.0,1.2),
 						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
-						StepFactory_IntakeElevador.getNewWait(3.0),
-						StepFactory_IntakeElevador.getNewThrowBox()
+						StepFactory_IntakeElevador.getNewWait(3.0)
+						//StepFactory_IntakeElevador.getNewThrowBox()
 				};
 				
 				driveSteps = new AutonomousStep_Drive[]{
@@ -263,11 +317,11 @@ public class Robot_Autonomo extends Subsystem {
 						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,50),
 						StepFactory_Drive.getNewVectorMoveEncoders(90,1,45),
 						StepFactory_Drive.getNewWait(0.6),
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,30),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,40), //30
 						StepFactory_Drive.getNewWait(1),
 						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,85),
 						StepFactory_Drive.getNewWait(0.5),
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,27)
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,35) //27
 						};
 			}
 			else{
@@ -279,23 +333,23 @@ public class Robot_Autonomo extends Subsystem {
 						StepFactory_IntakeElevador.move2Switch(1),
 						StepFactory_IntakeElevador.getNewGrabBox(),
 						StepFactory_IntakeElevador.getMoveElevatorEncoder(30000),
-						StepFactory_IntakeElevador.getNewWait(1.2),
-						StepFactory_IntakeElevador.getNewThrowBox()
+						StepFactory_IntakeElevador.getNewWait(2) //1.2
+						//StepFactory_IntakeElevador.getNewThrowBox()
 				};
 				
 				driveSteps = new AutonomousStep_Drive[]{
 						StepFactory_Drive.getNewWait(1.5),
-						StepFactory_Drive.getNewVectorMoveEncoders(45,1,50),
-						StepFactory_Drive.getNewVectorMoveEncoders(90,1,12),
-						StepFactory_Drive.getNewWait(0.7),
+						StepFactory_Drive.getNewVectorMoveEncoders(45,1,38),  //50
+						//StepFactory_Drive.getNewVectorMoveEncoders(90,1,12),
+						StepFactory_Drive.getNewWait(1.4), //0.7
 						StepFactory_Drive.getNewVectorMoveEncoders(0,-1,50),
-						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,48),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,-1,65),  //48
 						StepFactory_Drive.getNewWait(1),
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,25),
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,42), //25  //55
 						StepFactory_Drive.getNewWait(1),
-						StepFactory_Drive.getNewVectorMoveEncoders(90,1,70),
+						StepFactory_Drive.getNewVectorMoveEncoders(90,1,70), //70
 						StepFactory_Drive.getNewWait(0.5),
-						StepFactory_Drive.getNewVectorMoveEncoders(0,1,27)
+						StepFactory_Drive.getNewVectorMoveEncoders(0,1,40) //27
 						};
 			}
 		}
