@@ -47,6 +47,7 @@ public class RotateDegrees extends AutonomousStep_Drive{
 	@Override
 	public boolean isFinished() {
 		if(arrdata[0]==0 && arrdata[1]==0 && arrdata[2]==0 && arrdata[3]==0 && arrdata[4]==0){
+			vectorMove(0,0,0);
 			Timer.delay(0.2);
 			heading.resetRotation();
 			return true;
