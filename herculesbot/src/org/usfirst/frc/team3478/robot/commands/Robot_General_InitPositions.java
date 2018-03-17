@@ -19,7 +19,6 @@ public class Robot_General_InitPositions extends Command {
 		requires(Robot.Robot_intake);
 		requires(Robot.Robot_elevador);
 		requires(Robot.Robot_escalador);
-		requires(Robot.Robot_topes);
 		requires(Robot.Robot_drive);
 	}
 
@@ -34,7 +33,6 @@ public class Robot_General_InitPositions extends Command {
 		Robot.Robot_intake.InitDefaultState();
 		Robot.Robot_elevador.InitDefaultState();
 		Robot.Robot_escalador.InitDefaultState();
-		Robot.Robot_topes.InitDefaultState();
 		Robot.Robot_drive.InitDefaultState();
 	}
 

@@ -1,7 +1,13 @@
 eclipse.preferences.version=1
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=C\:/Program Files/Java/jre1.8.0_144/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.classpathVariable.JUNIT_HOME=C\:/Users/79192/Documents/workspaces/PortableIDEs/Eclipse/eclipse-java-mars-1-win32-x86_64/eclipse/plugins/org.junit_4.12.0.v201504281640/
+org.eclipse.jdt.core.classpathVariable.M2_REPO=C\:/Users/79192/.m2/repository
 org.eclipse.jdt.core.classpathVariable.USERLIBS_DIR=C\:/Users/79192/wpilib/user/java/lib
 org.eclipse.jdt.core.classpathVariable.cscore=C\:/Users/79192/wpilib/java/current/lib/cscore.jar
 org.eclipse.jdt.core.classpathVariable.cscore.sources=C\:/Users/79192/wpilib/java/current/lib/cscore-sources.jar
+org.eclipse.jdt.core.classpathVariable.navx-mxp=C\:/Users/79192/wpilib/user/java/lib/navx_frc.jar
 org.eclipse.jdt.core.classpathVariable.networktables=C\:/Users/79192/wpilib/java/current/lib/ntcore.jar
 org.eclipse.jdt.core.classpathVariable.networktables.sources=C\:/Users/79192/wpilib/java/current/lib/ntcore-sources.jar
 org.eclipse.jdt.core.classpathVariable.opencv=C\:/Users/79192/wpilib/java/current/lib/opencv.jar

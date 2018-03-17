@@ -22,24 +22,24 @@ public class Robot_Autonomo_Main extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		Robot.Robot_autonomo.InitAuto();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.Robot_autonomo.StartAuto();
+		Robot.Robot_autonomo.RunAuto();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;  //cambiar a true si queremos que solo se haga una vez, false es que lo repite(el while held cambia el false a true o cuando se interrumpe)
+		return false;  //cambiar a true si queremos que solo se haga una vez, false es que lo repite(el while held cambia el false a true o cuando se interrumpe)
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.Robot_autonomo.EndAuto();
 	}
 
 	// Called when another command which requires one or more of the same

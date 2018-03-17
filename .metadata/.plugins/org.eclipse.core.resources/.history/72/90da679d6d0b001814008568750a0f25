@@ -1,0 +1,65 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import org.usfirst.frc.team3478.robot.RobotMap;
+
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+/* // Para pruebas
+ * import edu.wpi.first.wpilibj.interfaces.Gyro;
+ */
+
+public class Robot_Heading extends Subsystem{
+	/* // Para pruebas
+	 * private static Gyro gyro;
+	 */
+	
+	private AHRS ahrs;
+	public Robot_Heading(){
+		/* // Para pruebas
+		 * gyro=RobotMap.gyro;
+		 * gyro.calibrate();
+		 * gyro.reset();
+		 */
+		/***********Inicializar NavX*********/
+		try{
+			ahrs=new AHRS(SPI.Port.kMXP);
+			ahrs.reset();
+		}
+		catch(Exception e){
+			
+		}
+		/************************************/
+	}
+	public void resetRotation(){
+		
+	}
+	public double getRate(){
+		/* // Para pruebas
+		 * return gyro.getRate();
+		 */
+		
+		/****Regresar la entrada del NavX****/
+		return ahrs.getRate();
+		/************************************/		
+	}
+	public double getRawRotation(){
+		/****Regresar la entrada del NavX****/
+		return ahrs.getAngle();
+		/************************************/
+	}
+	public double getRotation(){
+		/****Regresar la entrada del NavX****/
+		////necesita regresar de 0 a 180 y -180 a 0
+		return ahrs.getAngle();
+		/************************************/
+	}
+	@Override
+	protected void initDefaultCommand() {
+		// nada
+	}
+	
+	
+}
