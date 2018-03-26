@@ -36,6 +36,12 @@ public abstract class AutonomousStep_Drive extends AutonomousStep{
 	// Metodo para inicializar el paso
 	@Override
 	public abstract void start();
+	
+	// Funcion para sincronizar
+	@Override
+	public int changewait() {
+		return(0);
+	}
 
 	// Funcion iterativa del paso
 	@Override

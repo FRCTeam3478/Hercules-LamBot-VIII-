@@ -22,10 +22,37 @@ public class StepFactory_IntakeElevador {
 	public static AutonomousStep_IntakeElevador move2Switch(double select){
 		return new MoveElevatorToSwitch(select);
 	}
+	
+	
+	public static AutonomousStep_IntakeElevador syncWait(int step2wait){
+		AutonomousStep_IntakeElevador wait=new AutonomousStep_IntakeElevador(){
+			int stepx=step2wait;
+			@Override
+			public int changewait() {
+				return(stepx);
+			}
+			
+			@Override
+			public void start() {
+			}
+
+			@Override
+			public void run() {
+			}
+
+			@Override
+			public boolean isFinished() {
+				return true;
+			}
+		};
+		return wait;
+	}
+	
 	public static AutonomousStep_IntakeElevador getNewWait(double time){
 		AutonomousStep_IntakeElevador wait=new AutonomousStep_IntakeElevador(){
 			double delay=time;
 			Timer timer;
+			
 			@Override
 			public void start() {
 				timer=new Timer();

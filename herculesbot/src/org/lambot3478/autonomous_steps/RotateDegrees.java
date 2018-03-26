@@ -36,13 +36,16 @@ public class RotateDegrees extends AutonomousStep_Drive{
 		// Potencia de alineacion proporcional
 		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
 		vectorMove(0,0,adjustangle);
-		//SmartDashboard.putNumber("anguloauto", heading.getRotation());
+		SmartDashboard.putNumber("anguloauto", heading.getRotation());
 		arrdata[filternum]=adjustangle;
 		filternum=filternum+1;
 		if(filternum>=arrdata.length) {
 			filternum=0;
 		}
-		Timer.delay(0.01);
+		if(arrdata[0]==0 && arrdata[1]==0 && arrdata[2]==0 && arrdata[3]==0 && arrdata[4]==0){
+			vectorMove(0,0,0);
+		}
+		Timer.delay(0.05);
 	}
 	@Override
 	public boolean isFinished() {

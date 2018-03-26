@@ -31,6 +31,12 @@ public abstract class AutonomousStep_IntakeElevador extends AutonomousStep{
 	// Metodo para inicializar el paso
 	@Override
 	public abstract void start();
+	
+	// Funcion para sincronizar
+	@Override
+	public int changewait() {
+		return(0);
+	}
 
 	// Funcion iterativa del paso
 	@Override

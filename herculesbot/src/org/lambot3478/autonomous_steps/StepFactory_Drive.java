@@ -19,10 +19,36 @@ public class StepFactory_Drive {
 	public static AutonomousStep_Drive getNewVectorMoveEncoders(double translationAngle,double power,double distance){
 		return new VectorMoveEncoders(translationAngle,power,distance);
 	}
+	
+	public static AutonomousStep_Drive syncWait(int step2wait){
+		AutonomousStep_Drive wait=new AutonomousStep_Drive(){
+			int stepx=step2wait;
+			@Override
+			public int changewait() {
+				return(stepx);
+			}
+			
+			@Override
+			public void start() {
+			}
+
+			@Override
+			public void run() {
+			}
+
+			@Override
+			public boolean isFinished() {
+				return true;
+			}
+		};
+		return wait;
+	}
+	
 	public static AutonomousStep_Drive getNewWait(double time){
 		AutonomousStep_Drive wait=new AutonomousStep_Drive(){
 			double delay=time;
 			Timer timer;
+			
 			@Override
 			public void start() {
 				timer=new Timer();

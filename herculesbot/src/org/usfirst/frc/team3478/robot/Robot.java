@@ -134,9 +134,9 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		if (autonomo_command != null) autonomo_command.cancel();  //cancelamos el comando si esta activo
 		if (resetall_command != null) resetall_command.start();  //inicializamos el comando si no existe
-		if (drivestart_command != null) drivestart_command.start();  //inicializamos el comando si no existe
 		if (elevadorstart_command != null) elevadorstart_command.start();  //inicializamos el comando si no existe
 		if (intakestart_command != null) intakestart_command.start();  //inicializamos el comando si no existe
+		if (drivestart_command != null) drivestart_command.start();  //inicializamos el comando si no existe
 	}
 
 	/**

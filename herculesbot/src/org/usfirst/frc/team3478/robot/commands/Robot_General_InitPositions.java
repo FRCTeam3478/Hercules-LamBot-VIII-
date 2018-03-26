@@ -30,10 +30,10 @@ public class Robot_General_InitPositions extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		Robot.Robot_drive.InitDefaultState();
 		Robot.Robot_intake.InitDefaultState();
 		Robot.Robot_elevador.InitDefaultState();
 		Robot.Robot_escalador.InitDefaultState();
-		Robot.Robot_drive.InitDefaultState();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

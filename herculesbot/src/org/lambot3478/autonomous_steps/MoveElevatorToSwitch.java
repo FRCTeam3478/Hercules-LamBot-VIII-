@@ -24,9 +24,9 @@ public class MoveElevatorToSwitch extends AutonomousStep_IntakeElevador{
 		timer.reset();
 		timer.start();
 		if(select==1) {  //abajo
-			power=-0.8;
+			power=-1;
 		}else if(select==-1) { //arriba
-			power=0.8;
+			power=1;
 		}else {
 			power=0;
 		}
