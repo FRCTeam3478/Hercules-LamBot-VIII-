@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot_Elevador extends Subsystem {
 	
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
-	private static final int TOP_LIMIT = 68000; //pulsos por vuelta del encoder
+	private static final int TOP_LIMIT = 25750; //pulsos por vuelta del encoder
 	private static final int LOW_LIMIT = 250; //pulsos por vuelta del encoder
 	private static final int TOLERANCE_ENCODER = 250; //pulsos por vuelta del encoder
 	
@@ -125,7 +125,7 @@ public class Robot_Elevador extends Subsystem {
 	
 	//////////movimiento principal del elevador/////////////////////
 	public void Elevador_Up() {
-		Position_abs=30000;
+		Position_abs=12500;
 	}
 	///////////////////////////////////////////////////////////////
 	

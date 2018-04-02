@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //////para subir o bajar el elevador con encoder y seguridad de switch/////////////////////
 
 public class MoveElevatorEncoder extends AutonomousStep_IntakeElevador{
-	private static final int TOP_LIMIT = 69000; //pulsos por vuelta del encoder
+	private static final int TOP_LIMIT = 25750; //pulsos por vuelta del encoder
 	private static final int LOW_LIMIT = -10000; //pulsos por vuelta del encoder
 	private static final int TOLERANCE_ENCODER = 250; //pulsos por vuelta del encoder
 	private int Actualposition = 0;

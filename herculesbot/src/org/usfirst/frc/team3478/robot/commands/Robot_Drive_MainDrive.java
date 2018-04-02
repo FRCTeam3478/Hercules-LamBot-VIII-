@@ -17,11 +17,13 @@ public class Robot_Drive_MainDrive extends Command {
 	public Robot_Drive_MainDrive() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.Robot_drive);
+		requires(Robot.Robot_heading);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		Robot.Robot_heading.resetRotation();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

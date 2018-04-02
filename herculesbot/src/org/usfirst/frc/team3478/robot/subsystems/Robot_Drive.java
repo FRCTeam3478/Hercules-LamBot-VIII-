@@ -13,6 +13,7 @@ import org.usfirst.frc.team3478.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +25,7 @@ public class Robot_Drive extends Subsystem {
 	private static TalonSRX[] talons;  //arreglo para guadar los talon del chasis
 	private static Robot_Heading robotHeading;
 	private static double Select_drive=1;
+	protected Encoder[] encoders;
 	
 	
 	/////para el pid/////////////
@@ -42,6 +44,8 @@ public class Robot_Drive extends Subsystem {
 		talons=new TalonSRX[]{RobotMap.frontLeft,RobotMap.frontRight,
 			   RobotMap.backLeft,RobotMap.backRight};
 		robotHeading=Robot.Robot_heading;
+		encoders=new Encoder[]{
+				RobotMap.DriveEL,RobotMap.DriveER};
 	}
 	//////////////////////////////////////////////////////
 	
@@ -65,6 +69,8 @@ public class Robot_Drive extends Subsystem {
 			Tank_drive();
 			SmartDashboard.putString("drive mode", "tanque");
 		}
+		SmartDashboard.putNumber("encoderL", encoders[0].getRaw());
+		SmartDashboard.putNumber("enocderR", encoders[1].getRaw());
 	}
 	//////////////////////////////////////////////////////////////////
 	
