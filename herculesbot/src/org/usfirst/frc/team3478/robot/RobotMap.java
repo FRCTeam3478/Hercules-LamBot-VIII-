@@ -31,6 +31,7 @@ public class RobotMap {
 	private static final int ESCALADOR_RIGHT_PORT = 6;
 	
 	private static final int ELEVADOR_PORT = 4;
+	private static final int ELEVADOR_FOLLOW_PORT = 8;
 	/******************************************/
 	
 	/**********numeros de las senales digitales********/
@@ -70,6 +71,7 @@ public class RobotMap {
 	
 	/***********elevador****************/
 	public static TalonSRX ElevadorMot;
+	private static TalonSRX ElevadorMot2;
 	/**********************************/
 	
 	public static void init() {
@@ -167,6 +169,14 @@ public class RobotMap {
 		/* Set to position 0 */
 		//ElevadorMot.set(ControlMode.Position, 0);  //encoder ticks (versa) 1024cpr
 		ElevadorMot.set(ControlMode.PercentOutput,0);
+		
+		
+
+		
+		ElevadorMot2=new TalonSRX(ELEVADOR_FOLLOW_PORT);
+		ElevadorMot2.setInverted(true);
+		ElevadorMot2.setNeutralMode(NeutralMode.Brake);
+		ElevadorMot2.set(ControlMode.Follower, ELEVADOR_PORT);
 		/**********************************/
 		
 	}
