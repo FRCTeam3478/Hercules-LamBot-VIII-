@@ -34,7 +34,7 @@ public class RotateDegrees extends AutonomousStep_Drive{
 	@Override
 	public void run() {
 		// Potencia de alineacion proporcional
-		adjustangle = PID_fun(rotation,heading.getRotation(),0.025,0,0)*-1;
+		adjustangle = PID_fun(rotation,heading.getRotation(),0.04,0,0)*-1;
 		vectorMove(0,0,adjustangle);
 		SmartDashboard.putNumber("anguloauto", heading.getRotation());
 		arrdata[filternum]=adjustangle;
@@ -69,7 +69,7 @@ public class RotateDegrees extends AutonomousStep_Drive{
       //para tener un pid variable a cierto rango
     	double kp2 = kp*3;
     	double kd2 = kd*3;
-        double range_tol = 10;
+        double range_tol = 1;
         
         //obtiene el error
         int error = (int) ( setpoint - actual_point);
@@ -115,7 +115,7 @@ public class RotateDegrees extends AutonomousStep_Drive{
 
         //update error, guardando el nuevo error que sera el viejo
         pre_input =actual_point;
-
+        
         return(output_val); ///regresa el rewsultado del pid
     }
 	 //////////////////////////////////////////////////////////////////////

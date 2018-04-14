@@ -154,7 +154,7 @@ public class RobotMap {
 		ElevadorMot.configNominalOutputForward(0, 0);
 		ElevadorMot.configNominalOutputReverse(0, 0);
 		ElevadorMot.configPeakOutputForward(1.0, 0);
-		ElevadorMot.configPeakOutputReverse(-1.0, 0);
+		ElevadorMot.configPeakOutputReverse(-0.7, 0);
 		/* set closed loop gains in slot0*/
 		ElevadorMot.selectProfileSlot(0, 0);
 		ElevadorMot.config_kF(0, 0.3, 0);
