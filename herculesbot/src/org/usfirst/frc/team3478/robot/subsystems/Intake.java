@@ -2,7 +2,8 @@ package org.usfirst.frc.team3478.robot.subsystems;
 
 import org.usfirst.frc.team3478.robot.RobotMap;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Intake extends Subsystem {
 	
 	//talond que se va usar para el intake
-	CANTalon RollerIntake = RobotMap.RollerIntake;
+	TalonSRX RollerIntake = RobotMap.RollerIntake;
 	Shooter objectshooter = new Shooter();
 	
 	static boolean flagx1=false;
@@ -27,7 +28,7 @@ public class Intake extends Subsystem {
 	
 	public void stop(){  //para el Intake
 		if(objectshooter.state3==0){ //solo si no esta activo en el shooter
-		RollerIntake.set(0);
+		RollerIntake.set(ControlMode.PercentOutput,0);
 		}
 	}
 	
@@ -35,11 +36,11 @@ public class Intake extends Subsystem {
 		if(objectshooter.state3==0){  //solo si no esta activo en el shooter
 				//Activa el motor para que gire hacia adentro
 				if(flagx1==false){
-					RollerIntake.set(1);
+					RollerIntake.set(ControlMode.PercentOutput,1);
 					SmartDashboard.putBoolean("intake", true);
 					flagx1=true;
 				}else{
-					RollerIntake.set(0);
+					RollerIntake.set(ControlMode.PercentOutput,0);
 					SmartDashboard.putBoolean("intake", false);
 					flagx1=false;
 				}
@@ -53,7 +54,7 @@ public class Intake extends Subsystem {
 	
 	public void RollerOut(){
 		//Activa el motor para que gira hacia afuera
-		RollerIntake.set(-1);
+		RollerIntake.set(ControlMode.PercentOutput,-1);
 		
 	}
 	

@@ -1,0 +1,205 @@
+package org.usfirst.frc.team3478.robot;
+
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Solenoid;
+
+/**
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
+ */
+public class RobotMap {
+	
+	/***********aqui se va declarar todo lo del robot**************************/
+	//motores
+	public static TalonSRX RollerIntake;
+	public static TalonSRX Hoppermotor;
+	public static TalonSRX Escalador;
+	public static TalonSRX Shooter;
+	public static TalonSRX BandaTorreta;
+	public static TalonSRX GiroTorreta;
+	public static TalonSRX DriveR1;
+	public static TalonSRX DriveR2;
+	public static TalonSRX DriveL1;
+	public static TalonSRX DriveL2;
+	
+	//solenoides
+	public static Solenoid Engranes_puerta;
+	public static Solenoid Engranes_empujador;
+	public static Solenoid PosShooter;
+	public static Solenoid Cambios;
+	
+	///compresor
+	public static Compressor Compressor;
+	
+	//encoders
+    public static Encoder DriveEL;
+    public static Encoder DriveER;
+    
+    /////entradas digitales
+    public static DigitalInput Limit_torreta;
+
+    ////pdp
+    public static PowerDistributionPanel pdp;
+	
+	///////********************************************************************/
+	
+public static void init() {
+    	///////////aqui vamos a inicializar todos los objetos de todo lo que usemos
+	
+		//compressor
+    	Compressor = new Compressor(0);	
+    	
+    	//PDP para leer corrientes
+    	pdp = new PowerDistributionPanel();
+    	
+    	///drive
+    	/*
+    	DriveR1= new TalonSRX(5);
+    	DriveR1.enableBrakeMode(true); //Pone motores en brake
+    	DriveR1.set(0);  //empieza en 0
+    	DriveR2= new TalonSRX(6);
+    	DriveR2.enableBrakeMode(true); //Pone motores en brake
+    	DriveR2.set(0);  //empieza en 0
+    	DriveL1= new TalonSRX(1);
+    	DriveL1.enableBrakeMode(true); //Pone motores en brake
+    	DriveL1.set(0);  //empieza en 0
+    	DriveL2= new TalonSRX(2);
+    	DriveL2.enableBrakeMode(true); //Pone motores en brake
+    	DriveL2.set(0);  //empieza en 0*/
+    	DriveR1= new TalonSRX(5);
+    	DriveR1.setNeutralMode(NeutralMode.Brake);
+    	DriveR1.set(ControlMode.PercentOutput,0);  //empieza en 0
+    	DriveR2= new TalonSRX(6);
+    	DriveR2.setNeutralMode(NeutralMode.Brake);//Pone motores en brake
+    	DriveR2.set(ControlMode.PercentOutput,0); 
+    	DriveL1= new TalonSRX(1);
+    	DriveL1.setNeutralMode(NeutralMode.Brake);//Pone motores en brake
+    	DriveL1.set(ControlMode.PercentOutput,0); 
+    	DriveL2= new TalonSRX(2);
+    	DriveL2.setNeutralMode(NeutralMode.Brake);//Pone motores en brake
+    	DriveL2.set(ControlMode.PercentOutput,0); 
+        DriveEL = new Encoder(0,1,true, Encoder.EncodingType.k4X);
+        DriveEL.setMaxPeriod(.1);
+        DriveEL.setMinRate(10);
+        DriveEL.setDistancePerPulse(13.195/(128));  //encoders 128 por RPM llantas 4 inches diametro perimetro de 12.57
+        DriveEL.setSamplesToAverage(10);
+        DriveEL.setReverseDirection(true);
+        DriveEL.reset();
+        DriveER = new Encoder(2,3,false, Encoder.EncodingType.k4X);
+        DriveER.setMaxPeriod(.1);
+        DriveER.setMinRate(10);
+        DriveER.setDistancePerPulse(13.195/(128));  //encoders 128 por RPM llantas 4 inches diametro perimetro de 12.57
+        DriveER.setSamplesToAverage(10);
+        DriveER.setReverseDirection(false);
+        DriveER.reset();
+        Cambios = new Solenoid(2);
+        Cambios.set(false);
+	
+		//Roller (Intake)
+		RollerIntake = new TalonSRX(8);
+		RollerIntake.setNeutralMode(NeutralMode.Coast); //Pone motores en brake
+		RollerIntake.set(ControlMode.PercentOutput,0);  //empieza en 0
+		
+		///para el motor del hopper
+		Hoppermotor = new TalonSRX(9);
+		Hoppermotor.setNeutralMode(NeutralMode.Coast); //Pone motores en brake
+		Hoppermotor.set(ControlMode.PercentOutput,0);  //empieza en 0
+		
+		//Ponedor de engranes
+		Engranes_puerta = new Solenoid(1);
+		Engranes_puerta.set(false);
+		Engranes_empujador = new Solenoid(0);
+		Engranes_empujador.set(false);
+		
+		//Escalador
+		Escalador = new TalonSRX(7);
+		Escalador.setNeutralMode(NeutralMode.Brake); //Pone motores en brake
+		Escalador.set(ControlMode.PercentOutput,0);  //empieza en 0
+		
+		//torreta
+		Shooter=new TalonSRX(4);
+		Shooter.setNeutralMode(NeutralMode.Coast); //Pone motores en brake
+		Shooter.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		Shooter.changeMotionControlFramePeriod(80);
+    	Shooter.configNominalOutputForward(0,0);
+    	Shooter.configPeakOutputForward(1,0);
+    	Shooter.configNominalOutputReverse(0,0);
+    	Shooter.configPeakOutputReverse(-1,0);
+    	Shooter.selectProfileSlot(0, 0);
+    	Shooter.config_kF(0, 0.25, 0);
+    	Shooter.config_kP(0, 2, 0);
+    	Shooter.config_kI(0, 0, 0);
+    	Shooter.config_kD(0, 100, 0);
+    	Shooter.configClosedloopRamp(0, 0);
+    	Shooter.setSelectedSensorPosition(0, 0, 0);
+    	Shooter.set(ControlMode.PercentOutput,0);
+		/*Shooter.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Shooter.configEncoderCodesPerRev(128*4);
+    	Shooter.reverseSensor(true);
+    	Shooter.configNominalOutputVoltage(+0.0f,-0.0f);
+    	Shooter.configPeakOutputVoltage(+12.0f, -12.0f);
+    	Shooter.setProfile(0);
+    	Shooter.setF(0.25); //feed forward value
+    	Shooter.setP(2);  //P of PID
+    	Shooter.setI(0);  //I of PID
+    	Shooter.setD(100);  //D of PID
+    	Shooter.setCloseLoopRampRate(0);  //Limit ramp (maximo voltaje por segundo)
+    	Shooter.changeControlMode(TalonControlMode.Speed);
+    	Shooter.setPosition(0);  //resetea las revoluciones del encoder*/
+		
+    	
+		BandaTorreta=new TalonSRX(4); 
+		BandaTorreta.setNeutralMode(NeutralMode.Coast); //Pone motores en brake
+		BandaTorreta.set(ControlMode.PercentOutput,0);  //empieza en 0\
+		
+		
+		
+		GiroTorreta=new TalonSRX(0); 
+		GiroTorreta.setNeutralMode(NeutralMode.Brake); //Pone motores en brake
+		GiroTorreta.configForwardSoftLimitEnable(false, 0);
+		GiroTorreta.configReverseSoftLimitEnable(false, 0);
+		GiroTorreta.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		GiroTorreta.changeMotionControlFramePeriod(4096);
+		GiroTorreta.setSelectedSensorPosition(0,0,0);
+		GiroTorreta.configNominalOutputForward(0,0);
+		GiroTorreta.configPeakOutputForward(1,0);
+		GiroTorreta.configNominalOutputReverse(0,0);
+		GiroTorreta.configPeakOutputReverse(-1,0);
+		GiroTorreta.config_kP(0, 1, 0);
+		GiroTorreta.config_kI(0, 0, 0);
+		GiroTorreta.config_kD(0, 0, 0);
+		GiroTorreta.set(ControlMode.PercentOutput, 0);
+		/*GiroTorreta.enableLimitSwitch(false, false);
+		GiroTorreta.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		GiroTorreta.configEncoderCodesPerRev(4096);
+		GiroTorreta.reverseSensor(false);
+		GiroTorreta.reset();  //resetea el encoder
+		GiroTorreta.configNominalOutputVoltage(+0.0f,-0.0f);
+		GiroTorreta.configPeakOutputVoltage(+12.0f, -12.0f);
+		GiroTorreta.changeControlMode(TalonControlMode.Position); //Change control mode of talon, default is PercentVbus (-1.0 to 1.0)
+		GiroTorreta.setPID(1, 0, 0.0); //Set the PID constants (p, i, d)
+		GiroTorreta.enableControl(); //Enable PID control on the talon
+		GiroTorreta.setPosition(0);  //pone en la posicion 0
+		GiroTorreta.set(ControlMode.PercentOutput,0);  //pone en 0 la velocidad*/
+		
+		
+		
+		
+		
+		Limit_torreta = new DigitalInput(4);
+		PosShooter=new Solenoid(3);
+		PosShooter.set(false);
+}
+
+}

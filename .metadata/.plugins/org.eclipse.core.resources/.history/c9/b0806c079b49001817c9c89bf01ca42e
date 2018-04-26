@@ -1,0 +1,276 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import org.usfirst.frc.team3478.robot.Robot;
+import org.usfirst.frc.team3478.robot.RobotMap;
+import org.usfirst.frc.team3478.robot.commands.Torreta_main;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class Torreta extends Subsystem {
+	
+
+	TalonSRX giroTorreta = RobotMap.GiroTorreta;
+	DigitalInput limit_Torreta = RobotMap.Limit_torreta;
+	
+	public static double Position_giro=0;
+	public static boolean Flag_reset = false;
+	public static boolean Auto_flagflag = false;
+	
+	////para el pid
+	public static double pre_input = 0;
+	public static double integral_val = 0;
+	public static double max_pid_output = 100;
+	public static double min_pid_output = -100;
+	public static double temp_margin = 50;
+	
+	//camara
+	private NetworkTable camerapoints = NetworkTable.getTable("Pitable");
+	double y_camera = 0;
+	
+	////para activar o no el modo automatico
+	public boolean Flagauto=false;
+	
+	
+
+	
+	public void initDefaultCommand() {
+
+	}
+	
+	 public void Reset_vars(){
+		 Position_giro=0;
+		 Flag_reset=false;
+		 Flagauto=false;
+		 Auto_flagflag = false;
+		 SmartDashboard.putBoolean("torretaauto",false);
+		 pre_input = 0;
+		 integral_val = 0;
+	 }
+	 
+	 public void Activate_auto(){
+		 pre_input=(y_camera/2);  //resetea
+     	 integral_val=0;  //resetea
+     	 camerapoints.putNumber("dataready",1);
+		 Flagauto=true;
+		 Auto_flagflag = true;
+		 SmartDashboard.putBoolean("torretaauto",true);
+		 
+		////calibracion de la camara///////////
+		 //camerapoints.putNumber("greenhl",1);
+    	 //camerapoints.putNumber("greenhh",1);
+    	 //camerapoints.putNumber("greensl",1);
+    	 //camerapoints.putNumber("greensh",1);
+    	 //camerapoints.putNumber("greenvs",1);
+    	 //camerapoints.putNumber("greenvh",1);
+    	 camerapoints.putNumber("minarea",150);
+    	 //camerapoints.putNumber("targetmedida",0);
+    	 //camerapoints.putNumber("imgselect",0);
+    	 camerapoints.putNumber("changevalues",1);//hace los cambios
+    	 ////////////////////////////////////////
+	 }
+	 
+	 public void Activate_auto2(){
+		 pre_input=(y_camera/2);  //resetea
+     	 integral_val=0;  //resetea
+     	 camerapoints.putNumber("dataready",1);
+		 Flagauto=true;
+		 SmartDashboard.putBoolean("torretaauto",true);
+	 }
+	 
+	 public void Diactivate_auto(){
+		 Flagauto=false;
+		 Auto_flagflag = false;
+		 SmartDashboard.putBoolean("torretaauto",false);
+	 }
+	 
+	 public void Diactivate_auto2(){
+		 Flagauto=false;
+		 SmartDashboard.putBoolean("torretaauto",false);
+	 }
+	
+
+	public void start(){  //comienza la torreta
+	
+		double tolerancia = 0.2;
+		double giro = Robot.oi.Stick2.getRawAxis(0);
+		
+		if((giro<=tolerancia && giro > 0) || (giro >= -tolerancia && giro < 0) || giro ==0){
+			giro=0; //quita el error del jostick
+		}else{
+			Diactivate_auto();
+			if(giro>0){
+				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
+				giro = map(giro,tolerancia,1,0,1);
+				giro=giro/90; //para dar dos grado por ciclo maximo
+			}
+			if(giro<0){
+				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
+				giro = map(giro,-tolerancia,-1,0,-1);	
+				giro=giro/90; //para dar dos grado por ciclo maximo
+			}
+		}
+		
+		///////////modo automatico
+		if(Flagauto==true){
+			boolean newdatax = false;
+			//espera a que haya nueva data
+			if(camerapoints.getNumber("dataready",1)==0){
+				newdatax = true;
+			}
+			if(newdatax == true){
+			if(Robot.oi.Stick2.getRawAxis(0)<tolerancia && Robot.oi.Stick2.getRawAxis(0)>-tolerancia){
+				y_camera = camerapoints.getNumber("imagew",0);
+				double y_position = camerapoints.getNumber("xposition",0);  //leemos donde esta el centro
+				////suponemos que vamos a movernos 180 grados(0.5 de vuelta)
+				giro = PID_fun((y_camera/2),y_position,0.03,0.01,0.01); //leemos el pid (-100 a 100)  //0.3,0.1,(0.7/10)
+				//SmartDashboard.putString("giropid",String.valueOf(giro));
+				giro = (giro/100)*(-0.1);  //-0.02
+				//SmartDashboard.putString("xposition",String.valueOf(y_position));
+				SmartDashboard.putString("xcenter",String.valueOf((y_camera/2)));
+				camerapoints.putNumber("dataready",1);
+			}else{
+				giro = 0;
+				Diactivate_auto();
+			}
+			}
+		}
+		
+		///////////para mandar a posiciones default con el pub///////////////////////////
+		if(Robot.oi.Stick2.getPOV()==0){
+			Diactivate_auto();
+			Position_giro=0.32;
+			giro=0;
+		}else if(Robot.oi.Stick2.getPOV()==90){
+			Diactivate_auto();
+			Position_giro=0.64;
+			giro=0;
+		}else if(Robot.oi.Stick2.getPOV()==270){
+			Diactivate_auto();
+			Position_giro=0.01;
+			giro=0;
+		}
+		
+		/////////////////////////////////////////////////////////////////////////////////
+
+		///********checar aqui si los switches tienen  pull up y a donde gira
+		if(limit_Torreta.get()==false && Position_giro<=0.1){
+			if(Flag_reset==false){
+			Position_giro=0;
+			giroTorreta.set(ControlMode.Position,0); 
+			Flag_reset=true;
+			}
+			if(giro<0){
+				giro=0;
+			}
+		}else if(limit_Torreta.get()==false && Position_giro>0.1){
+			if(giro>0){
+				giro=0;
+			}
+		}else{
+			Flag_reset=false;
+		}
+		
+		if(Position_giro<=0 && giro<0){
+			giro=0;
+		}
+		
+		if(Position_giro>=0.65 && giro>0){
+			giro=0;
+		}
+		
+		
+		Position_giro=Position_giro+giro;
+		SmartDashboard.putString("Torreta",String.valueOf(Position_giro));
+		giroTorreta.set(ControlMode.Position,Position_giro*12000);  //mueve el motor por vueltas
+			
+		}
+	
+    public double map(double x, double in_min, double in_max, double out_min, double out_max){
+    	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+    
+    public double abs(double x){
+    	if(x<0){
+    		x=x*-1;
+    	}
+    	return (x);
+    }
+    
+    public double PID_fun(double setpoint,double actual_point,double kp,double ki,double kd){
+    	double output_val = 0;  //la salida
+        double dt = 0.1;  //tiempo que tarda entre medidas
+        double epsilon = 2;  //tolerancia
+        
+      //para tener un pid variable a cierto rango
+    	double kp2 = kp*3;
+    	double kd2 = kd*3;
+        double range_tol = 5;
+        
+        //obtiene el error
+        double error = setpoint - actual_point;
+        if(abs(error) <= epsilon){
+        	error = 0;
+        	pre_input=(y_camera/2);
+        	integral_val=0;  //resetea
+        	return(0);
+        }else{
+        	///calcula la integral
+        	//considerando rectangulos pequenos donde dt es lo ancho y el error lo largo
+        	integral_val=integral_val + (error*dt);  //el area al graficar la variable contra tiempo(y se suma con lo que ya hay)
+        	////para limitar la integral
+        	if(integral_val> (max_pid_output-temp_margin)){
+        		integral_val = (max_pid_output-temp_margin);}
+        	if(integral_val< (min_pid_output+temp_margin)){
+        		integral_val = (min_pid_output+temp_margin);}
+        }
+                 
+        //calcula la derivada
+        double derivative_val = (actual_point - pre_input)/dt;  //la funcion dx/dt donde dx es la diferencia entre el ultimo error y el nuevo
+
+        if( abs(error)>range_tol){   //si esta muy lejos
+        	//calculates the output
+        	output_val = (kp2*error) + (ki*integral_val) - (kd2*derivative_val);
+        }
+        
+        if( abs(error)<=range_tol){  //si esta muy cerca
+        	//calculates the output
+        	output_val = (kp*error) + (ki*integral_val) - (kd*derivative_val);
+        }
+       
+        //Saturation filter, para asegurar que no pase los valores maximos ni minimos
+        //sirve como una rampa tambien para evitar cambios bruscos
+        if(output_val > max_pid_output){output_val=max_pid_output;}
+        if(output_val < min_pid_output){output_val=min_pid_output;}
+
+        //update error, guardando el nuevo error que sera el viejo
+        pre_input =actual_point;
+
+        return(output_val); ///regresa el rewsultado del pid
+    }
+
+	}
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

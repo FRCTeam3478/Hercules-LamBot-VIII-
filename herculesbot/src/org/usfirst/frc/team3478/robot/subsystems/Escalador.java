@@ -4,15 +4,16 @@ import org.usfirst.frc.team3478.robot.Robot;
 import org.usfirst.frc.team3478.robot.RobotMap;
 import org.usfirst.frc.team3478.robot.commands.Intake_resetflag;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Escalador extends Subsystem {
 	
-	CANTalon elevador = RobotMap.Escalador;
-	CANTalon RollerIntake = RobotMap.RollerIntake;
+	TalonSRX elevador = RobotMap.Escalador;
+	TalonSRX RollerIntake = RobotMap.RollerIntake;
 	
 	Command Intakecommand;
 	
@@ -57,7 +58,7 @@ public class Escalador extends Subsystem {
     	if(Z3>0){
     		Z3=0;
     	}else if(Z3<0){
-    		RollerIntake.set(0);
+    		RollerIntake.set(ControlMode.PercentOutput,0);
     		flagx1=true;
     	}else{
     		if(flagx1==true){
@@ -68,11 +69,11 @@ public class Escalador extends Subsystem {
     	}
     	
 		Vel_L_act = ramp_fun(Vel_L_act, -Z3 , 0.1);
-		elevador.set(Vel_L_act);
+		elevador.set(ControlMode.PercentOutput,Vel_L_act);
 	}
 	
 	public void stop(){// si se interrumpe o se acaba el match el motor para
-		elevador.set(0);
+		elevador.set(ControlMode.PercentOutput,0);
 	}
 	
 	

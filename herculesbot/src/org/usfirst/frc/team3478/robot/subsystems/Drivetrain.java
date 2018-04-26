@@ -3,7 +3,8 @@ package org.usfirst.frc.team3478.robot.subsystems;
 import org.usfirst.frc.team3478.robot.Robot;
 import org.usfirst.frc.team3478.robot.RobotMap;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -11,10 +12,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
-	CANTalon leftMotorOne = RobotMap.DriveL1;
-	CANTalon leftMotorTwo = RobotMap.DriveL2;
-	CANTalon rightMotorOne = RobotMap.DriveR1;
-	CANTalon rightMotorTwo = RobotMap.DriveR2;
+	TalonSRX leftMotorOne = RobotMap.DriveL1;
+	TalonSRX leftMotorTwo = RobotMap.DriveL2;
+	TalonSRX rightMotorOne = RobotMap.DriveR1;
+	TalonSRX rightMotorTwo = RobotMap.DriveR2;
 	
 	Encoder leftEncoder = RobotMap.DriveEL;
 	Encoder rightEncoder = RobotMap.DriveER;
@@ -22,7 +23,7 @@ public class Drivetrain extends Subsystem {
 	Solenoid ShifterSolenoid = RobotMap.Cambios;
 	
 	
-	public static byte Polarity=1;
+	public static byte Polarity=-1;
 	public static boolean Shifter_var = false;
 	public static byte Chassis_out = 0;
 	public static double Vel_R_act =0;
@@ -66,10 +67,10 @@ public class Drivetrain extends Subsystem {
     }
 
     public void Stop_drive() {
-    	rightMotorOne.set(0);
-    	rightMotorTwo.set(0);
-    	leftMotorOne.set(0);
-    	leftMotorTwo.set(0);
+    	rightMotorOne.set(ControlMode.PercentOutput,0);
+    	rightMotorTwo.set(ControlMode.PercentOutput,0);
+    	leftMotorOne.set(ControlMode.PercentOutput,0);
+    	leftMotorTwo.set(ControlMode.PercentOutput,0);
     }
     
     public void Main_drive() {
@@ -99,7 +100,7 @@ public class Drivetrain extends Subsystem {
     	
     	SmartDashboard.putString("EncoderL",String.valueOf(Value_EL));
     	SmartDashboard.putString("EncoderR",String.valueOf(Value_ER));
-    	
+    	/*
     	if((abs(Value_EL) >= 10 ) && (abs(Value_ER) >= 10 )){  //10 feets per second //10
     		
     		if(Shifter_var==false && Giro_shifter == false){  //solo si esta en primera
@@ -112,7 +113,8 @@ public class Drivetrain extends Subsystem {
         		ShifterSolenoid.set(true);  //cambia a segunda
         		SmartDashboard.putBoolean("cambios",true);
     		}
-    	}
+    	}*/
+    	ShifterSolenoid.set(true);
 
     	/*control de xbox joysicks:
     	 * x izq stick 0 menos es izquierda
@@ -124,7 +126,7 @@ public class Drivetrain extends Subsystem {
     	 * */
 
     	//lee los joysticks
-    	X1 = Robot.oi.Stick1.getRawAxis(0); 
+    	X1 = -Robot.oi.Stick1.getRawAxis(0); 
     	Zizq = Robot.oi.Stick1.getRawAxis(2);
     	Zder = Robot.oi.Stick1.getRawAxis(3);
     	Z3 = Zder - Zizq;
@@ -188,10 +190,10 @@ public class Drivetrain extends Subsystem {
     	if(Vel_R_act <-1){Vel_R_act=-1;} 
 		
     	//pone la jalar los motores    	
-    	rightMotorOne.set(Vel_R_act);
-    	rightMotorTwo.set(Vel_R_act);
-    	leftMotorOne.set(Vel_L_act);
-    	leftMotorTwo.set(Vel_L_act);
+    	rightMotorOne.set(ControlMode.PercentOutput,Vel_R_act);
+    	rightMotorTwo.set(ControlMode.PercentOutput,Vel_R_act);
+    	leftMotorOne.set(ControlMode.PercentOutput,-Vel_L_act);
+    	leftMotorTwo.set(ControlMode.PercentOutput,-Vel_L_act);
     	
 
     }

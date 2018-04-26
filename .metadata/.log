@@ -698,3 +698,2520 @@ java.lang.NullPointerException
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+!SESSION 2018-04-26 13:37:17.789 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_MX
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:03.828
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:03.988
+!MESSAGE Install necessary for tools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:17.176
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:17.332
+!MESSAGE Installing common if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:17.374
+!MESSAGE Install necessary for common
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:20.336
+!MESSAGE Installedcommon
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:20.359
+!MESSAGE Installing cpp if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:40:20.382
+!MESSAGE Install necessary for cpp
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:42:32.403
+!MESSAGE Installedcpp
+
+!ENTRY WPILib_CPP_Robot_Development 1 0 2018-04-26 13:42:32.419
+!MESSAGE Updating projects
+
+!ENTRY WPILib_CPP_Robot_Development 4 0 2018-04-26 13:42:32.549
+!MESSAGE Error updating projects.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/herculesbot' is not open.
+	at org.eclipse.core.internal.resources.Project.checkAccessible(Project.java:143)
+	at org.eclipse.core.internal.resources.Project.hasNature(Project.java:521)
+	at edu.wpi.first.wpilib.plugins.cpp.WPILibCPPPlugin.updateProjects(WPILibCPPPlugin.java:126)
+	at edu.wpi.first.wpilib.plugins.cpp.WPILibCPPPlugin.earlyStartup(WPILibCPPPlugin.java:112)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:90)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:68)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.Workbench$56.run(Workbench.java:2852)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.core.resources 4 372 2018-04-26 13:42:32.564
+!MESSAGE Resource '/herculesbot' is not open.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:42:35.124
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:42:35.151
+!MESSAGE Install necessary for java
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-26 13:42:36.928
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\79192'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 13:43:14.150
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 13:43:14.167
+!MESSAGE Updating projects
+!SESSION 2018-04-26 14:50:53.628 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_MX
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-04-26 14:52:07.102
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-26 14:54:05.582
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\79192'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:15.692
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:15.712
+!MESSAGE Install necessary for tools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:38.032
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:38.102
+!MESSAGE Installing common if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:38.122
+!MESSAGE Install necessary for common
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:44.052
+!MESSAGE Installedcommon
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:44.192
+!MESSAGE Installing cpp if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:54:44.222
+!MESSAGE Install necessary for cpp
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:57:24.815
+!MESSAGE Installedcpp
+
+!ENTRY WPILib_CPP_Robot_Development 1 0 2018-04-26 14:57:24.835
+!MESSAGE Updating projects
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:57:24.995
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:57:25.015
+!MESSAGE Install necessary for java
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2018-04-26 14:58:05.746
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 14:58:05.766
+!MESSAGE Updating projects
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:19:52.300
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:19:53.630
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:19:54.150
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:19:54.210
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:19:54.520
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:20:34.450
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:20:35.970
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2018-04-26 15:20:36.030
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.texteditor.FindReplaceDialog.performReplaceAll(FindReplaceDialog.java:1361)
+	at org.eclipse.ui.texteditor.FindReplaceDialog.access$30(FindReplaceDialog.java:1344)
+	at org.eclipse.ui.texteditor.FindReplaceDialog$4.widgetSelected(FindReplaceDialog.java:368)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:694)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:606)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:27:26.230
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:27:26.250
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 15:28:31.343
+!MESSAGE Connected to robot at 127.0.0.1
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:33:32.128
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:33:32.174
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:35:49.549
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:35:49.568
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:36:53.781
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:36:53.805
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:43:01.030
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:43:01.051
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 15:45:17.165
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:45:17.200
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:45:19.102
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:45:19.118
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:45:19.147
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:45:20.326
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:45:21.172
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:45:21.190
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:45:21.225
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:07.796
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:09.293
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:09.311
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:09.332
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:09.814
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:11.352
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:11.368
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:11.391
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:11.814
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:13.414
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:13.433
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:13.453
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:13.814
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:15.472
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:15.489
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:15.508
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:15.817
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:17.525
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:17.538
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:17.560
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:17.816
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:19.577
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:19.590
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:19.611
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:19.836
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:21.634
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:21.652
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:21.677
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:21.855
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:23.702
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:23.719
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:23.743
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:23.874
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:25.777
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:25.793
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:25.815
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:25.879
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:27.839
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:27.852
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:27.880
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:27.913
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:29.896
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:29.916
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:29.938
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:30.893
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:31.957
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:31.974
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:31.994
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:32.895
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:34.021
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:34.038
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:34.056
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:34.895
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:36.075
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:36.092
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:36.112
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:36.896
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:38.131
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:38.146
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:38.168
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:38.895
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:40.193
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:40.208
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:40.230
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:40.896
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:42.247
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:42.260
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:42.286
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:42.945
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:44.308
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:44.328
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:44.359
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:44.896
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:46.380
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:46.397
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:46.419
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:46.898
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:48.438
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:48.521
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:48.579
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:48.945
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:50.614
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:50.634
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:50.673
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:50.907
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:52.692
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:52.711
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:52.738
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:52.898
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:54.761
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:54.783
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:54.809
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:54.902
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:56.823
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:56.838
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:56.859
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:56.913
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:58.912
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:53:58.929
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:53:58.948
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:53:59.920
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:00.981
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:01.019
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:01.122
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:01.915
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:03.165
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:03.185
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:03.209
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:03.934
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:05.238
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:05.257
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:05.280
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:05.972
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:07.312
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:07.331
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:07.363
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:07.978
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:09.395
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:09.411
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:09.431
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:09.967
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:11.453
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:11.468
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:11.494
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:11.965
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:13.514
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:13.529
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:13.552
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:13.965
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:15.571
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:15.585
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:15.607
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:15.968
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:17.624
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:17.643
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:17.671
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:17.974
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:19.692
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:19.708
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:19.745
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:19.993
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:21.762
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:21.787
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:21.812
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:22.037
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:23.832
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:23.854
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:23.887
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:24.053
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:25.906
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:25.919
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:25.942
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:26.056
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:27.963
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:27.979
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:28.003
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:28.057
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:30.034
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:30.049
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:30.070
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:31.062
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:32.089
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:32.109
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:32.129
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:33.061
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:34.151
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:34.165
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:34.187
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:35.059
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:36.204
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:36.221
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:36.244
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:37.058
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:38.265
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:38.282
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:38.300
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:39.061
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:40.320
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:40.336
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:40.359
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:41.064
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:42.378
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:42.394
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:42.418
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:43.069
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:44.434
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:44.461
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:44.517
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:45.067
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:46.543
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:46.556
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:46.582
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:47.074
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:48.600
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:48.616
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:48.635
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:49.093
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:50.654
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:50.668
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:50.697
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:51.093
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:52.722
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:52.793
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:52.849
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:53.097
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:54.880
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:54.894
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:54.919
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:55.097
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:56.944
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:56.956
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:56.986
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:57.100
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:59.004
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:54:59.023
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:54:59.042
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:54:59.106
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:01.059
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:01.075
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:01.094
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:01.115
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:03.112
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:03.140
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:03.169
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:04.113
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:05.196
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:05.214
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:05.241
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:06.120
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:07.260
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:07.279
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:07.302
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:08.116
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:09.319
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:09.336
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:09.345
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:10.139
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:11.371
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:11.387
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:11.410
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:12.137
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:13.430
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:13.458
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:13.482
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:14.152
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:15.505
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:15.522
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:15.543
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:16.155
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:17.563
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:17.580
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:17.602
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:18.155
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:19.622
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:19.638
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:19.658
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:20.159
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:21.676
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:21.690
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:21.713
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:22.158
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:23.730
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:23.748
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:23.768
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:24.158
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:25.789
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:25.806
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:25.831
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:26.161
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:27.845
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:27.862
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:27.883
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:28.174
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:29.904
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:29.917
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:29.941
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:30.176
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:31.957
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:31.971
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:32.001
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:32.175
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:34.021
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:34.036
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:34.045
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:34.176
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:36.061
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:36.075
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:36.096
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:36.190
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:38.117
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:38.133
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:38.155
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:38.193
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:40.173
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:40.189
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:40.214
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:41.193
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:42.231
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:42.251
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:42.258
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:43.194
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:44.284
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:44.300
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:44.338
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:45.197
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:46.357
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:46.372
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:46.394
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:47.211
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:48.413
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:48.433
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:48.455
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:49.212
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:50.473
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:50.488
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:50.508
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:51.230
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:52.524
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:52.537
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:52.559
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:53.240
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:54.577
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:54.592
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:54.616
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:55.242
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:56.633
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:56.646
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:56.669
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:57.239
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:58.689
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:55:58.702
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:55:58.723
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:55:59.353
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:56:00.743
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:56:00.759
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:56:00.780
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:58:19.773
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:58:19.789
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 15:58:36.421
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:36.845
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:58:36.927
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:58:36.957
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:38.921
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:39.005
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:58:39.027
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:58:39.048
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:39.086
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:41.069
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:58:41.084
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:58:41.105
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:42.312
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 15:58:43.125
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 15:58:43.137
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 15:58:43.159
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:59:45.809
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 15:59:45.842
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:00:01.884
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:03.184
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:00:03.216
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:00:03.244
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:04.407
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:05.266
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:00:05.280
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:00:05.301
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:05.376
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:07.317
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:00:07.334
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:00:07.354
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:07.760
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:00:09.375
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:00:09.390
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:00:09.409
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:00:59.792
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:00:59.807
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:01:14.650
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:15.436
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:01:15.459
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:01:15.483
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:17.202
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:17.867
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:01:17.906
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:01:17.935
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:18.256
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:19.960
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:01:19.976
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:01:19.998
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:20.585
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:01:22.019
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:01:22.033
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:01:22.055
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:10:38.051
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:10:38.107
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:10:38.125
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:10:38.154
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:18:02.485
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:18:02.502
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:18:19.038
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:18:20.585
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:18:20.602
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:18:20.628
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:18:21.606
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:18:22.646
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:18:22.660
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:18:22.682
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:18:24.998
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:18:26.701
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:18:26.714
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:18:26.735
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:18:43.975
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:18:43.989
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:19:00.327
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:19:00.756
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:19:00.771
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:19:00.793
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:19:03.034
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:19:04.811
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:19:04.827
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:19:04.850
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:19:06.370
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:19:06.865
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:19:06.878
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:19:06.902
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:20:16.642
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:20:16.662
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:20:32.605
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:20:32.987
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:20:33.043
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:20:33.071
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:20:35.138
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:20:37.088
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:20:37.103
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:20:37.127
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:20:38.517
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:20:39.146
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:20:39.165
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:20:39.188
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:21:02.718
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:21:02.734
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:21:18.417
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:19.228
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:21:19.249
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:21:19.274
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:20.943
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:21.300
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:21:21.317
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:21:21.345
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:21.932
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:23.477
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:21:23.492
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:21:23.511
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:24.312
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:21:25.533
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:21:25.550
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:21:25.578
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:22:51.464
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:22:51.499
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:23:06.943
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:07.608
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:07.624
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:23:07.644
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:09.628
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:09.664
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:09.680
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:23:09.704
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:09.781
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:11.724
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:11.738
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:23:11.761
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:12.977
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:13.782
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:13.800
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:23:13.823
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:23:41.373
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:23:41.387
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:23:54.786
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:55.849
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:55.870
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:23:55.893
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:55.940
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:57.914
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:57.932
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:23:57.954
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:58.507
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:23:59.972
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:23:59.988
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:24:00.012
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:24:01.889
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:24:02.037
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:24:02.052
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:24:02.074
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:31:07.739
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:31:07.763
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:31:23.198
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:24.123
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:31:24.152
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:31:24.182
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:25.748
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:26.204
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:31:26.220
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:31:26.240
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:26.722
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:28.256
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:31:28.270
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:31:28.292
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:29.114
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:31:30.307
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:31:30.325
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:31:30.347
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:31:47.203
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:31:47.221
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:32:01.796
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:02.394
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:32:02.418
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:32:02.441
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:04.329
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:04.474
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:32:04.496
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:32:04.518
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:04.557
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:06.535
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:32:06.560
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:32:06.580
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:07.781
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:32:08.600
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:32:08.614
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:32:08.638
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:34:21.417
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:34:21.437
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:34:35.904
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:36.660
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:34:36.684
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:34:36.721
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:38.454
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:38.756
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:34:38.800
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:34:38.822
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:39.452
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:40.849
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:34:40.869
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:34:40.893
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:41.814
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:34:42.912
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:34:42.926
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:34:42.945
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:39:58.428
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:39:58.448
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:40:14.438
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:15.534
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:40:15.547
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:40:15.569
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:17.036
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:17.586
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:40:17.607
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:40:17.644
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:18.033
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:19.676
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:40:19.690
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:40:19.714
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:20.418
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:40:21.729
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:40:21.746
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:40:21.766
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:40:51.126
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:40:51.144
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:41:05.806
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:41:07.812
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:41:07.828
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:41:07.847
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:41:08.361
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:41:09.863
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:41:09.878
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:41:09.901
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:41:11.731
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:41:11.917
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:41:11.934
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:41:11.958
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:42:09.840
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:42:09.856
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:42:25.841
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:25.978
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:42:25.996
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:42:26.028
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:28.426
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:30.061
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:42:30.076
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:42:30.083
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:31.766
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:32.102
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:42:32.117
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:42:32.141
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:42:40.409
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:42:40.423
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:42:54.776
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:56.166
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:42:56.190
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:42:56.213
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:57.544
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:58.262
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:42:58.286
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:42:58.311
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:42:58.551
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:00.328
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:43:00.341
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:43:00.364
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:00.908
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:02.379
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:43:02.395
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:43:02.416
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:43:03.609
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:43:03.628
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:43:18.104
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:18.443
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:43:18.465
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:43:18.495
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:20.679
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:22.528
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:43:22.544
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:43:22.565
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:24.051
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:43:24.608
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:43:24.624
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:43:24.641
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:44:46.415
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:44:46.434
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:45:02.104
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:02.668
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:45:02.690
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:45:02.719
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:04.637
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:04.739
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:45:04.756
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:45:04.775
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:04.856
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:06.792
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:45:06.812
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:45:06.831
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:07.993
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:45:08.848
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:45:08.862
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:45:08.885
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:45:54.216
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:45:54.232
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:46:09.209
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:46:10.958
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:46:10.972
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:46:10.994
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:46:11.933
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:46:13.012
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:46:13.030
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:46:13.053
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:46:15.298
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:46:17.071
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:46:17.086
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:46:17.105
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:47:00.837
+!MESSAGE Running ant file: C:\Users\79192\Documents\workspaces\GitHub\Hercules-LamBot-VIII-\herculesbot\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2018-04-26 16:47:00.856
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY riolog 1 0 2018-04-26 16:47:15.330
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:47:17.128
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:47:17.146
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:47:17.170
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:47:17.944
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:47:19.195
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:47:19.214
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:47:19.234
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:47:21.301
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:47:23.258
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:47:23.272
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:47:23.292
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY riolog 1 0 2018-04-26 16:54:47.516
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 16:54:49.344
+!MESSAGE failed to send keep alive, reconnecting
+
+!ENTRY riolog 1 0 2018-04-26 16:55:24.574
+!MESSAGE Connected to robot at 10.34.78.2
+
+!ENTRY org.eclipse.recommenders.rcp 2 23 2018-04-26 16:55:57.498
+!MESSAGE Failed to parse news feed
+!STACK 0
+java.net.UnknownHostException: www.codetrails.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$2.lookupAllHostAddr(Unknown Source)
+	at java.net.InetAddress.getAddressesFromNameService(Unknown Source)
+	at java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:319)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:363)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:219)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:195)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:86)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at org.apache.http.client.fluent.Executor.execute(Executor.java:206)
+	at org.eclipse.recommenders.internal.rcp.news.CheckForProjectNewsJob.getRSSFeed(CheckForProjectNewsJob.java:138)
+	at org.eclipse.recommenders.internal.rcp.news.CheckForProjectNewsJob.doRun(CheckForProjectNewsJob.java:89)
+	at org.eclipse.recommenders.internal.rcp.news.CheckForProjectNewsJob.run(CheckForProjectNewsJob.java:62)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY riolog 1 0 2018-04-26 17:00:40.950
+!MESSAGE socket disconnected during read
+
+!ENTRY riolog 1 0 2018-04-26 17:00:42.774
+!MESSAGE failed to send keep alive, reconnecting

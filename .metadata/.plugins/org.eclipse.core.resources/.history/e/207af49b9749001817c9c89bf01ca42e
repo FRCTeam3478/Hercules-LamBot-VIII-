@@ -1,0 +1,156 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import org.usfirst.frc.team3478.robot.Robot;
+import org.usfirst.frc.team3478.robot.RobotMap;
+import org.usfirst.frc.team3478.robot.commands.Intake_resetflag;
+import org.usfirst.frc.team3478.robot.commands.Torreta_activateauto2;
+import org.usfirst.frc.team3478.robot.commands.Torreta_disableauto2;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
+public class Shooter extends Subsystem {
+    
+	TalonSRX shooter = RobotMap.Shooter;
+	TalonSRX banda = RobotMap.BandaTorreta;
+	TalonSRX RollerIntake = RobotMap.RollerIntake;
+	TalonSRX hoppermotor = RobotMap.Hoppermotor;
+	
+	Torreta objtorreta = new Torreta();
+	
+	public static double Shoot_speed=0;  //fija la velocidad del motor
+	public static byte state1=0; //nos dice donde esta el piston
+	public static byte state2=0; //nos dice si ya se puede disparar o no
+	public static byte state3=0; //nos dice si ya se puede disparar o no
+	
+	Command Torretacommand1;
+	Command Intakecommand;
+	
+	
+
+    public void initDefaultCommand() {
+
+    }
+    ///funcion para resetear las variables
+    public void Reset_vars(){
+    	state1=0;
+    	state2=0;
+    	state3=0;
+    	Shoot_speed=0;
+    	Shooter_Stop();
+    	pos0();
+    }
+    
+    ///funcion que siempre esta monitoreando la llanta
+    public void start() {
+   	 ////el encoder esta directo al talon por lo que solo hay que modificar el set point
+   	double Tol_var = 0.1;
+   	   shooter.set(ControlMode.Velocity,Shoot_speed); //fija la velocidad que queremos en pulsos por cada 100 milisegundos
+       double actual_speed = 0;
+       actual_speed = shooter.getSelectedSensorVelocity(0); 
+       SmartDashboard.putString("Encodershooter",String.valueOf(actual_speed));
+       if(Shoot_speed != 0){
+       if( (actual_speed <= (Shoot_speed + (Shoot_speed*Tol_var))) && (actual_speed >= (Shoot_speed - (Shoot_speed*Tol_var)))){
+       	if(state2 ==0){
+       		//RPM alcanzados
+       		state2 =1;
+       		SmartDashboard.putBoolean("shooter",true);
+       	}
+       }else{
+       	if(state2 ==1){
+       		//RPM no alcanzados
+       		state2 =0;
+       		SmartDashboard.putBoolean("shooter",false);
+       	}
+       }
+       }else{
+       	if(state2 ==1){
+       		//RPM no alcanzados
+       		state2 =0;
+       		SmartDashboard.putBoolean("shooter",false);
+       	}
+       }
+       
+       //////aqui mismo metemos la parte de disparar ya que queremos hacerlo con un gatillo analogo y no podemos ligarle el comando
+       double limite = 0.5;
+       double gatillo  = Robot.oi.Stick2.getRawAxis(3);
+       if(state2 == 1 && gatillo > limite && state3==0){  //solo si ya alcanzo los rpm
+    	   if(objtorreta.Auto_flagflag==true){
+    	   //Torretacommand1 = new Torreta_disableauto2();
+    	   //Torretacommand1.start();
+    	   }
+    	   Shooter_shoot();
+    	   RollerIntake.set(ControlMode.PercentOutput,1);
+    	   hoppermotor.set(ControlMode.PercentOutput,-1);
+    	   state3=1;
+       }else{
+    	   if(state3==1 && gatillo < (limite-0.1)){
+    		   Shooter_Stop();
+    		   RollerIntake.set(ControlMode.PercentOutput,0);
+    		   hoppermotor.set(ControlMode.PercentOutput,0);
+    		   if(objtorreta.Auto_flagflag==true){
+    		   //Torretacommand1 = new Torreta_activateauto2();
+        	   //Torretacommand1.start();
+    		   }
+    		   Intakecommand = new Intake_resetflag();
+    		   Intakecommand.start();
+    		   state3=0;
+    	   }
+       }
+       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   }
+    
+    //fincion para poner un set point que mueva la llanta(dependiendo la posicion de piston)
+    public void Change_setpoint(){  
+    	double Max_rpm = 0;
+    	if(state1==0){ //piston abajo
+    		////5100
+    		Max_rpm = 840;
+    	}else{
+    		//5100
+    		Max_rpm = 840;  //840
+    	}
+        //encoder de 80 pulsos una vuelta(quadruped) y la funcion pide pulsos/100 milisegundos
+    	Shoot_speed = (Max_rpm);
+    }
+    
+    ////funcion para hacer el setpoint 0
+    public void Setpoint_0(){  //cambia el setpoint a 0
+    	   Shoot_speed = 0;
+    }
+    
+    //funcion para cambiar a la posicion de disparo de abajo
+    public void pos0(){  //Posicion 1 que es la de abajo
+		state1=0;
+		SmartDashboard.putBoolean("velocidad shooter",false);
+		if(Shoot_speed!=0){
+			Change_setpoint(); //acyualiza el setpoint si estaba prendido el shooter
+		}
+	}
+    
+    ////funcion para cambiar a la posicion de disparo de arriba
+	public void pos1(){
+		state1=1;
+		SmartDashboard.putBoolean("velocidad shooter",true);
+		if(Shoot_speed!=0){
+			Change_setpoint(); //acyualiza el setpoint si estaba prendido el shooter
+		}
+	}
+	
+	////funcion para detener los rodillos del elevador
+	public void Shooter_Stop() {
+    		banda.set(ControlMode.PercentOutput,0);
+    }
+	
+	////funcion para mover los rodillos del elevador
+	public void Shooter_shoot() {
+    		banda.set(ControlMode.PercentOutput,1);
+    }
+ 
+}

@@ -6,7 +6,9 @@ import org.usfirst.frc.team3478.robot.commands.Intake_resetflag;
 import org.usfirst.frc.team3478.robot.commands.Torreta_activateauto2;
 import org.usfirst.frc.team3478.robot.commands.Torreta_disableauto2;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,10 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends Subsystem {
     
-	CANTalon shooter = RobotMap.Shooter;
-	CANTalon banda = RobotMap.BandaTorreta;
-	CANTalon RollerIntake = RobotMap.RollerIntake;
-	CANTalon hoppermotor = RobotMap.Hoppermotor;
+	TalonSRX shooter = RobotMap.Shooter;
+	TalonSRX banda = RobotMap.BandaTorreta;
+	TalonSRX RollerIntake = RobotMap.RollerIntake;
+	TalonSRX hoppermotor = RobotMap.Hoppermotor;
 	
 	Torreta objtorreta = new Torreta();
 	
@@ -29,6 +31,7 @@ public class Shooter extends Subsystem {
 	
 	Command Torretacommand1;
 	Command Intakecommand;
+	
 	
 
     public void initDefaultCommand() {
@@ -48,9 +51,9 @@ public class Shooter extends Subsystem {
     public void start() {
    	 ////el encoder esta directo al talon por lo que solo hay que modificar el set point
    	double Tol_var = 0.1;
-   	   shooter.set(Shoot_speed); //fija la velocidad que queremos en pulsos por cada 100 milisegundos
+   	   shooter.set(ControlMode.Velocity,Shoot_speed); //fija la velocidad que queremos en pulsos por cada 100 milisegundos
        double actual_speed = 0;
-       actual_speed = shooter.getSpeed(); 
+       actual_speed = shooter.getSelectedSensorVelocity(0); 
        SmartDashboard.putString("Encodershooter",String.valueOf(actual_speed));
        if(Shoot_speed != 0){
        if( (actual_speed <= (Shoot_speed + (Shoot_speed*Tol_var))) && (actual_speed >= (Shoot_speed - (Shoot_speed*Tol_var)))){
@@ -83,14 +86,14 @@ public class Shooter extends Subsystem {
     	   //Torretacommand1.start();
     	   }
     	   Shooter_shoot();
-    	   RollerIntake.set(1);
-    	   hoppermotor.set(-1);
+    	   RollerIntake.set(ControlMode.PercentOutput,1);
+    	   hoppermotor.set(ControlMode.PercentOutput,-1);
     	   state3=1;
        }else{
     	   if(state3==1 && gatillo < (limite-0.1)){
     		   Shooter_Stop();
-    		   RollerIntake.set(0);
-    		   hoppermotor.set(0);
+    		   RollerIntake.set(ControlMode.PercentOutput,0);
+    		   hoppermotor.set(ControlMode.PercentOutput,0);
     		   if(objtorreta.Auto_flagflag==true){
     		   //Torretacommand1 = new Torreta_activateauto2();
         	   //Torretacommand1.start();
@@ -108,10 +111,10 @@ public class Shooter extends Subsystem {
     	double Max_rpm = 0;
     	if(state1==0){ //piston abajo
     		////5100
-    		Max_rpm = 760;
+    		Max_rpm = 2800;
     	}else{
     		//5100
-    		Max_rpm = 770;  //840
+    		Max_rpm = 2800;  //840
     	}
         //encoder de 80 pulsos una vuelta(quadruped) y la funcion pide pulsos/100 milisegundos
     	Shoot_speed = (Max_rpm);
@@ -142,12 +145,12 @@ public class Shooter extends Subsystem {
 	
 	////funcion para detener los rodillos del elevador
 	public void Shooter_Stop() {
-    		banda.set(0);
+    		banda.set(ControlMode.PercentOutput,0);
     }
 	
 	////funcion para mover los rodillos del elevador
 	public void Shooter_shoot() {
-    		banda.set(1);
+    		banda.set(ControlMode.PercentOutput,1);
     }
  
 }

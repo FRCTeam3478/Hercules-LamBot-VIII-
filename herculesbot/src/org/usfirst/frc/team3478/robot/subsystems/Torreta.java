@@ -4,7 +4,8 @@ import org.usfirst.frc.team3478.robot.Robot;
 import org.usfirst.frc.team3478.robot.RobotMap;
 import org.usfirst.frc.team3478.robot.commands.Torreta_main;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Torreta extends Subsystem {
 	
 
-	CANTalon giroTorreta = RobotMap.GiroTorreta;
+	TalonSRX giroTorreta = RobotMap.GiroTorreta;
 	DigitalInput limit_Torreta = RobotMap.Limit_torreta;
 	
 	public static double Position_giro=0;
@@ -107,12 +108,12 @@ public class Torreta extends Subsystem {
 			if(giro>0){
 				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
 				giro = map(giro,tolerancia,1,0,1);
-				giro=giro/180; //para dar dos grado por ciclo maximo
+				giro=giro/90; //para dar dos grado por ciclo maximo
 			}
 			if(giro<0){
 				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
 				giro = map(giro,-tolerancia,-1,0,-1);	
-				giro=giro/180; //para dar dos grado por ciclo maximo
+				giro=giro/90; //para dar dos grado por ciclo maximo
 			}
 		}
 		
@@ -162,7 +163,7 @@ public class Torreta extends Subsystem {
 		if(limit_Torreta.get()==false && Position_giro<=0.1){
 			if(Flag_reset==false){
 			Position_giro=0;
-			giroTorreta.setPosition(0); 
+			giroTorreta.set(ControlMode.Position,0); 
 			Flag_reset=true;
 			}
 			if(giro<0){
@@ -187,7 +188,7 @@ public class Torreta extends Subsystem {
 		
 		Position_giro=Position_giro+giro;
 		SmartDashboard.putString("Torreta",String.valueOf(Position_giro));
-		giroTorreta.set(Position_giro);  //mueve el motor por vueltas
+		giroTorreta.set(ControlMode.Position,Position_giro*13500);  //mueve el motor por vueltas
 			
 		}
 	

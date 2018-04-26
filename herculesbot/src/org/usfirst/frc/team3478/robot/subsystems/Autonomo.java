@@ -7,7 +7,8 @@ import org.usfirst.frc.team3478.robot.commands.Intake_resetflag;
 import org.usfirst.frc.team3478.robot.commands.Torreta_activateauto2;
 import org.usfirst.frc.team3478.robot.commands.Torreta_disableauto2;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -20,31 +21,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Autonomo  extends Subsystem {
 	
 	////chasis
-	CANTalon driveL1 = RobotMap.DriveL1;
-	CANTalon driveL2 = RobotMap.DriveL2;
-	CANTalon driveR1 = RobotMap.DriveR1;
-	CANTalon driveR2 = RobotMap.DriveR2;
+	TalonSRX driveL1 = RobotMap.DriveL1;
+	TalonSRX driveL2 = RobotMap.DriveL2;
+	TalonSRX driveR1 = RobotMap.DriveR1;
+	TalonSRX driveR2 = RobotMap.DriveR2;
 	Encoder driveEL = RobotMap.DriveEL;
 	Encoder driveER = RobotMap.DriveER;
 	Solenoid ShifterSolenoid = RobotMap.Cambios;
 	
 	///intake
-	CANTalon RollerIntake = RobotMap.RollerIntake;
+	TalonSRX RollerIntake = RobotMap.RollerIntake;
 	
 	////engrane
 	Solenoid Engranes_puerta = RobotMap.Engranes_puerta;
 	Solenoid Engranes_empujador = RobotMap.Engranes_empujador;
 	
 	////torreta
-	CANTalon giroTorreta = RobotMap.GiroTorreta;
+	TalonSRX giroTorreta = RobotMap.GiroTorreta;
 	DigitalInput limit_Torreta = RobotMap.Limit_torreta;
 	public static double stablevar = 0;
 	public static double Position_giro=0;
 	
 	////shooter
-	CANTalon shooter = RobotMap.Shooter;
-	CANTalon banda = RobotMap.BandaTorreta;
-	CANTalon hoppermotor = RobotMap.Hoppermotor;
+	TalonSRX shooter = RobotMap.Shooter;
+	TalonSRX banda = RobotMap.BandaTorreta;
+	TalonSRX hoppermotor = RobotMap.Hoppermotor;
 
 	////para el pid
 	public static double pre_input = 0;
@@ -68,7 +69,7 @@ public class Autonomo  extends Subsystem {
 	public void initDefaultCommand() {
 
 	}
-	
+	/*
 	public void Check_timer(){
     	if(((System.currentTimeMillis() - Timer_start)/1000) >= 15){
     		Timer_emerg = true;
@@ -80,20 +81,20 @@ public class Autonomo  extends Subsystem {
 	    	while((vel_ramp > 0) && (Timer_emerg==false)){
 	        	vel_ramp = vel_ramp - ramp_val ;
 	        	if(vel_ramp < 0){vel_ramp = 0;}
-	        	driveR1.set(-vel_ramp);
-	        	driveR2.set(-vel_ramp);
-	        	driveL1.set(vel_ramp);
-	        	driveL2.set(vel_ramp);
+	        	driveR1.set(ControlMode.PercentOutput,-vel_ramp);
+	        	driveR2.set(ControlMode.PercentOutput,-vel_ramp);
+	        	driveL1.set(ControlMode.PercentOutput,vel_ramp);
+	        	driveL2.set(ControlMode.PercentOutput,vel_ramp);
 	        	Check_timer();
 	        }
 	    }else{
 	    	while((vel_ramp < 0) && (Timer_emerg==false)){
 	        	vel_ramp = vel_ramp + ramp_val;
 	        	if(vel_ramp > 0){vel_ramp = 0;}
-	        	driveR1.set(-vel_ramp);
-	        	driveR2.set(-vel_ramp);
-	        	driveL1.set(vel_ramp);
-	        	driveL2.set(vel_ramp);
+	        	driveR1.set(ControlMode.PercentOutput,-vel_ramp);
+	        	driveR2.set(ControlMode.PercentOutput,-vel_ramp);
+	        	driveL1.set(ControlMode.PercentOutput,vel_ramp);
+	        	driveL2.set(ControlMode.PercentOutput,vel_ramp);
 	        	Check_timer();
 	        }
 	    }
@@ -102,10 +103,10 @@ public class Autonomo  extends Subsystem {
 	    
 	    public void Stop_Motors2(){
 	    	  //vel_ramp = 0;
-	          driveR1.set(0);
-	          driveR2.set(0);
-	          driveL1.set(0);
-	          driveL2.set(0); 
+	          driveR1.set(ControlMode.PercentOutput,0);
+	          driveR2.set(ControlMode.PercentOutput,0);
+	          driveL1.set(ControlMode.PercentOutput,0);
+	          driveL2.set(ControlMode.PercentOutput,0); 
 	        }
 	    
 	    public double ramp_fun(double x, double set_point, double ramp){
@@ -132,10 +133,10 @@ public class Autonomo  extends Subsystem {
 	    	driveER.reset();
 	    	while((abs(driveEL.getDistance()) <= distance && abs(driveER.getDistance()) <= distance ) && (Timer_emerg==false) ){
 	    		vel_ramp = ramp_fun(vel_ramp,speed,ramp_val);
-	        	driveL1.set((vel_ramp*x2*0.96));  ///0.955 porque esta chueco el chassis
-	        	driveL2.set((vel_ramp*x2*0.96));  ///0.955 porque esta chueco el chassis
-	    		driveR1.set(((vel_ramp)*x1));
-	        	driveR2.set(((vel_ramp)*x1));
+	        	driveL1.set(ControlMode.PercentOutput,(vel_ramp*x2*0.96));  ///0.955 porque esta chueco el chassis
+	        	driveL2.set(ControlMode.PercentOutput,(vel_ramp*x2*0.96));  ///0.955 porque esta chueco el chassis
+	    		driveR1.set(ControlMode.PercentOutput,((vel_ramp)*x1));
+	        	driveR2.set(ControlMode.PercentOutput,((vel_ramp)*x1));
 	        	Check_timer();
 	    	}
 	    }
@@ -145,10 +146,10 @@ public class Autonomo  extends Subsystem {
 	    		x=x*-1;
 	    	}
 	    	return (x);
-	    }
+	    }*/
 	
 	public void Autostart() {		
-		
+		/*
 		Timer_start = System.currentTimeMillis();
     	Timer_emerg = false;
     	
@@ -213,7 +214,7 @@ public class Autonomo  extends Subsystem {
     	    		//SmartDashboard.putString("Autotest1",String.valueOf(waiter));
     	    	}
     	    	*/
-    	    	//Timer.delay(1);  //para que caigan las pelotas
+    	    /*	//Timer.delay(1);  //para que caigan las pelotas
     	    	shoot_infinite();
     	    	Reset_autotorreta();
     	    	waiter=false;
@@ -249,7 +250,7 @@ public class Autonomo  extends Subsystem {
     	    	}
     	    	*/
     	    	//Timer.delay(1);  //para que caigan las pelotas
-    	    	shoot_infinite();
+    	    /*	shoot_infinite();
     	    	Reset_autotorreta();
     	    	waiter=false;
     	    	while((Timer_emerg==false) && waiter==false){
@@ -322,7 +323,7 @@ public class Autonomo  extends Subsystem {
     	    	vel_shootwheel = 757;
     	    	while((Timer_emerg==false) && waiter==false){
     	    		Check_timer();
-    	    		shooter.set(vel_shootwheel);
+    	    		shooter.set(ControlMode.Velocity,vel_shootwheel);
     	    		//waiter = movetorretaauto();
     	    		movetorretaauto2();
     	    		SmartDashboard.putString("shootwheelspeed",String.valueOf(vel_shootwheel));
@@ -333,10 +334,10 @@ public class Autonomo  extends Subsystem {
     	
     	}
     	
-    	Finish_all();
+    	Finish_all();*/
 		
     }
-	
+	/*
 	
 	public void Finish_all(){
 		off_shooter();
@@ -373,10 +374,10 @@ public class Autonomo  extends Subsystem {
 	/////////////funcion para apuntar torreta/////////////////////////////
 	public void move_torreta(double pos){
 		Position_giro=pos;
-		giroTorreta.set(Position_giro);  //mueve el motor por vueltas
-	}
+		giroTorreta.set(ControlMode.Position,Position_giro);  //mueve el motor por vueltas
+	}*/
 
-	
+	/*
 	public boolean movetorretaauto(){  //comienza la torreta
 
 			double giro =0;
@@ -407,7 +408,7 @@ public class Autonomo  extends Subsystem {
 		///********checar aqui si los switches tienen  pull up y a donde gira
 		if(limit_Torreta.get()==false && Position_giro<=0.1 && giro<0){
 			Position_giro=0;
-			giroTorreta.setPosition(0); 
+			giroTorreta.set(ControlMode.Position,0); 
 			giro=0;
 		}
 
@@ -425,12 +426,12 @@ public class Autonomo  extends Subsystem {
 		
 		return(xxzstate);
 			
-		}
+		}*/
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	////////////////////funcion de torreta automatica que tambien modifica velocidad de la llanta///////
-	public boolean movetorretaauto2(){  //comienza la torreta
+	/*public boolean movetorretaauto2(){  //comienza la torreta
 
 		double giro =0;
 		boolean xxzstate=false;
@@ -553,12 +554,12 @@ public class Autonomo  extends Subsystem {
         pre_input =actual_point;
 
         return(output_val); ///regresa el rewsultado del pid
-    }
+    }*/
 	 //////////////////////////////////////////////////////////////////////
 	
 	
 	////////////shooter//////////////////////////////////////////////////////
-	 public boolean start_shooter(double Shoot_speed) {
+	/* public boolean start_shooter(double Shoot_speed) {
 	   	 ////el encoder esta directo al talon por lo que solo hay que modificar el set point
 	   	double Tol_var = 0.1;
 	   	   shooter.set(Shoot_speed); //fija la velocidad que queremos en pulsos por cada 100 milisegundos
@@ -573,9 +574,9 @@ public class Autonomo  extends Subsystem {
 	       }else{
 	    	   return(false);
 	       }
-	       }
+	       }*/
 	 
-	 public void off_shooter() {
+	/* public void off_shooter() {
 	   	 shooter.set(0); //fija la velocidad que queremos en pulsos por cada 100 milisegundos
 	   	 banda.set(0);
 		 RollerIntake.set(0);
@@ -586,7 +587,7 @@ public class Autonomo  extends Subsystem {
 		 banda.set(1);
 	     RollerIntake.set(1);
 	     hoppermotor.set(-1);
-	 }
+	 }*/
 	 
 	 public void Resetall(){
 		 
