@@ -1,68 +1,91 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team3478.robot;
 
-import org.usfirst.frc.team3478.robot.commands.Robot_Autonomo_Main;
-import org.usfirst.frc.team3478.robot.commands.Robot_Drive_MainDrive;
-import org.usfirst.frc.team3478.robot.commands.Robot_Elevador_MainMove;
-import org.usfirst.frc.team3478.robot.commands.Robot_Escalador_MainMove;
-import org.usfirst.frc.team3478.robot.commands.Robot_General_InitPositions;
-import org.usfirst.frc.team3478.robot.commands.Robot_Intake_MainMove;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Autonomo;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Control;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Drive;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Elevador;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Escalador;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Intake;
-import org.usfirst.frc.team3478.robot.subsystems.Robot_Topes;
-
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team3478.robot.commands.Autostart;
+import org.usfirst.frc.team3478.robot.commands.Drive_main;
+import org.usfirst.frc.team3478.robot.commands.Escalador_start;
+import org.usfirst.frc.team3478.robot.commands.Reset_variables;
+import org.usfirst.frc.team3478.robot.commands.Shooter_main;
+import org.usfirst.frc.team3478.robot.commands.Torreta_main;
+import org.usfirst.frc.team3478.robot.subsystems.Autonomo;
+import org.usfirst.frc.team3478.robot.subsystems.Colocador;
+import org.usfirst.frc.team3478.robot.subsystems.Control;
+import org.usfirst.frc.team3478.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team3478.robot.subsystems.Escalador;
+import org.usfirst.frc.team3478.robot.subsystems.Intake;
+import org.usfirst.frc.team3478.robot.subsystems.Shooter;
+import org.usfirst.frc.team3478.robot.subsystems.Torreta;
 
 
-public class Robot extends TimedRobot {
+/**
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the IterativeRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the manifest file in the resource
+ * directory.
+ */
+public class Robot extends IterativeRobot {
+
 	
-	public static OI oi; //clase de los joysticks
 	
-	/*********comandos que necesite el robot para empezar********/
+	/***********aqui vamos a declarar los comandos con los que inicia el robot*************/
 	Command autonomo_command;
 	Command drivestart_command;
-	Command escaladorstart_command;
-	Command elevadorstart_command;
-	Command intakestart_command;
-	Command resetall_command; //todos los subsistemas deben tener una inicializacion en este comando
-	/***********************************************************/
+	Command escalador_command;
+	Command torreta_command;
+	Command shooter_command;
+	Command resetall_command;
+	/****************************************************************************************/
 	
-	/********subsistemas del robot*******************************/
-	public static Robot_Intake Robot_intake;
-	public static Robot_Elevador Robot_elevador;
-	public static Robot_Escalador Robot_escalador;
-	public static Robot_Topes Robot_topes;
-	public static Robot_Drive Robot_drive;
-	public static Robot_Autonomo Robot_autonomo;
-	public static Robot_Control Robot_control;
+	public static OI oi;
+
+	/********aqui vamos a crear los objetos de los subsystemas*******************************/
+	public static Drivetrain drivetrain;
+	public static Intake Roller;
+	public static Escalador escalador;
+	public static Colocador colocador;
+	public static Control control;
+	public static Torreta torreta;
+	public static Autonomo autonomo;
+	public static Shooter shooter;
 	/*****************************************************************************************/
 	
+	///////////****para seleccionar entre autonomos********************************************/
+	private int mode = 1; // initialize default mode
+	public static SendableChooser chooser;
+	///////**********************************************************************************///
+	
 
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
 	@Override
 	public void robotInit() {
+		
 		RobotMap.init(); //inicializa todos los elementos del robot
 		
-		/*******aqui vamos inicializar los subsystemas que se necesite*************************/
-		Robot_intake = new Robot_Intake();
-		Robot_elevador = new Robot_Elevador();
-		Robot_escalador = new Robot_Escalador();
-		Robot_topes = new Robot_Topes();
-		Robot_drive = new Robot_Drive();
-		Robot_autonomo = new Robot_Autonomo();
-		Robot_control = new Robot_Control();
+		/*******aqui vamos inicializar los subsystemas**************************************/
+		drivetrain = new Drivetrain();
+		Roller = new Intake();
+		escalador = new Escalador();
+		colocador = new Colocador();
+		control = new Control();
+		torreta = new Torreta();
+		autonomo = new Autonomo();
+		shooter = new Shooter();
 		/*************************************************************************************/
+		
 		
 		oi = new OI();  ///lo del joystick
 	
@@ -73,13 +96,28 @@ public class Robot extends TimedRobot {
 		/**********************************************************************************/
 		
 		/****************aqui vamos a inicializar los comandos*******************************/
-		autonomo_command = new Robot_Autonomo_Main();
-		drivestart_command = new Robot_Drive_MainDrive();
-		escaladorstart_command = new Robot_Escalador_MainMove();
-		intakestart_command = new Robot_Intake_MainMove();
-		elevadorstart_command = new Robot_Elevador_MainMove();
-		resetall_command = new Robot_General_InitPositions();
+		autonomo_command = new Autostart();
+		drivestart_command = new Drive_main();
+		escalador_command = new Escalador_start();
+		resetall_command = new Reset_variables();
+		torreta_command = new Torreta_main();
+		shooter_command = new Shooter_main();
+		Robot.control.turnCompressorOn();	//activa el ciclo automatico de can del compresor
 		/***********************************************************************************/
+		
+		/////*******para seleccionar entre autonomos***********************************//////
+		chooser = new SendableChooser();
+	    chooser.addDefault("Nada", 1);
+	    chooser.addObject("Engrane centro", 2);
+	    chooser.addObject("Engrane izquierda", 3);
+	    chooser.addObject("Engrane derecha", 4);
+	    chooser.addObject("Hopper izquierda", 5);
+	    chooser.addObject("Hopper derecho", 6);
+	    chooser.addObject("centro derecha", 7);
+	    chooser.addObject("centro izquierda", 8);
+	    chooser.addObject("shoot crazy", 9);
+	    SmartDashboard.putData("Autonomous Selector", chooser);
+		/************************************************************************************/
 	}
 
 	/**
@@ -104,17 +142,17 @@ public class Robot extends TimedRobot {
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
+	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
-		if (autonomo_command != null) autonomo_command.start();
+		if (autonomo_command != null) autonomo_command.start();  //inicializamos el comando si no existe
 	}
 
 	/**
-	 * This function is called periodically during autonomous.
+	 * This function is called periodically during autonomous
 	 */
 	@Override
 	public void autonomousPeriodic() {
@@ -126,13 +164,14 @@ public class Robot extends TimedRobot {
 		if (autonomo_command != null) autonomo_command.cancel();  //cancelamos el comando si esta activo
 		if (resetall_command != null) resetall_command.start();  //inicializamos el comando si no existe
 		if (drivestart_command != null) drivestart_command.start();  //inicializamos el comando si no existe
-		if (escaladorstart_command != null) escaladorstart_command.start();  //inicializamos el comando si no existe
-		if (elevadorstart_command != null) elevadorstart_command.start();  //inicializamos el comando si no existe
-		if (intakestart_command != null) intakestart_command.start();  //inicializamos el comando si no existe
+		if (escalador_command != null) escalador_command.start();  //inicializamos el comando si no existe
+		if (shooter_command != null) shooter_command.start();  //inicializamos el comando si no existe
+		if (torreta_command != null) torreta_command.start();  //inicializamos el comando si no existe
+
 	}
 
 	/**
-	 * This function is called periodically during operator control.
+	 * This function is called periodically during operator control
 	 */
 	@Override
 	public void teleopPeriodic() {
@@ -140,9 +179,10 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This function is called periodically during test mode.
+	 * This function is called periodically during test mode
 	 */
 	@Override
 	public void testPeriodic() {
+		LiveWindow.run();
 	}
 }

@@ -1,0 +1,239 @@
+package org.usfirst.frc.team3478.robot.subsystems;
+
+import org.usfirst.frc.team3478.robot.Robot;
+import org.usfirst.frc.team3478.robot.RobotMap;
+
+import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class Drivetrain extends Subsystem {
+	CANTalon leftMotorOne = RobotMap.DriveL1;
+	CANTalon leftMotorTwo = RobotMap.DriveL2;
+	CANTalon rightMotorOne = RobotMap.DriveR1;
+	CANTalon rightMotorTwo = RobotMap.DriveR2;
+	
+	Encoder leftEncoder = RobotMap.DriveEL;
+	Encoder rightEncoder = RobotMap.DriveER;
+	
+	Solenoid ShifterSolenoid = RobotMap.Cambios;
+	
+	
+	public static byte Polarity=1;
+	public static boolean Shifter_var = false;
+	public static byte Chassis_out = 0;
+	public static double Vel_R_act =0;
+	public static double Vel_L_act =0;
+	public static boolean Break_var = false;
+	public static boolean Giro_shifter = false;
+	
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
+	
+    public void Reset_vars(){
+    	Polarity=1;
+    	Shifter_var=false;
+    	Chassis_out = 0;
+    	Vel_R_act =0;
+    	Vel_L_act =0;
+    	Break_var = false;
+    	Giro_shifter = false;
+    	Stop_drive();
+    	Change_shifter();
+    }
+ 
+    ///funciones que se llamaran en los comandos
+    
+    public void Change_Polarity(){
+    	if(Polarity > 0){
+    		Polarity = -1;
+    		SmartDashboard.putBoolean("chassis",false);
+    	}else{
+    		Polarity = 1;
+    		SmartDashboard.putBoolean("chassis",true);
+    	}
+    }
+    
+    public void Change_shifter(){
+    	Shifter_var=false;
+    	ShifterSolenoid.set(false);  //baja a primera
+    	SmartDashboard.putBoolean("cambios",false);
+    }
+
+    public void Stop_drive() {
+    	rightMotorOne.set(0);
+    	rightMotorTwo.set(0);
+    	leftMotorOne.set(0);
+    	leftMotorTwo.set(0);
+    }
+    
+    public void Main_drive() {
+    	
+    	///inicializa variables
+    	double tolerancia = 0.2;
+    	double factor = 0.6; //sensibilidad
+    	double X1; 
+    	double Zizq;
+    	double Zder;
+    	double Z3;
+    	double Left_Speed = 0;
+    	double Right_Speed = 0;
+    	
+    	double current = 0;
+    	double limiter_c = 1;
+    	
+    	double Value_EL = 0;
+    	double Value_ER = 0;
+    	
+    	//para poner una rampa de arranque
+    	double Ramp_val = 0.1;  //0.05
+    	
+    	//checa los encoders para hacer el cambio
+    	Value_EL = leftEncoder.getRate(); //distance per second
+    	Value_ER = rightEncoder.getRate(); //distance per second
+    	
+    	SmartDashboard.putString("EncoderL",String.valueOf(Value_EL));
+    	SmartDashboard.putString("EncoderR",String.valueOf(Value_ER));
+    	
+    	if((abs(Value_EL) >= 10 ) && (abs(Value_ER) >= 10 )){  //10 feets per second //10
+    		
+    		if(Shifter_var==false && Giro_shifter == false){  //solo si esta en primera
+    			//si hace el cambio tiene que compensar bajando los rpm para no tronar la caja
+        		//como la relacion de primera a segunda es 1 a 2.5 hay que bajarle al pwm
+        		Vel_R_act = (Vel_R_act/2.5);
+        		Vel_L_act = (Vel_L_act/2.5);
+        		//Hago el cambio
+        		Shifter_var=true;
+        		ShifterSolenoid.set(true);  //cambia a segunda
+        		SmartDashboard.putBoolean("cambios",true);
+    		}
+    	}
+
+    	/*control de xbox joysicks:
+    	 * x izq stick 0 menos es izquierda
+		   y isq stick 1 menos es arriba
+           z izq button 2 solo da 1 positivo a 0
+           z der button 3 solo da 1 positivo a 0
+           x der stick 4 menos es izquierda
+		   y der stick 5 menos es arriba
+    	 * */
+
+    	//lee los joysticks
+    	X1 = Robot.oi.Stick1.getRawAxis(0); 
+    	Zizq = Robot.oi.Stick1.getRawAxis(2);
+    	Zder = Robot.oi.Stick1.getRawAxis(3);
+    	Z3 = Zder - Zizq;
+    	
+    	///inicializa en 0
+    	Left_Speed = 0;
+    	Right_Speed = 0;
+   
+    	//quita el error del stick
+    	if((X1<=tolerancia && X1 > 0) || (X1 >= -tolerancia && X1 < 0)){
+			X1=0; //quita el error del jostick
+		}else{
+			if(X1>0){
+				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
+				X1 = map(X1,tolerancia,1,0,1);
+			}
+			if(X1<0){
+				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
+				X1 = map(X1,-tolerancia,-1,0,-1);	
+			}
+		}
+    	
+    	if((Z3<=tolerancia && Z3 > 0) || (Z3 >= -tolerancia && Z3 < 0)){
+			Z3=0; //quita el error del jostick
+		}else{
+			if(Z3>0){
+				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
+				Z3 = map(Z3,tolerancia,1,0,1);
+			}
+			if(Z3<0){
+				///mappea los valores para que no inicie arriba de la tolerancia sino en 0
+		    	Z3 = map(Z3,-tolerancia,-1,0,-1);	
+			}
+		}
+    	
+    	boolean Flaf_shif_0 = false;
+   
+    	///ecuacion del drive
+    	if((Z3 > 0) || (Z3 < 0)){
+    		Giro_shifter = false;
+    		Left_Speed = ((-Z3*Polarity) + (factor*-X1));
+    		Right_Speed =((Z3*Polarity) + (factor*-X1));
+    	}else{ //giros rapidos
+    		if(X1 == 0){Flaf_shif_0 = true;}
+    		if(Flaf_shif_0 == false){
+    			//Change_shifter();  //Esto es para que cambie a primera en los giros
+    		}
+    		Giro_shifter = true;
+    		Left_Speed = -X1;
+        	Right_Speed = -X1;
+    	}
+		
+		//para la rampa
+		Vel_R_act = ramp_fun(Vel_R_act, Right_Speed, Ramp_val);
+		Vel_L_act = ramp_fun(Vel_L_act, Left_Speed, Ramp_val);
+				
+		///por si se pasa (seguridad)
+    	if(Vel_L_act >1){Vel_L_act=1;}
+    	if(Vel_R_act >1){Vel_R_act=1;} 
+    	if(Vel_L_act <-1){Vel_L_act=-1;}
+    	if(Vel_R_act <-1){Vel_R_act=-1;} 
+		
+    	//pone la jalar los motores    	
+    	rightMotorOne.set(Vel_R_act);
+    	rightMotorTwo.set(Vel_R_act);
+    	leftMotorOne.set(Vel_L_act);
+    	leftMotorTwo.set(Vel_L_act);
+    	
+
+    }
+    
+    ///para mappear los valores del stick
+    public double map(double x, double in_min, double in_max, double out_min, double out_max){
+    	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+    
+    public double ramp_fun(double x, double set_point, double ramp){
+    	double x1 = make_divisible(x,ramp);
+    	
+    	if(x1 < set_point){
+    		x1 = x + ramp;
+    	}else if(x1 > set_point){
+    		x1 = x - ramp;
+    	}else{
+    		x1 = set_point;
+    	}
+    	
+    	return(x1);
+    }
+    
+    public double make_divisible(double x,double div){  //operacion modulo para flotantes
+    	double resi = 0;
+    	int resi_int = 0;
+    	double x1 = 0;
+    	
+    	if(x!=0){
+    		resi = x/div;
+    	    resi_int = (int)(resi);
+    	    x1 = x - (div * resi_int);  //el residuo
+    	    x = x-x1;
+    	}
+    	
+    	return(x);
+    }
+    
+    public double abs(double x){
+    	if(x<0){
+    		x=x*-1;
+    	}
+    	return (x);
+    }
+}
