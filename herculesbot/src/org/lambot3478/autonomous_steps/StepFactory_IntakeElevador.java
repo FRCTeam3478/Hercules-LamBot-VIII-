@@ -19,6 +19,9 @@ public class StepFactory_IntakeElevador {
 	public static AutonomousStep_IntakeElevador getNewThrowBox(){
 		return new ThrowBox();
 	}
+	public static AutonomousStep_IntakeElevador getNewThrowBox2(){
+		return new ThrowBox2();
+	}
 	public static AutonomousStep_IntakeElevador move2Switch(double select){
 		return new MoveElevatorToSwitch(select);
 	}
