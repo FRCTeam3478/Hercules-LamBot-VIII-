@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot_Drive extends Subsystem {
 
 	private static final double TOLERANCE=0.15;  //tolerancia del joystick
+	private static final double TOLERANCE2=0.3;  //tolerancia del joystick
 	private static int direction = -1;
 	private static TalonSRX[] talons;  //arreglo para guadar los talon del chasis
 	private static Robot_Heading robotHeading;
@@ -36,7 +37,7 @@ public class Robot_Drive extends Subsystem {
 	private static final double MAX_PID_VAL = 0.5;
 	private static final double MIN_PID_VAL = -0.5;
 	private static int rotatingrobot = 0;
-	private static int rotatingrobotramp = 0;
+	private static double rotatingrobotramp = 0;
 	/////////////////////////////
 	
 	//////////constructor de la clase/////////////////////
@@ -83,7 +84,7 @@ public class Robot_Drive extends Subsystem {
 		//lee cada eje de los joystick y les quita el error y mapea
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*direction, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*direction,
-			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,0.7)*-1;
+			   rotationAxis=mapDoubleT(joystick.getRawAxis(4),TOLERANCE2,1,0,0.7)*-1;
 		
 		//obtiene la magnbitud del vector del joystick
 		double magnitude=Math.sqrt((translationX*translationX)+(translationY*translationY));
@@ -113,13 +114,19 @@ public class Robot_Drive extends Subsystem {
 		double translationX=mapDoubleT(joystick.getRawAxis(0),TOLERANCE,1,0,1)*-1, 
 			   translationY=mapDoubleT(joystick.getRawAxis(1),TOLERANCE,1,0,1)*-1;
 		
-	    int rotationAxis=(int)((mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,0.7)*-1)/stempx);
+	    double rotationAxis= (mapDoubleT(joystick.getRawAxis(4),TOLERANCE,1,0,0.7)*-1);
 		
 		/////////rampa para dar los giros///////////////////
 		if(rotatingrobotramp<rotationAxis) {
-			rotatingrobotramp=rotatingrobotramp+1;
+			rotatingrobotramp=rotatingrobotramp+stempx;
 		}else if(rotatingrobotramp>rotationAxis) {
-			rotatingrobotramp=rotatingrobotramp-1;
+			rotatingrobotramp=rotatingrobotramp-stempx;
+		}
+		if(rotatingrobotramp<(stempx) && rotatingrobotramp>0) {
+			rotatingrobotramp=0;
+		}
+		if(rotatingrobotramp>(-stempx) && rotatingrobotramp<0) {
+			rotatingrobotramp=0;
 		}
 		////////////////////////////////////////////////////
 
@@ -131,29 +138,31 @@ public class Robot_Drive extends Subsystem {
 		double angle=-Math.atan2(translationX, translationY)+(Math.PI/4);
 		angle-=(robotHeading.getRawRotation())*Math.PI/180.0;
 		SmartDashboard.putNumber("angulo chasis", robotHeading.getRawRotation());
+		SmartDashboard.putNumber("angulo chasis convert", robotHeading.getRotation());
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		///////////para evitar que el robot se gire cuando no debe///////////////////////////////
 		double rotationGain=PID_fun(0,robotHeading.getRotation(),0.025,0,0)*-1;
-		if(Math.abs((rotatingrobotramp*stempx))>0.0){
+		if(Math.abs((rotationAxis))>0.0){
 			rotatingrobot=1;
 			rotationGain=0;
-		}
-		if(rotatingrobot==1 && (rotatingrobotramp*stempx)==0.0) {
+			SmartDashboard.putNumber("resetting",0);
+		}else if(rotatingrobot==1 && rotatingrobotramp==0) {
 			rotatingrobot=0;
 			robotHeading.resetRotation();
 			rotationGain=0;
+			SmartDashboard.putNumber("resetting",1);
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////
 		
 		talons[0].set(ControlMode.PercentOutput,magnitude*
-				Math.sin(angle)-(rotatingrobotramp*stempx)-rotationGain);
+				Math.sin(angle)-(rotatingrobotramp)-rotationGain);
 		talons[1].set(ControlMode.PercentOutput,magnitude*
-				Math.cos(angle)+(rotatingrobotramp*stempx)+rotationGain);
+				Math.cos(angle)+(rotatingrobotramp)+rotationGain);
 		talons[2].set(ControlMode.PercentOutput,magnitude*
-				Math.cos(angle)-(rotatingrobotramp*stempx)-rotationGain);
+				Math.cos(angle)-(rotatingrobotramp)-rotationGain);
 		talons[3].set(ControlMode.PercentOutput,magnitude*
-				Math.sin(angle)+(rotatingrobotramp*stempx)+rotationGain);
+				Math.sin(angle)+(rotatingrobotramp)+rotationGain);
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	
